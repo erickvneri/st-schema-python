@@ -1,7 +1,4 @@
-from marshmallow.utils import get_value
 from marshmallow import Schema, fields
-from pystschema.device_cookie import DeviceCookieSchema
-
 
 class BaseDevice:
     """The BaseDevice class is the basic SmartThings
