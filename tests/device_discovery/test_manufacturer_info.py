@@ -5,7 +5,7 @@ class TestManufacturerInfo:
     @pytest.fixture
     def manufacturer(self):
         mn = ManufacturerInfo(
-            manufacturer_name='SmartThings', model_name='SmartPlug', hw_version='v1 US Outlet', sw_version='0.0.3'
+            manufacturer_name='SmartThings', model_name='SmartPlug', hw_version='v1 US Plug', sw_version='0.0.3'
         )
         yield mn
 

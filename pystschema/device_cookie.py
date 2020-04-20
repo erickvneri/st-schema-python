@@ -9,6 +9,7 @@ class DeviceCookie:
     device.
 
         :::param cookie"""
+
     def __init__(self, cookie: str):
         self.cookie = cookie
 
@@ -16,6 +17,7 @@ class DeviceCookie:
     def issue(cls):
         """Return a DeviceCookie instance with
         datetime.now() encrypted using md5 algorithm."""
+
         timestamp = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
         cookie_hash = hashlib.md5(timestamp.encode()).hexdigest()
         return cls(cookie=cookie_hash)
@@ -24,6 +26,7 @@ class DeviceCookie:
 class DeviceCookieSchema(Schema):
     """The DeviceCookieSchema handles the
     serialization of the DeviceCookie class."""
+
     cookie = fields.Str()
 
 

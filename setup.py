@@ -5,7 +5,7 @@ setup(
     version='0.0.1',
     author='erickv',
     author_email='erickv@bluetrailsoft.com',
-    description='Python SDK for ST-Schema Integrations.',
+    description='Python ST-Schema SDK',
     url='https://github.com/erickvneri/py-st-schema/',
     packages=find_packages(),
     install_requires=[

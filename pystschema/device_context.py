@@ -11,6 +11,7 @@ class DeviceContext:
         the environment of the device.
         :::param categories: classifiers of the type of
         device (light, thermostats, monitoring, etc.)."""
+
     def __init__(self, room_name: str, groups: List[str] = None, categories: List[str] = None):
         self.room_name = room_name
         self.groups = groups or list()
@@ -26,6 +27,7 @@ class DeviceContextSchema(Schema):
         :::param room_name -> roomName
         :::param groups
         :::param categories"""
+
     roomName = fields.Field(attribute='room_name')
     groups = fields.List(fields.Str(attribute='groups'))
     categories = fields.List(fields.Str(attribute='categories'))

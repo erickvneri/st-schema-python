@@ -2,8 +2,7 @@ import  pytest
 from pystschema import BaseDevice, DeviceSchema, DeviceCookie, DeviceCookieSchema
 
 class TestSTDevice:
-    # Define DeviceCookie for its use accross
-    # the tested devices.
+    # Define DeviceCookie for its use across the test.
     cookie = DeviceCookie.issue()
     cookie_schema = DeviceCookieSchema()
     device_cookie = cookie_schema.dump(cookie)
@@ -20,6 +19,14 @@ class TestSTDevice:
     def device_schema(self):
         schema = DeviceSchema()
         yield schema
+
+    def test_class_construction(self):
+        assert BaseDevice.__doc__
+        assert len(BaseDevice.__doc__) != 0
+
+    def test_schema_construction(self):
+        assert DeviceSchema.__doc__
+        assert len(DeviceSchema.__doc__) != 0
 
     def test_device_definition(self, device_instance):
         """This test will verify the main functionality
@@ -41,14 +48,6 @@ class TestSTDevice:
             assert device_instance.device_cookie is not None
             assert device_instance.friendly_name
             assert device_instance.device_handler_type
-
-    def test_class_construction(self):
-        assert BaseDevice.__doc__
-        assert len(BaseDevice.__doc__) != 0
-
-    def test_schema_construction(self):
-        assert DeviceSchema.__doc__
-        assert len(DeviceSchema.__doc__) != 0
 
     def test_device_schema(self, device_instance, device_schema):
         """This test will verify that the DeviceSchema

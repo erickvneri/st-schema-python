@@ -7,6 +7,7 @@ class Header:
         acquired at incoming ST Requests.
         :::param request_id: parameter
         acquired at incoming ST Requests."""
+
     schema = 'st-schema'
     version = '1.0'
 
@@ -21,6 +22,7 @@ class HeadersSchema(Schema):
     It parses the Snake Cased attributes
     into Camel Case attributes as specified
     in the ST-Scema documentation."""
+
     schema = fields.Str()
     version = fields.Str()
     interactionType = fields.Field(attribute='interaction_type')

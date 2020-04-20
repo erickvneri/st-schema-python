@@ -11,6 +11,7 @@ class ManufacturerInfo:
         :::param model_name: Commercial name of the device
         :::param hw_version: Hardware version
         :::param sw_version: Software version"""
+
     def __init__(self, manufacturer_name: str, model_name: str, hw_version: str, sw_version: str):
         self.manufacturer_name = manufacturer_name
         self.model_name = model_name
@@ -28,6 +29,7 @@ class ManufacturerSchema(Schema):
             :::param model_name -> modelName
             :::param hw_version -> hwVersion
             :::param sw_version -> swVersion"""
+
     manufacturerName = fields.Field(attribute='manufacturer_name')
     modelName = fields.Field(attribute='model_name')
     hwVersion = fields.Field(attribute='hw_version')
