@@ -1,10 +1,8 @@
-
 import  pytest
-import pystschema
 from pystschema import BaseDevice, DeviceSchema, DeviceCookie, DeviceCookieSchema
 
 class TestSTDevice:
-    # Define DeviceCookie for its use accros
+    # Define DeviceCookie for its use accross
     # the tested devices.
     cookie = DeviceCookie.issue()
     cookie_schema = DeviceCookieSchema()
@@ -32,16 +30,17 @@ class TestSTDevice:
         assert device_instance.friendly_name
         assert device_instance.device_handler_type
 
-    def  test_alt_definition(self):
-        device_instance = BaseDevice()
-        device_instance.external_device_id = 'x1'
-        device_instance.device_cookie = self.device_cookie
-        device_instance.friendly_name = 'fn'
-        device_instance.device_handler_type = 'c2c-test'
-        assert device_instance.external_device_id
-        assert device_instance.device_cookie is not None
-        assert device_instance.friendly_name
-        assert device_instance.device_handler_type
+    def test_alt_definition(self):
+        with pytest.raises(TypeError):
+            device_instance = BaseDevice()
+            device_instance.external_device_id = 'x1'
+            device_instance.device_cookie = self.device_cookie
+            device_instance.friendly_name = 'fn'
+            device_instance.device_handler_type = 'c2c-test'
+            assert device_instance.external_device_id
+            assert device_instance.device_cookie is not None
+            assert device_instance.friendly_name
+            assert device_instance.device_handler_type
 
     def test_class_attr(self, device_instance):
         assert device_instance.__doc__ != ''

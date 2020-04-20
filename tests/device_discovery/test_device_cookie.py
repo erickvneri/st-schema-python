@@ -2,7 +2,6 @@ import pytest
 from pystschema import DeviceCookie, DeviceCookieSchema
 
 class TestDeviceCookie:
-
     @pytest.fixture
     def device_cookie(self):
         yield DeviceCookie

@@ -8,13 +8,12 @@ class BaseDevice:
         :::param external_device_id: device id for a
         third-party cloud.
         :::param friendly_name: Name set by the user.
-        :::param device_handler_type: string  referred
+        :::param device_handler_type: value referred
         at the main ST-Schema documentation:
         https://smartthings.developer.samsung.com/docs//devices/smartthings-schema/device-handler-types.html
         :::param device_cookie: DeviceCookie object."""
     def __init__(
-            self, external_device_id: str = None, device_cookie: object = None,
-            friendly_name: str = None, device_handler_type: str = None
+        self, external_device_id: str, device_cookie: object, friendly_name: str, device_handler_type: str
     ):
         self.external_device_id = external_device_id
         self.device_cookie = device_cookie or dict()
@@ -23,10 +22,11 @@ class BaseDevice:
 
 
 class DeviceSchema(Schema):
-    """The DeviceSchema class will handle BaseDevice
-    and Device classes. Also, it will handle snake cased
-    attributes and parse them to their respective Camel Case
-    versions:
+    """The DeviceSchema class will handle the
+    serialization of the BaseDevice and Device
+    classes. It parses the snake cased attributes
+    to Camel Case attributes as the ST-Schema
+    documentation refers:
 
         :::param external_device_id -> externalDeviceId
         :::param friendly_name -> friendlyName
