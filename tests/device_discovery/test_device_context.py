@@ -14,11 +14,11 @@ class TestDeviceContext:
 
     def test_class_construction(self):
         assert DeviceContext.__doc__
-        assert len(DeviceContext.__doc__)
+        assert len(DeviceContext.__doc__) != 0
 
     def test_schema_class_construction(self):
         assert DeviceContextSchema.__doc__
-        assert len(DeviceContextSchema.__doc__)
+        assert len(DeviceContextSchema.__doc__) != 0
 
     def test_device_context_instance(self, device_context):
         assert device_context

@@ -15,6 +15,13 @@ class TestSTHeader:
         header_schema = HeadersSchema()
         yield header_schema
 
+    def test_header_class_construction(self):
+        assert Header.__doc__
+        assert len(Header.__doc__) != 0
+    def test_header_schema_construction(self):
+        assert HeadersSchema.__doc__
+        assert len(HeadersSchema.__doc__) != 0
+
     def test_def_header(self, def_header):
         assert isinstance(def_header, Header)
         assert def_header.interaction_type == 'DiscoveryRequest'
@@ -26,7 +33,7 @@ class TestSTHeader:
         result_header = header_schema.dump(def_header)
 
         assert type(result_header) is dict
-        assert result_header['interaction_type'] == 'DiscoveryRequest'
         assert result_header['schema'] == 'st-schema'
         assert result_header['version'] == '1.0'
-        assert result_header['request_id'] is not None
+        assert result_header['interactionType'] == 'DiscoveryRequest'
+        assert result_header['requestId'] is not None

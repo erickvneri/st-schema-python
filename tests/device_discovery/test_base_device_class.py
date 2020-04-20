@@ -42,9 +42,13 @@ class TestSTDevice:
             assert device_instance.friendly_name
             assert device_instance.device_handler_type
 
-    def test_class_attr(self, device_instance):
-        assert device_instance.__doc__ != ''
-        assert len(device_instance.__doc__) != 0
+    def test_class_construction(self):
+        assert BaseDevice.__doc__
+        assert len(BaseDevice.__doc__) != 0
+
+    def test_schema_construction(self):
+        assert DeviceSchema.__doc__
+        assert len(DeviceSchema.__doc__) != 0
 
     def test_device_schema(self, device_instance, device_schema):
         """This test will verify that the DeviceSchema

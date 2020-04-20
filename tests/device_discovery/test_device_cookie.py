@@ -11,6 +11,14 @@ class TestDeviceCookie:
         schema = DeviceCookieSchema()
         yield schema
 
+    def test_class_construction(self):
+        assert DeviceCookie.__doc__
+        assert len(DeviceCookie.__doc__) != 0
+
+    def test_schema_construction(self):
+        assert DeviceCookieSchema.__doc__
+        assert len(DeviceCookieSchema.__doc__) != 0
+
     def test_raw_cookie_definition(self, device_cookie):
         raw_cookie = device_cookie(cookie='raw_definition')
 

@@ -31,7 +31,7 @@ class DeviceSchema(Schema):
         :::param external_device_id -> externalDeviceId
         :::param friendly_name -> friendlyName
         :::param device_handler_type -> deviceHandlerType
-        :::param device_cookie -> DeviceCookie"""
+        :::param device_cookie -> deviceCookie"""
     externalDeviceId = fields.Field(attribute='external_device_id')
     deviceCookie = fields.Field(attribute='device_cookie')
     friendlyName = fields.Field(attribute='friendly_name')
