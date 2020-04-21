@@ -1,6 +1,6 @@
 import pytest
 from hashlib import sha1
-from pystschema import Header, HeadersSchema
+from pystschema.base import Header, HeadersSchema
 
 
 class TestSTHeader:

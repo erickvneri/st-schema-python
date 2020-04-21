@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields
 
-class ManufacturerInfo:
+class BaseManufacturer:
     """The ManufacturerInfo class is used
     at the initial DiscoveryRequest. It
     contains the information about the
@@ -30,7 +30,7 @@ class ManufacturerSchema(Schema):
             :::param hw_version -> hwVersion
             :::param sw_version -> swVersion"""
 
-    manufacturerName = fields.Field(attribute='manufacturer_name')
-    modelName = fields.Field(attribute='model_name')
-    hwVersion = fields.Field(attribute='hw_version')
-    swVersion = fields.Field(attribute='sw_version')
+    manufacturerName = fields.Str(attribute='manufacturer_name', dump_only=True)
+    modelName = fields.Str(attribute='model_name', dump_only=True)
+    hwVersion = fields.Str(attribute='hw_version', dump_only=True)
+    swVersion = fields.Str(attribute='sw_version', dump_only=True)

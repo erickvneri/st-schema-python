@@ -1,10 +1,10 @@
 import pytest
-from pystschema import ManufacturerInfo, ManufacturerSchema
+from pystschema.base import BaseManufacturer, ManufacturerSchema
 
 class TestManufacturerInfo:
     @pytest.fixture
     def manufacturer(self):
-        mn = ManufacturerInfo(
+        mn = BaseManufacturer(
             manufacturer_name='SmartThings', model_name='SmartPlug', hw_version='v1 US Plug', sw_version='0.0.3'
         )
         yield mn
@@ -15,8 +15,8 @@ class TestManufacturerInfo:
         yield schema
 
     def test_manufacturer_class_construction(self):
-        assert ManufacturerInfo.__doc__
-        assert len(ManufacturerInfo.__doc__) != 0
+        assert BaseManufacturer.__doc__
+        assert len(BaseManufacturer.__doc__) != 0
 
     def test_schema_class_construction(self):
         assert ManufacturerSchema.__doc__
@@ -24,6 +24,7 @@ class TestManufacturerInfo:
 
     def test_manufacturer_class(self, manufacturer):
         assert manufacturer
+        assert isinstance(manufacturer, BaseManufacturer)
         assert manufacturer.manufacturer_name
         assert manufacturer.model_name
         assert manufacturer.hw_version

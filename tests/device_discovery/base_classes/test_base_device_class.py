@@ -1,9 +1,9 @@
-import  pytest
-from pystschema import BaseDevice, DeviceSchema, DeviceCookie, DeviceCookieSchema
+import pytest
+from pystschema.base import BaseDevice, DeviceSchema, BaseDeviceCookie, DeviceCookieSchema
 
 class TestSTDevice:
     # Define DeviceCookie for its use across the test.
-    cookie = DeviceCookie.issue()
+    cookie = BaseDeviceCookie(cookie='123abc')
     cookie_schema = DeviceCookieSchema()
     device_cookie = cookie_schema.dump(cookie)
 
@@ -61,4 +61,5 @@ class TestSTDevice:
         assert device_result['externalDeviceId']
         assert device_result['friendlyName']
         assert device_result['deviceCookie']
+        print(device_result)
         assert device_result['deviceHandlerType']
