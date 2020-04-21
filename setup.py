@@ -12,5 +12,15 @@ setup(
         'pytest',
         'marshmallow'
     ],
-    python_requires='>=3.6'
+    python_requires='>=3.6',
+    classifiers=[
+        "Development Status :: In development",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Topic :: Software Development :: Libraries",
+        "Topic :: Home Automation",
+        "Topic :: Cloud to Cloud",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+    ]
 )
