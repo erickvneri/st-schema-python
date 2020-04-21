@@ -1,9 +1,7 @@
 import pytest
 from pystschema.base import BaseDevice, DeviceSchema, BaseDeviceCookie, DeviceCookieSchema
 
-# @pytest.mark.skip('Redefining BaseDeviceCookie')
 class TestSTDevice:
-    # FIXME: DeviceCookie
     # Define DeviceCookie for its use across the test.
     cookie = BaseDeviceCookie(cookie='123abc')
     cookie_schema = DeviceCookieSchema()
