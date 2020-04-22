@@ -61,5 +61,4 @@ class TestSTDevice:
         assert device_result['externalDeviceId']
         assert device_result['friendlyName']
         assert device_result['deviceCookie']
-        print(device_result)
         assert device_result['deviceHandlerType']
