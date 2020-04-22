@@ -1,0 +1,1 @@
+from pystschema.base import BaseDevice
