@@ -10,8 +10,8 @@ class TestSTDevice:
     @pytest.fixture
     def device_instance(self):
         device_instance = BaseDevice(
-            external_device_id='x1', device_cookie=self.device_cookie,
-            friendly_name='Hello World', device_handler_type='c2c-test'
+            external_device_id='x1', device_cookie=self.device_cookie, friendly_name='Hello World',
+            device_handler_type='c2c-test', device_unique_id='123abc'
         )
         yield device_instance
 
@@ -36,6 +36,7 @@ class TestSTDevice:
         assert device_instance.device_cookie is not None
         assert device_instance.friendly_name
         assert device_instance.device_handler_type
+        assert device_instance.device_unique_id
 
     def test_alt_definition(self):
         with pytest.raises(TypeError):
@@ -44,10 +45,12 @@ class TestSTDevice:
             device_instance.device_cookie = self.device_cookie
             device_instance.friendly_name = 'fn'
             device_instance.device_handler_type = 'c2c-test'
+            device_instance.device_unique_id = '123abc'
             assert device_instance.external_device_id
             assert device_instance.device_cookie is not None
             assert device_instance.friendly_name
             assert device_instance.device_handler_type
+            assert device_instance.device_unique_id
 
     def test_device_schema(self, device_instance, device_schema):
         """This test will verify that the DeviceSchema
@@ -61,5 +64,5 @@ class TestSTDevice:
         assert device_result['externalDeviceId']
         assert device_result['friendlyName']
         assert device_result['deviceCookie']
-        print(device_result)
         assert device_result['deviceHandlerType']
+        assert device_result['deviceUniqueId']

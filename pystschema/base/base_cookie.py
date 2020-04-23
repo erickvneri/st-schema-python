@@ -7,7 +7,7 @@ class BaseDeviceCookie:
     device.
         :::param cookie"""
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: object):
         self.cookie = kwargs
 
 
