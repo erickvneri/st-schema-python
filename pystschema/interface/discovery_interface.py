@@ -13,8 +13,9 @@ class DeviceInterface(BaseDevice):
             - set_mn
             - set_cookie"""
 
-    def __init__(self, external_device_id: str, friendly_name: str, device_handler_type: str, device_cookie: object = None):
-        BaseDevice.__init__(self, external_device_id, friendly_name, device_handler_type, device_cookie)
+    def __init__(self, external_device_id: str, friendly_name: str, device_handler_type: str,
+                 device_unique_id: str, device_cookie: object = None):
+        BaseDevice.__init__(self, external_device_id, friendly_name, device_handler_type, device_cookie, device_unique_id)
         self.device_context = None
         self.manufacturer_info = None
 
@@ -45,4 +46,4 @@ class DeviceInterface(BaseDevice):
     def set_cookie(self, cookie: str):
         """Defines the device cookie"""
 
-        self.device_cookie = BaseDeviceCookie(cookie)
+        self.device_cookie = BaseDeviceCookie(cookie=cookie)
