@@ -2,6 +2,8 @@
 
 ### SmartThings ST-Schema SDK.
 
-Interaction Types documentation:    
-- https://smartthings.developer.samsung.com/docs/devices/smartthings-schema/smartthings-schema-reference.html
+Important documents:
+
+- [Interaction Types documentation](https://smartthings.developer.samsung.com/docs/devices/smartthings-schema/smartthings-schema-reference.html)
  
+- [SDK Publication](https://smartthings.atlassian.net/wiki/spaces/DevRelations/pages/522028874/SDKs+Tools)

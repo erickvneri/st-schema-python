@@ -7,15 +7,19 @@ class DeviceInterface(BaseDevice):
         :::param friendly_name: required values
         :::param device_handler_type: required values
         :::param device_cookie: default as None
+        :::param device_unique_id: required value
 
         Extends by adding the next methods:
             - set_context
             - set_mn
             - set_cookie"""
 
-    def __init__(self, external_device_id: str, friendly_name: str, device_handler_type: str,
-                 device_unique_id: str, device_cookie: object = None):
-        BaseDevice.__init__(self, external_device_id, friendly_name, device_handler_type, device_cookie, device_unique_id)
+    def __init__(
+            self, external_device_id: str, friendly_name: str, device_unique_id: str, device_cookie: object, device_handler_type: str
+                 ):
+        BaseDevice.__init__(
+            self, external_device_id, friendly_name, device_unique_id, device_cookie, device_handler_type
+        )
         self.device_context = None
         self.manufacturer_info = None
 

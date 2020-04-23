@@ -39,11 +39,10 @@ class TestDiscoverySchema:
     def test_device_schema(self, schema, device_fixture):
         device_result = schema.dump(device_fixture)
         assert schema
-        assert device_result['externalDeviceId']
-        assert device_result['friendlyName']
-        assert device_result['deviceHandlerType']
-        assert device_result['deviceUniqueId']
-        assert device_result['deviceCookie']
+        assert device_result['externalDeviceId'] == device_fixture.external_device_id
+        assert device_result['friendlyName'] == device_fixture.friendly_name
+        assert device_result['deviceUniqueId'] == device_fixture.device_unique_id
+        assert device_result['deviceCookie'] == device_fixture.device_cookie.__dict__
+        assert device_result['deviceHandlerType'] == device_fixture.device_handler_type
         assert device_result['manufacturerInfo']
         assert device_result['deviceContext']
-

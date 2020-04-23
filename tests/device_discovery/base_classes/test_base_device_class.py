@@ -10,8 +10,8 @@ class TestSTDevice:
     @pytest.fixture
     def device_instance(self):
         device_instance = BaseDevice(
-            external_device_id='x1', device_cookie=self.device_cookie, friendly_name='Hello World',
-            device_handler_type='c2c-test', device_unique_id='123abc'
+            external_device_id='x1', friendly_name='Hello World',  device_unique_id='123abc',
+            device_cookie=self.device_cookie, device_handler_type='c2c-test'
         )
         yield device_instance
 
