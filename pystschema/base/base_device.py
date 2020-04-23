@@ -15,14 +15,14 @@ class BaseDevice:
         :::param unique_device_id"""
 
     def __init__(
-        self, external_device_id: str, device_cookie: object, friendly_name: str, 
-        device_handler_type: str, device_unique_id: str
+        self, external_device_id: str, friendly_name: str, device_unique_id: str,
+            device_cookie: object, device_handler_type: str
     ):
         self.external_device_id = external_device_id
-        self.device_cookie = device_cookie or dict()
         self.friendly_name = friendly_name
-        self.device_handler_type = device_handler_type
         self.device_unique_id = device_unique_id
+        self.device_cookie = device_cookie or dict()
+        self.device_handler_type = device_handler_type
 
 
 class DeviceSchema(Schema):
@@ -39,7 +39,7 @@ class DeviceSchema(Schema):
         :::param device_unique_id -> uniqueDeviceId"""
 
     externalDeviceId = fields.Field(attribute='external_device_id', dump_only=True)
-    deviceCookie = fields.Field(attribute='device_cookie', dump_only=True)
     friendlyName = fields.Field(attribute='friendly_name', dump_only=True)
-    deviceHandlerType = fields.Field(attribute='device_handler_type', dump_only=True)
     deviceUniqueId = fields.Field(attribute='device_unique_id', dump_only=True)
+    deviceCookie = fields.Field(attribute='device_cookie', dump_only=True)
+    deviceHandlerType = fields.Field(attribute='device_handler_type', dump_only=True)
