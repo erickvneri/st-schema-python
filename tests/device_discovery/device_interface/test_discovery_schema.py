@@ -36,7 +36,6 @@ class TestDiscoverySchema:
         assert device_fixture.device_unique_id
         assert device_fixture.manufacturer_info
 
-
     def test_device_schema(self, schema, device_fixture):
         device_result = schema.dump(device_fixture)
         assert schema

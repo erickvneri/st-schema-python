@@ -2,6 +2,10 @@ from datetime import datetime
 from pystschema import DeviceInterface
 
 class DeviceFixture(DeviceInterface):
+    """The DeviceFixture is a Testing Implementation
+    to check the DiscoverySchema interface. This is
+    just a test serialization. Mock Response. Etc."""
+
     def __init__(
         self, external_device_id='x1', device_cookie=None, friendly_name='Kitchen',
         device_handler_type='c2c', device_unique_id='123abc'
