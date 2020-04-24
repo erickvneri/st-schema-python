@@ -1,4 +1,5 @@
 from pystschema.interface import DeviceInterface
+from datetime import datetime
 
 class DeviceFixture(DeviceInterface):
     """The DeviceFixture class is a Mock Device
@@ -11,7 +12,7 @@ class DeviceFixture(DeviceInterface):
             external_device_id='9',
             friendly_name='BathLight',
             device_unique_id='dsfg7-654s',
-            # device_cookie='not official',
+            device_cookie=datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
             device_handler_type='c2c-bulb-rgb'
         )
         # SETTING DEVICE CONTEXT

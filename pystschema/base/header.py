@@ -11,7 +11,7 @@ class Header:
     schema = 'st-schema'
     version = '1.0'
 
-    def __init__(self, interaction_type: str, request_id: str) -> 'Header':
+    def __init__(self, interaction_type: str, request_id: str):
         self.interaction_type = interaction_type
         self.request_id = request_id
 
@@ -25,5 +25,5 @@ class HeadersSchema(Schema):
 
     schema = fields.Str()
     version = fields.Str()
-    interactionType = fields.Field(attribute='interaction_type')
-    requestId = fields.Field(attribute='request_id')
+    interactionType = fields.Str(attribute='interaction_type')
+    requestId = fields.Str(attribute='request_id')
