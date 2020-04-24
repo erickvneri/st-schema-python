@@ -25,20 +25,21 @@ class TestDeviceCookie:
         assert d_cookie
         assert d_cookie.cookie
         assert isinstance(d_cookie, BaseDeviceCookie)
-        assert type(d_cookie.cookie) is dict
-        assert d_cookie.cookie == dict(cookie='some_cookie')
+        assert type(d_cookie.cookie) is str
+        assert d_cookie.cookie == 'some_cookie'
 
     def test_multiple_values(self,  device_cookie):
-        multiple_cookies = device_cookie(cookie='cookie_1', cookie_2='last_year_cookie')
-        assert multiple_cookies
-        assert multiple_cookies.cookie
-        assert isinstance(multiple_cookies, BaseDeviceCookie)
-        assert type(multiple_cookies.cookie) is dict
-        assert multiple_cookies.cookie == dict(cookie='cookie_1', cookie_2='last_year_cookie')
+        with pytest.raises(TypeError):
+            multiple_cookies = device_cookie(cookie='cookie_1', cookie_2='last_year_cookie')
+            assert multiple_cookies
+            assert multiple_cookies.cookie
+            assert isinstance(multiple_cookies, BaseDeviceCookie)
+            assert type(multiple_cookies.cookie) is str
+            assert multiple_cookies.cookie == 'cookie_1'
 
     def test_device_cookie_schema(self, device_cookie, schema):
         cookie_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        cookie = device_cookie(update=cookie_date)
+        cookie = device_cookie(cookie=cookie_date)
         dumped_cookie = schema.dump(cookie)
         assert dumped_cookie
         assert dumped_cookie['cookie']
