@@ -1,17 +1,17 @@
 import pytest
-from pystschema import DiscoverySchema
-from pystschema.base import BaseDeviceCookie, BaseDeviceContext, BaseManufacturer
-from tests.device_discovery.device_interface.device_interface_fixture import DeviceFixture
+from pystschema.interface import DiscoveryDeviceSchema
+from pystschema.base import BaseCookie, BaseContext, BaseManufacturer
+from tests.fixtures import DeviceFixture
 
 class TestDiscoverySchema:
     @pytest.fixture
     def schema(self):
-        schema = DiscoverySchema()
+        schema = DiscoveryDeviceSchema()
         yield schema
 
     @pytest.fixture
     def schema_class(self):
-        yield DiscoverySchema
+        yield DiscoveryDeviceSchema
 
     @pytest.fixture
     def device_fixture(self):
@@ -23,9 +23,9 @@ class TestDiscoverySchema:
         assert len(schema_class.__doc__) != 0
 
     def test_nested_classes(self, device_fixture):
-        assert isinstance(device_fixture.device_cookie, BaseDeviceCookie)
+        assert isinstance(device_fixture.device_cookie, BaseCookie)
         assert isinstance(device_fixture.manufacturer_info, BaseManufacturer)
-        assert isinstance(device_fixture.device_context, BaseDeviceContext)
+        assert isinstance(device_fixture.device_context, BaseContext)
 
     def test_device_representation(self, device_fixture):
         assert device_fixture

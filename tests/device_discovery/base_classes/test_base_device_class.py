@@ -1,9 +1,9 @@
 import pytest
-from pystschema.base import BaseDevice, DeviceSchema, BaseDeviceCookie, DeviceCookieSchema
+from pystschema.base import BaseDevice, BaseDeviceSchema, BaseCookie, DeviceCookieSchema
 
 class TestSTDevice:
     # Define DeviceCookie for its use across the test.
-    cookie = BaseDeviceCookie(cookie='123abc')
+    cookie = BaseCookie(cookie='123abc')
     cookie_schema = DeviceCookieSchema()
     device_cookie = cookie_schema.dump(cookie)
 
@@ -17,7 +17,7 @@ class TestSTDevice:
 
     @pytest.fixture
     def device_schema(self):
-        schema = DeviceSchema()
+        schema = BaseDeviceSchema()
         yield schema
 
     def test_class_construction(self):
@@ -25,8 +25,8 @@ class TestSTDevice:
         assert len(BaseDevice.__doc__) != 0
 
     def test_schema_construction(self):
-        assert DeviceSchema.__doc__
-        assert len(DeviceSchema.__doc__) != 0
+        assert BaseDeviceSchema.__doc__
+        assert len(BaseDeviceSchema.__doc__) != 0
 
     def test_device_definition(self, device_instance):
         """This test will verify the main functionality
