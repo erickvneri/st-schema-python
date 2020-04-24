@@ -1,11 +1,11 @@
 import pytest
 from datetime import datetime
-from pystschema.base import BaseDeviceCookie, DeviceCookieSchema
+from pystschema.base import BaseCookie, DeviceCookieSchema
 
 class TestDeviceCookie:
     @pytest.fixture
     def device_cookie(self):
-        yield BaseDeviceCookie
+        yield BaseCookie
 
     @pytest.fixture
     def schema(self):
@@ -13,8 +13,8 @@ class TestDeviceCookie:
         yield schema
 
     def test_class_construction(self):
-        assert BaseDeviceCookie.__doc__
-        assert len(BaseDeviceCookie.__doc__) != 0
+        assert BaseCookie.__doc__
+        assert len(BaseCookie.__doc__) != 0
 
     def test_schema_construction(self):
         assert DeviceCookieSchema.__doc__
@@ -24,7 +24,7 @@ class TestDeviceCookie:
         d_cookie = device_cookie(cookie='some_cookie')
         assert d_cookie
         assert d_cookie.cookie
-        assert isinstance(d_cookie, BaseDeviceCookie)
+        assert isinstance(d_cookie, BaseCookie)
         assert type(d_cookie.cookie) is str
         assert d_cookie.cookie == 'some_cookie'
 
@@ -33,7 +33,7 @@ class TestDeviceCookie:
             multiple_cookies = device_cookie(cookie='cookie_1', cookie_2='last_year_cookie')
             assert multiple_cookies
             assert multiple_cookies.cookie
-            assert isinstance(multiple_cookies, BaseDeviceCookie)
+            assert isinstance(multiple_cookies, BaseCookie)
             assert type(multiple_cookies.cookie) is str
             assert multiple_cookies.cookie == 'cookie_1'
 

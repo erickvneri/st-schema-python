@@ -1,7 +1,7 @@
 from marshmallow import Schema, fields
 from pystschema.base import ManufacturerSchema, DeviceContextSchema, DeviceCookieSchema
 
-class DiscoverySchema(Schema):
+class DiscoveryDeviceSchema(Schema):
     """The DiscoverySchema returns the formal
     representation of a device in a Discovery
     Response.

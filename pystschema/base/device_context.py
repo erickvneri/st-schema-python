@@ -1,7 +1,7 @@
 from typing import List
 from marshmallow import Schema, fields
 
-class BaseDeviceContext:
+class BaseContext:
     """The DeviceContext class contains general
     information about the type of device in use.
 

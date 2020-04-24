@@ -1,4 +1,5 @@
-from pystschema.base import BaseDevice, BaseDeviceContext, BaseDeviceCookie, BaseManufacturer
+from pystschema.base import BaseDevice, BaseContext, BaseCookie, BaseManufacturer
+
 
 class DeviceInterface(BaseDevice):
     """Inherits from BaseDevice.
@@ -14,40 +15,42 @@ class DeviceInterface(BaseDevice):
             - set_mn
             - set_cookie"""
 
-    def __init__(
-            self, external_device_id: str, friendly_name: str, device_unique_id: str, device_cookie: object, device_handler_type: str
-                 ):
-        BaseDevice.__init__(
-            self, external_device_id, friendly_name, device_unique_id, device_cookie, device_handler_type
-        )
+    def __init__(self, **info):
+        BaseDevice.__init__(self,
+                            external_device_id=info.get('external_device_id'),
+                            friendly_name=info.get('friendly_name'),
+                            device_unique_id=info.get('device_unique_id'),
+                            device_cookie=info.get('device_cookie'),
+                            device_handler_type=info.get('device_handler_type')
+                            )
         self.device_context = None
         self.manufacturer_info = None
 
-    def set_context(self, room_name: str, groups: list, categories: list):
+    def set_context(self, **context):
         """Defines the device_context values accordingly to the ST Schema specifications.
 
             :::param room_name
             :::param groups
             :::param categories"""
 
-        self.device_context = BaseDeviceContext(
-            room_name=room_name, groups=groups, categories=categories
+        self.device_context = BaseContext(
+            room_name=context.get('room_name'),
+            groups=context.get('groups'),
+            categories=context.get('categories')
         )
 
-    def set_mn(self, manufacturer_name: str, model_name: str, hw_version: str, sw_version: str):
+    def set_mn(self, **info):
         """Defines the manufacturer_info  values accordingly to the ST Schema specifications.
 
             :::param manufacturer_name
             :::param model_name
             :::param hw_version
-            :::param sw_version
-        """
+            :::param sw_version"""
 
         self.manufacturer_info = BaseManufacturer(
-            manufacturer_name=manufacturer_name, model_name=model_name, hw_version=hw_version, sw_version=sw_version
+            manufacturer_name=info.get('manufacturer_name'),
+            model_name=info.get('model_name'),
+            hw_version=info.get('hw_version'),
+            sw_version=info.get('sw_version')
         )
 
-    def set_cookie(self, cookie: str):
-        """Defines the device cookie"""
-
-        self.device_cookie = BaseDeviceCookie(cookie=cookie)

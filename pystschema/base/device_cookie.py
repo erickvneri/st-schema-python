@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields
 
-class BaseDeviceCookie:
+class BaseCookie:
     """The DeviceCookie is an utility
     class used for the DeviceClass to
     handle encrypted updates over the
@@ -15,8 +15,8 @@ class DeviceCookieSchema(Schema):
     """The DeviceCookieSchema handles the
     serialization of the DeviceCookie class.
         e.g.:
-        {'cookie': {'update': '2020-04-21'}}"""
+        {'cookie': f'{value}'}"""
 
-    cookie = fields.Field(attribute='cookie')
+    cookie = fields.Str(attribute='cookie')
 
 

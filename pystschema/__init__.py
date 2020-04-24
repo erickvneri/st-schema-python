@@ -1,2 +1,0 @@
-from .interface.discovery_interface import DeviceInterface
-from .interface.discovery_schema import DiscoverySchema
