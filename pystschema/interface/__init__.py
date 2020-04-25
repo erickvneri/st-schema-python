@@ -1,2 +1,2 @@
 from .discovery_interface import DeviceInterface
-from .discovery_schema import DiscoveryDeviceSchema
+from .discovery_schema import DeviceSchema

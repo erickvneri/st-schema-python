@@ -1,11 +1,10 @@
 from marshmallow import Schema, fields
 
-class BaseManufacturer:
-    """The ManufacturerInfo class is used
-    at the initial DiscoveryRequest. It
-    contains the information about the
-    manufacturer and the hardware and software
-    versions of the device:
+class ManufacturerInfo:
+    """The ManufacturerInfo class contains the
+    information about the manufacturer company
+    and the hardware and software versions
+    of the device:
 
         :::param manufacturer_name: Company manufacturer
         :::param model_name: Commercial name of the device
@@ -21,9 +20,9 @@ class BaseManufacturer:
 class ManufacturerSchema(Schema):
     """The ManufacturerSchema class will handle the
     serialization of the ManufacturerInfo class.
-    It parses the snake cased attributes into Camel
-    Case attributes as the ST-Schema documentation
-    refers:
+    It parses the Snake Cased attributes to a
+    Camel Case format following REST conventions
+    for Cloud-to-Cloud communication:
 
             :::param manufacturer_name -> manufacturerName
             :::param model_name -> modelName

@@ -1,6 +1,7 @@
 from pystschema.interface import DeviceInterface
 from datetime import datetime
 
+
 class DeviceFixture(DeviceInterface):
     """The DeviceFixture class is a Mock Device
     Implementation which handles the device info

@@ -10,7 +10,6 @@ class BaseCookie:
     def __init__(self, cookie: str):
         self.cookie = cookie
 
-
 class DeviceCookieSchema(Schema):
     """The DeviceCookieSchema handles the
     serialization of the DeviceCookie class.

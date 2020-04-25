@@ -1,11 +1,12 @@
 from marshmallow import Schema, fields
-from pystschema.interface import DiscoveryDeviceSchema
-from pystschema.base import HeadersSchema, Header
+from pystschema.interface import DeviceSchema
+from pystschema.responses.util import HeadersSchema, Header
 
 class DiscoveryResponse:
     """The DiscoveryResponse class will handle the
     final representation of a Discovery Response as
     the ST Schema documentation refers.
+
         :::param devices: a list of devices.
         :::param headers: headers or a request and response"""
 
@@ -25,13 +26,14 @@ class DiscoveryResponse:
         interaction_type = 'discoveryResponse'
         self.headers = Header(interaction_type=interaction_type, request_id=request_id)
 
-class DiscoverySchema(Schema):
+class DiscoveryResponseSchema(Schema):
     """The DiscoverySchema class will returns
     a DiscoveryResponse JSON as it is referred
     at the ST Schema documentation.
+
         :::param devices: [devices]
         :::param headers: dict with JSON
         headers inherited from ST request."""
 
-    devices = fields.List(fields.Nested(DiscoveryDeviceSchema, attribute='devices'))
+    devices = fields.List(fields.Nested(DeviceSchema, attribute='devices'))
     headers = fields.Nested(HeadersSchema, attribute='headers')

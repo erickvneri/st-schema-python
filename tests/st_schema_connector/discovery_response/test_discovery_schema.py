@@ -1,21 +1,12 @@
 import pytest
-from pystschema.discovery_implementation import DiscoverySchema
+from pystschema.responses import DiscoveryResponseSchema
 from tests.fixtures import DeviceFixture
 
 class TestDiscoverySchema:
     @pytest.fixture
-    def discovery_schema(self):
-        schema = DiscoverySchema()
-        yield schema
-
-    @pytest.fixture
     def schema_class(self):
-        yield DiscoverySchema()
-
-    @pytest.fixture
-    def device(self):
-        device = DeviceFixture()
-        yield device
+        schema = DiscoveryResponseSchema()
+        yield schema
 
     def test_schema_class(self, schema_class):
         assert schema_class

@@ -1,5 +1,4 @@
-from pystschema.base import BaseDevice, BaseContext, BaseCookie, BaseManufacturer
-
+from pystschema.base import BaseDevice, DeviceContext, ManufacturerInfo
 
 class DeviceInterface(BaseDevice):
     """Inherits from BaseDevice.
@@ -12,8 +11,7 @@ class DeviceInterface(BaseDevice):
 
         Extends by adding the next methods:
             - set_context
-            - set_mn
-            - set_cookie"""
+            - set_mn"""
 
     def __init__(self, **info):
         BaseDevice.__init__(self,
@@ -33,7 +31,7 @@ class DeviceInterface(BaseDevice):
             :::param groups
             :::param categories"""
 
-        self.device_context = BaseContext(
+        self.device_context = DeviceContext(
             room_name=context.get('room_name'),
             groups=context.get('groups'),
             categories=context.get('categories')
@@ -47,7 +45,7 @@ class DeviceInterface(BaseDevice):
             :::param hw_version
             :::param sw_version"""
 
-        self.manufacturer_info = BaseManufacturer(
+        self.manufacturer_info = ManufacturerInfo(
             manufacturer_name=info.get('manufacturer_name'),
             model_name=info.get('model_name'),
             hw_version=info.get('hw_version'),
