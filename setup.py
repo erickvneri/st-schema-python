@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='pystschema',
+    name='st-schema-python',
     version='0.0.1',
     author='erickv',
     author_email='erickv@bluetrailsoft.com',

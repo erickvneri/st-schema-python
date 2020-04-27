@@ -1,9 +1,10 @@
 from typing import List
 from marshmallow import Schema, fields
 
-class BaseDeviceContext:
-    """The DeviceContext class contains general
-    information about the type of device in use.
+class DeviceContext:
+    """The DeviceContext class contains the information
+    about the device that refers to its utility or
+    location of use.
 
         :::param room_name: dictate at which room
         the device will be assigned at the One App.
@@ -20,14 +21,14 @@ class BaseDeviceContext:
 class DeviceContextSchema(Schema):
     """The DeviceContextSchema handles the
     serialization of the DeviceContext class.
-    It parses the snake cased attributes into Camel
-    Case attributes as the ST-Schema documentation
-    refers:
+    It parses the Snake Cased attributes to a
+    Camel Case format following REST conventions
+    for Cloud-to-Cloud communication:
 
         :::param room_name -> roomName
         :::param groups
         :::param categories"""
 
-    roomName = fields.Field(attribute='room_name')
+    roomName = fields.Str(attribute='room_name')
     groups = fields.List(fields.Str(attribute='groups'))
     categories = fields.List(fields.Str(attribute='categories'))

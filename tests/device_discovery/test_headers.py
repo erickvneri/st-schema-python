@@ -1,7 +1,6 @@
 import pytest
 from hashlib import sha1
-from pystschema.base import Header, HeadersSchema
-
+from stschema.responses.util import Header, HeadersSchema
 
 class TestSTHeader:
     @pytest.fixture

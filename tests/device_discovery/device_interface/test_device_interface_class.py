@@ -1,7 +1,7 @@
 import inspect
 import pytest
-from pystschema.base import BaseDevice
-from pystschema import DeviceInterface
+from stschema.base import BaseDevice
+from stschema.interface import DeviceInterface
 
 class TestDeviceInterface:
     @pytest.fixture
@@ -28,9 +28,6 @@ class TestDeviceInterface:
         assert interface_class.set_mn
         assert interface_class.set_mn.__doc__
         assert len(interface_class.set_mn.__doc__) != 0
-        assert interface_class.set_cookie
-        assert interface_class.set_cookie.__doc__
-        assert len(interface_class.set_cookie.__doc__) != 0
 
 
 

@@ -1,10 +1,10 @@
 import pytest
-from pystschema.base import BaseDeviceContext, DeviceContextSchema
+from stschema.base import DeviceContext, DeviceContextSchema
 
 class TestDeviceContext:
     @pytest.fixture
     def device_context(self):
-        d_context = BaseDeviceContext(room_name='Kitchen', groups=['home', 'kitchen'], categories=['light'])
+        d_context = DeviceContext(room_name='Kitchen', groups=['home', 'kitchen'], categories=['light'])
         yield d_context
 
     @pytest.fixture
@@ -13,8 +13,8 @@ class TestDeviceContext:
         yield schema
 
     def test_class_construction(self):
-        assert BaseDeviceContext.__doc__
-        assert len(BaseDeviceContext.__doc__) != 0
+        assert DeviceContext.__doc__
+        assert len(DeviceContext.__doc__) != 0
 
     def test_schema_class_construction(self):
         assert DeviceContextSchema.__doc__
@@ -22,7 +22,7 @@ class TestDeviceContext:
 
     def test_device_context_instance(self, device_context):
         assert device_context
-        assert isinstance(device_context, BaseDeviceContext)
+        assert isinstance(device_context, DeviceContext)
         assert device_context.room_name
         assert device_context.groups
         assert device_context.categories
