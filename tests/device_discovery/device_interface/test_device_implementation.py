@@ -1,6 +1,6 @@
 import pytest
-from pystschema.interface import DeviceSchema
-from pystschema.base import BaseCookie, DeviceContext, ManufacturerInfo
+from stschema.interface import DeviceSchema
+from stschema.base import BaseCookie, DeviceContext, ManufacturerInfo
 from tests.fixtures import DeviceFixture
 
 class TestDiscoverySchema:

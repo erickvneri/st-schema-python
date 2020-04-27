@@ -1,4 +1,4 @@
-from pystschema.base.device_cookie import BaseCookie
+from stschema.base.device_cookie import BaseCookie
 
 class BaseDevice:
     """The BaseDevice class is the basic SmartThings

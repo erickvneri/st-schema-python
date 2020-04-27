@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields
-from pystschema.interface import DeviceSchema
-from pystschema.responses.util import HeadersSchema, Header
+from stschema.interface import DeviceSchema
+from stschema.responses.util import HeadersSchema, Header
 
 class DiscoveryResponse:
     """The DiscoveryResponse class will handle the

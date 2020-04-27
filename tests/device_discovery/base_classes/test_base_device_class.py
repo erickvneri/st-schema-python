@@ -1,5 +1,5 @@
 import pytest
-from pystschema.base import BaseDevice
+from stschema.base import BaseDevice
 
 class TestBaseDevice:
     """TestBaseDevice class defined to test the

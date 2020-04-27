@@ -1,5 +1,5 @@
 import pytest
-from pystschema.base import DeviceContext, DeviceContextSchema
+from stschema.base import DeviceContext, DeviceContextSchema
 
 class TestDeviceContext:
     @pytest.fixture

@@ -1,4 +1,4 @@
-from pystschema.interface import DeviceInterface
+from stschema.interface import DeviceInterface
 from datetime import datetime
 
 

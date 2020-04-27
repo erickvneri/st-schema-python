@@ -1,4 +1,4 @@
-from pystschema.base import BaseDevice, DeviceContext, ManufacturerInfo
+from stschema.base import BaseDevice, DeviceContext, ManufacturerInfo
 
 class DeviceInterface(BaseDevice):
     """Inherits from BaseDevice.

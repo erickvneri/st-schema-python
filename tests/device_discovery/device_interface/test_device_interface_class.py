@@ -1,7 +1,7 @@
 import inspect
 import pytest
-from pystschema.base import BaseDevice
-from pystschema.interface import DeviceInterface
+from stschema.base import BaseDevice
+from stschema.interface import DeviceInterface
 
 class TestDeviceInterface:
     @pytest.fixture

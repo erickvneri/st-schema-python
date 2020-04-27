@@ -1,6 +1,6 @@
 import pytest
 from tests.fixtures import DeviceFixture
-from pystschema.responses import DiscoveryResponseSchema, DiscoveryResponse
+from stschema.responses import DiscoveryResponseSchema, DiscoveryResponse
 
 class TestDiscoveryResponse:
 

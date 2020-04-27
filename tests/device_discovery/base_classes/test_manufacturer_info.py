@@ -1,5 +1,5 @@
 import pytest
-from pystschema.base import ManufacturerInfo, ManufacturerSchema
+from stschema.base import ManufacturerInfo, ManufacturerSchema
 
 class TestManufacturerInfo:
     @pytest.fixture

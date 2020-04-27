@@ -1,5 +1,5 @@
 from marshmallow import Schema, fields
-from pystschema.base import ManufacturerSchema, DeviceContextSchema, DeviceCookieSchema
+from stschema.base import ManufacturerSchema, DeviceContextSchema, DeviceCookieSchema
 
 class DeviceSchema(Schema):
     """The DiscoverySchema returns the formal
