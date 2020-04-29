@@ -20,3 +20,14 @@ class BaseState:
         self.attribute = attribute
         self.value = value
         self.unit = unit
+
+
+class StateSchema(Schema):
+    """The StateSchema class handles the
+    serialization of the BaseState class."""
+
+    component = fields.Str()
+    capability = fields.Str()
+    attribute = fields.Str()
+    value = fields.Str()
+    unit = fields.Str()
