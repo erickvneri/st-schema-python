@@ -1,13 +1,13 @@
 import inspect
 import pytest
 from stschema.base import BaseDevice
-from stschema.interface import DeviceInterface
+from stschema.interface import DiscoveryInterface
 
 
 class TestDeviceInterface:
     @pytest.fixture
     def interface_class(self):
-        yield DeviceInterface
+        yield DiscoveryInterface
 
     def test_class_documentation(self, interface_class):
         assert interface_class

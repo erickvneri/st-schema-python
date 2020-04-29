@@ -1,6 +1,7 @@
 from stschema.base import BaseDevice, DeviceContext, ManufacturerInfo
 
-class DeviceInterface(BaseDevice):
+
+class DiscoveryInterface(BaseDevice):
     """Inherits from BaseDevice.
 
         :::param external_device_id: required values

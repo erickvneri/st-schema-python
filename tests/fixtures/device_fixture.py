@@ -1,14 +1,14 @@
-from stschema.interface import DeviceInterface
+from stschema.interface import DiscoveryInterface
 from datetime import datetime
 
 
-class DeviceFixture(DeviceInterface):
+class DiscoveryFixture(DiscoveryInterface):
     """The DeviceFixture class is a Mock Device
     Implementation which handles the device info
     JSON that a DiscoveryResponse must contain."""
 
     def __init__(self):
-        DeviceInterface.__init__(
+        DiscoveryInterface.__init__(
             self,
             external_device_id='9',
             friendly_name='BathLight',
