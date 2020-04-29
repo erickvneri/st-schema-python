@@ -2,6 +2,7 @@ import pytest
 from datetime import datetime
 from stschema.base import BaseCookie, DeviceCookieSchema
 
+
 class TestDeviceCookie:
     @pytest.fixture
     def device_cookie(self):

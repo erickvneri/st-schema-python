@@ -3,6 +3,7 @@ from stschema.interface import DeviceSchema
 from stschema.base import BaseCookie, DeviceContext, ManufacturerInfo
 from tests.fixtures import DeviceFixture
 
+
 class TestDiscoverySchema:
     @pytest.fixture
     def schema(self):

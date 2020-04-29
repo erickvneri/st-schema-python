@@ -2,6 +2,7 @@ import pytest
 from tests.fixtures import DeviceFixture
 from stschema.responses import DiscoveryResponseSchema, DiscoveryResponse
 
+
 class TestDiscoveryResponse:
 
     @pytest.fixture

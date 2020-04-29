@@ -1,6 +1,7 @@
 import pytest
 from stschema.base import ManufacturerInfo, ManufacturerSchema
 
+
 class TestManufacturerInfo:
     @pytest.fixture
     def manufacturer(self):

@@ -1,6 +1,7 @@
 import pytest
 from stschema.base import BaseDevice
 
+
 class TestBaseDevice:
     """TestBaseDevice class defined to test the
     BaseDevice class. This class will extend to

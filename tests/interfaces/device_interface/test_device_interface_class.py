@@ -3,6 +3,7 @@ import pytest
 from stschema.base import BaseDevice
 from stschema.interface import DeviceInterface
 
+
 class TestDeviceInterface:
     @pytest.fixture
     def interface_class(self):

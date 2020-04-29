@@ -2,7 +2,8 @@ import pytest
 from hashlib import sha1
 from stschema.responses.util import Header, HeadersSchema
 
-class TestSTHeader:
+
+class TestResponseHeader:
     @pytest.fixture
     def def_header(self):
         req_id = sha1(b'requestID').hexdigest()

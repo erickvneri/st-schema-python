@@ -1,5 +1,6 @@
 from stschema.base.device_cookie import BaseCookie
 
+
 class BaseDevice:
     """The BaseDevice class is the basic SmartThings
     Device representation that will contain the main
