@@ -2,6 +2,7 @@ from marshmallow import Schema, fields
 from stschema.interface import DeviceSchema
 from stschema.responses.util import HeadersSchema, Header
 
+
 class DiscoveryResponse:
     """The DiscoveryResponse class will handle the
     final representation of a Discovery Response as
@@ -25,6 +26,7 @@ class DiscoveryResponse:
         request_id = request.get('requestId')
         interaction_type = 'discoveryResponse'
         self.headers = Header(interaction_type=interaction_type, request_id=request_id)
+
 
 class DiscoveryResponseSchema(Schema):
     """The DiscoverySchema class will returns

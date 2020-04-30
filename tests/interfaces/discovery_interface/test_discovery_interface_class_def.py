@@ -16,7 +16,7 @@ class TestDeviceInterface:
 
     def test_interface_parent_class(self, interface_class):
         """This test will check if the parent class
-        is actually the BaseDevice Class."""
+        is the BaseDevice Class."""
         parent_class = inspect.getmro(interface_class)[1]
         assert parent_class == BaseDevice
 
