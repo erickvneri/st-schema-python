@@ -6,6 +6,7 @@ class BaseDevice:
     Device representation that will contain the main
     attributes for identifying a Cloud Integrated
     device:
+
         :::param external_device_id: device id for a
         third-party cloud.
         :::param friendly_name: Name set by the user.

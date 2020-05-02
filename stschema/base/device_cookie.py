@@ -1,5 +1,6 @@
 from marshmallow import Schema, fields
 
+
 class BaseCookie:
     """The DeviceCookie is an utility
     class used for the DeviceClass to
@@ -9,6 +10,7 @@ class BaseCookie:
 
     def __init__(self, cookie: str):
         self.cookie = cookie
+
 
 class DeviceCookieSchema(Schema):
     """The DeviceCookieSchema handles the

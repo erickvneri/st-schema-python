@@ -27,7 +27,6 @@ class TestStateSchema:
     def test_schema_with_state_instance(self, schema, state_instance):
         state_result = schema.dump(state_instance)
         assert state_result
-        print(state_result)
         assert type(state_result) is dict
         assert state_result['component']
         assert state_result['capability']

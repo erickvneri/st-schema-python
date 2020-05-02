@@ -1,3 +1,4 @@
 from .discovery import DeviceSchema
 from .discovery import DiscoveryInterface
-from .state import StateInterface
+from .state import DeviceStateInterface
+from .state import DeviceStateSchema

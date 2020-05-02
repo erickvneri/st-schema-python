@@ -1,4 +1,4 @@
-from stschema.interface import DiscoveryInterface
+from stschema.interface import DiscoveryInterface, DeviceStateInterface
 from datetime import datetime
 
 

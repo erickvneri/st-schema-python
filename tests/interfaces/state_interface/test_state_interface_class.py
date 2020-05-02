@@ -1,18 +1,18 @@
 import pytest
 from stschema.base import BaseState
-from stschema.interface import StateInterface
+from stschema.interface import DeviceStateInterface
 
 
 class TestStateInterface:
     @pytest.fixture
     def interface_class(self):
         """Raw class"""
-        yield StateInterface
+        yield DeviceStateInterface
 
     @pytest.fixture
     def mock_state(self):
         """Simple instance"""
-        state = StateInterface()
+        state = DeviceStateInterface()
         yield state
 
     def test_class_documentation(self, interface_class):
@@ -21,10 +21,10 @@ class TestStateInterface:
 
     def test_state_interface_instance(self, mock_state):
         assert mock_state
-        assert isinstance(mock_state, StateInterface)
+        assert isinstance(mock_state, DeviceStateInterface)
         assert mock_state.external_device_id or mock_state.external_device_id is None
         assert mock_state.device_cookie or mock_state.device_cookie is None
-        assert type(mock_state.device_state) is list
+        assert type(mock_state.states) is list
 
     def test_interface_method_set_state(self, interface_class):
         assert interface_class.set_state
@@ -41,12 +41,12 @@ class TestStateInterface:
             value=350,
             unit='F'
         )
-        assert len(mock_state.device_state) != 0
-        assert isinstance(mock_state.device_state[0], BaseState)
-        assert mock_state.device_state[0].component
-        assert mock_state.device_state[0].capability
-        assert mock_state.device_state[0].attribute
-        assert mock_state.device_state[0].value
-        mock_state.device_state[0].unit = None
-        assert mock_state.device_state[0].unit or mock_state.device_state[0].unit is None
+        assert len(mock_state.states) != 0
+        assert isinstance(mock_state.states[0], BaseState)
+        assert mock_state.states[0].component
+        assert mock_state.states[0].capability
+        assert mock_state.states[0].attribute
+        assert mock_state.states[0].value
+        mock_state.states[0].unit = None
+        assert mock_state.states[0].unit or mock_state.states[0].unit is None
 
