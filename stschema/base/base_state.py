@@ -29,5 +29,5 @@ class StateSchema(Schema):
     component = fields.Str()
     capability = fields.Str()
     attribute = fields.Str()
-    value = fields.Str()
+    value = fields.Field()
     unit = fields.Str()
