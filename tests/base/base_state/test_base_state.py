@@ -3,7 +3,10 @@ from stschema.base import BaseState
 from marshmallow import Schema, fields
 
 
-class TestDeviceState:
+class TestDeviceState(object):
+    """This test will guarantee the reliability of the
+    information contained at the State Refresh Response."""
+
     @pytest.fixture
     def state_class(self):
         yield BaseState
@@ -16,7 +19,7 @@ class TestDeviceState:
         assert state_class.__doc__
         assert len(state_class.__doc__) != 0
 
-    def test_class_definition(self, state_class):
+    def test_state_class_instance(self, state_class):
         state = state_class(component='main', capability='switch', attribute='switch', value='off', unit=None)
         assert state
         assert isinstance(state, state_class)
@@ -26,11 +29,11 @@ class TestDeviceState:
         assert state.value
         assert state.unit or state.unit is None
 
-    def test_bad_definition_missing_values(self, state_class):
+    def test_type_error_instance_null_values(self, state_class):
         with pytest.raises(TypeError):
             assert state_class()
 
-    def test_bad_definition_extra_value(self, state_class):
+    def test_type_error_instance_extra_value(self, state_class):
         with pytest.raises(TypeError):
             state = state_class(
                 component='main', capability='switch', attribute='switch', value='off', unit=None, extra=None
