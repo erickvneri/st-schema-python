@@ -1,5 +1,5 @@
 import pytest
-from tests.fixtures import DiscoveryFixture
+from tests.fixtures import DeviceFixture
 from stschema.responses import DiscoveryResponseSchema, DiscoveryResponse
 
 
@@ -10,7 +10,7 @@ class TestDiscoveryResponse:
         # Request ST Headers
         mock_req = dict(requestId='1j23n-1KJfs-f9Gk3')
         # Device implementation
-        device = DiscoveryFixture()
+        device = DeviceFixture()
         discovery_response = DiscoveryResponse(devices=[device])
         discovery_response.handle_request(mock_req)
         yield discovery_response

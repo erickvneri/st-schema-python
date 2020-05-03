@@ -1,2 +1,1 @@
-from .discovery_fixture import DiscoveryFixture
-from .state_fixture import StateFixture
+from .discovery_fixture import DeviceFixture

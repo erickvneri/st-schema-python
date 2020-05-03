@@ -1,14 +1,14 @@
-from stschema.interface import DiscoveryInterface
+from stschema.interface import Device
 from datetime import datetime
 
 
-class DiscoveryFixture(DiscoveryInterface):
+class DeviceFixture(Device):
     """The DeviceFixture class is a Mock Device
     Implementation which handles the device info
     JSON that a DiscoveryResponse must contain."""
 
     def __init__(self):
-        DiscoveryInterface.__init__(
+        Device.__init__(
             self,
             external_device_id='xaf0as8FASd2jkl',
             friendly_name='ThermoSensor',
@@ -27,4 +27,16 @@ class DiscoveryFixture(DiscoveryInterface):
             manufacturer_name='SmartThings',
             model_name='BulbDeluxe',
             hw_version='v1 MX 1.0', sw_version='0.1.0'
+        )
+        # SETTING STATE OF THERMOSTAT DEVICE (CAPABILITY)
+        self.set_state(
+            capability='temperatureMeasurement',
+            attribute='temperature',
+            value=86,
+            unit='F'
+        )
+        self.set_state(
+            capability='waterSensor',
+            attribute='water',
+            value='dry'
         )
