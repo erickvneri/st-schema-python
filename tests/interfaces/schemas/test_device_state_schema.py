@@ -1,6 +1,5 @@
 import pytest
 from stschema.interface import DeviceStateSchema
-from tests.fixtures import StateFixture
 
 
 class TestStateSchema(object):
@@ -8,11 +7,6 @@ class TestStateSchema(object):
     It'll guarantee the data and format reliability
     according to a State Refresh Response main
     information."""
-
-    @pytest.fixture
-    def device_state(self):
-        fixture = StateFixture()
-        yield fixture
 
     @pytest.fixture
     def schema(self):
@@ -29,13 +23,11 @@ class TestStateSchema(object):
         assert schema.fields['deviceCookie']
         assert schema.fields['states']
 
-    def test_state_base_implementation(self, schema, device_state):
-        state_result = schema.dump(device_state)
-        assert state_result
-        assert type(state_result) is dict
-        assert type(state_result['states']) is list
-        assert state_result['externalDeviceId']
-        assert state_result['deviceCookie']
-        assert state_result['states'] or state_result['states'] == []
+    def test_key_error_schema_composition(self, schema):
+        with pytest.raises(KeyError):
+            assert schema.fields['credentials']
+            assert schema.fields['port']
+            assert schema.fields['hackable_info']
+
 
 

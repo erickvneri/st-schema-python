@@ -1,4 +1,5 @@
-from stschema.base import BaseDevice, DeviceContext, ManufacturerInfo, BaseCookie
+from stschema.base import (BaseDevice, DeviceContext,
+                           ManufacturerInfo, BaseCookie, BaseState)
 
 
 class DiscoveryInterface(BaseDevice):
@@ -13,6 +14,8 @@ class DiscoveryInterface(BaseDevice):
         Extends by adding the next methods:
             - set_context
             - set_mn"""
+
+    states = []
 
     def __init__(self, **info):
         BaseDevice.__init__(self,
@@ -53,3 +56,21 @@ class DiscoveryInterface(BaseDevice):
             sw_version=info.get('sw_version')
         )
 
+    def set_state(self, capability: str, attribute: str, value: str or int, component: str = 'main', unit: str = None):
+        """The set_state method add a capability-state
+        to the device that has been used passed to the
+        StateInterface constructor.
+
+        For more information about the capabilities
+        supported, please visit the Capabilities
+        Reference documentation:
+        https://smartthings.developer.samsung.com/docs/api-ref/capabilities.html"""
+
+        new_state = BaseState(
+            component=component,
+            capability=capability,
+            attribute=attribute,
+            value=value,
+            unit=unit
+        )
+        self.states.append(new_state)
