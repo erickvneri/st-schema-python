@@ -3,7 +3,12 @@ from stschema.interface import DeviceStateSchema
 from tests.fixtures import StateFixture
 
 
-class TestStateSchema:
+class TestStateSchema(object):
+    """This class will test the StateFixture.
+    It'll guarantee the data and format reliability
+    according to a State Refresh Response main
+    information."""
+
     @pytest.fixture
     def device_state(self):
         fixture = StateFixture()
@@ -11,13 +16,14 @@ class TestStateSchema:
 
     @pytest.fixture
     def schema(self):
-        yield DeviceStateSchema()
+        schema = DeviceStateSchema()
+        yield schema
 
     def test_schema_documentation(self, schema):
         assert schema.__doc__
         assert len(schema.__doc__) != 0
 
-    def test_schema_construction(self, schema):
+    def test_schema_composition(self, schema):
         assert schema
         assert schema.fields['externalDeviceId']
         assert schema.fields['deviceCookie']
@@ -27,14 +33,9 @@ class TestStateSchema:
         state_result = schema.dump(device_state)
         assert state_result
         assert type(state_result) is dict
+        assert type(state_result['states']) is list
         assert state_result['externalDeviceId']
         assert state_result['deviceCookie']
         assert state_result['states'] or state_result['states'] == []
 
-    def test_state_implementation_states(self, schema, device_state):
-        state_result = schema.dump(device_state)
-        assert state_result
-        assert state_result['states']
-        assert type(state_result['states']) is list
-        assert len(state_result['states']) != 0
 
