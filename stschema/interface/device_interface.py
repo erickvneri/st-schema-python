@@ -2,7 +2,7 @@ from stschema.base import (BaseDevice, DeviceContext,
                            ManufacturerInfo, BaseCookie, BaseState)
 
 
-class DiscoveryInterface(BaseDevice):
+class Device(BaseDevice):
     """Inherits from BaseDevice.
 
         :::param external_device_id: required values
@@ -15,8 +15,6 @@ class DiscoveryInterface(BaseDevice):
             - set_context
             - set_mn"""
 
-    states = []
-
     def __init__(self, **info):
         BaseDevice.__init__(self,
                             external_device_id=info.get('external_device_id'),
@@ -25,6 +23,7 @@ class DiscoveryInterface(BaseDevice):
                             device_cookie=BaseCookie(info.get('device_cookie')),
                             device_handler_type=info.get('device_handler_type')
                             )
+        self.states = []
         self.device_context = None
         self.manufacturer_info = None
 
@@ -68,7 +67,7 @@ class DiscoveryInterface(BaseDevice):
 
         new_state = BaseState(
             component=component,
-            capability=capability,
+            capability=f'st.{capability}',
             attribute=attribute,
             value=value,
             unit=unit
