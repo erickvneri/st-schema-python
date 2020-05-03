@@ -1,5 +1,5 @@
 from marshmallow import Schema, fields
-from stschema.interface import DeviceSchema
+from stschema.interface import DeviceDiscoverySchema
 from stschema.responses.util import HeadersSchema, Header
 
 
@@ -37,5 +37,5 @@ class DiscoveryResponseSchema(Schema):
         :::param headers: dict with JSON
         headers inherited from ST request."""
 
-    devices = fields.List(fields.Nested(DeviceSchema, attribute='devices'))
+    devices = fields.List(fields.Nested(DeviceDiscoverySchema, attribute='devices'))
     headers = fields.Nested(HeadersSchema, attribute='headers')
