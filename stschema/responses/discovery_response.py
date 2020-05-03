@@ -14,8 +14,8 @@ class DiscoveryResponse:
     headers = None
     devices = []
 
-    def __init__(self, **devices):
-        self.devices.append(devices.get('devices'))
+    def __init__(self, devices: list):
+        self.devices.append(device for device in devices)
 
     def handle_request(self, request: dict):
         # FIXME: THIS IS JUST A TEST METHOD - PLEASE, IMPLEMENT PROPERLY
