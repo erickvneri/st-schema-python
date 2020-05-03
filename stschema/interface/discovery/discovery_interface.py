@@ -1,4 +1,4 @@
-from stschema.base import BaseDevice, DeviceContext, ManufacturerInfo
+from stschema.base import BaseDevice, DeviceContext, ManufacturerInfo, BaseCookie
 
 
 class DiscoveryInterface(BaseDevice):
@@ -19,7 +19,7 @@ class DiscoveryInterface(BaseDevice):
                             external_device_id=info.get('external_device_id'),
                             friendly_name=info.get('friendly_name'),
                             device_unique_id=info.get('device_unique_id'),
-                            device_cookie=info.get('device_cookie'),
+                            device_cookie=BaseCookie(info.get('device_cookie')),
                             device_handler_type=info.get('device_handler_type')
                             )
         self.device_context = None

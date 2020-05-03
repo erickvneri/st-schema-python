@@ -23,5 +23,5 @@ class BaseDevice:
         self.external_device_id = external_device_id
         self.friendly_name = friendly_name
         self.device_unique_id = device_unique_id
-        self.device_cookie = BaseCookie(device_cookie)
+        self.device_cookie = device_cookie
         self.device_handler_type = device_handler_type
