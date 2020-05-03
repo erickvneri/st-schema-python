@@ -43,8 +43,3 @@ class TestDiscoveryImplementation(object):
         assert device_result['deviceHandlerType']
         assert device_result['manufacturerInfo']
         assert device_result['deviceContext']
-        import requests
-        requests.post(
-            url='https://webhook.site/a77ed74c-a3f3-4295-830f-5c80193e4db1',
-            json=device_result
-        )
