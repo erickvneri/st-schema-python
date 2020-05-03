@@ -1,4 +1,4 @@
-from stschema.interface import DiscoveryInterface, DeviceStateInterface
+from stschema.interface import DiscoveryInterface
 from datetime import datetime
 
 
@@ -10,11 +10,11 @@ class DiscoveryFixture(DiscoveryInterface):
     def __init__(self):
         DiscoveryInterface.__init__(
             self,
-            external_device_id='9',
-            friendly_name='BathLight',
-            device_unique_id='dsfg7-654s',
+            external_device_id='xaf0as8FASd2jkl',
+            friendly_name='ThermoSensor',
+            device_unique_id='x11h2j4b2',
             device_cookie=datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            device_handler_type='c2c-bulb-rgb'
+            device_handler_type='c2c-thermo-device-handler'
         )
         # SETTING DEVICE CONTEXT
         self.set_context(
