@@ -8,12 +8,11 @@ class TestDiscoveryResponse:
     @pytest.fixture
     def discovery_response(self):
         # Request ST Headers
-        mock_req = dict(requestId='123abc')
+        mock_req = dict(requestId='1j23n-1KJfs-f9Gk3')
         # Device implementation
         device = DiscoveryFixture()
-        discovery_response = DiscoveryResponse(devices=device)
+        discovery_response = DiscoveryResponse(devices=[device])
         discovery_response.handle_request(mock_req)
-
         yield discovery_response
 
     @pytest.fixture
@@ -21,7 +20,7 @@ class TestDiscoveryResponse:
         schema = DiscoveryResponseSchema()
         yield schema
 
-    def test_discovery_object(self, discovery_response):
+    def test_discovery_response_instance(self, discovery_response):
         assert discovery_response
         assert discovery_response.devices
         assert type(discovery_response.devices) is list

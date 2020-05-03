@@ -8,6 +8,11 @@ class TestDiscoverySchema:
         schema = DiscoveryResponseSchema()
         yield schema
 
+    def test_schema_documentation(self, schema_class):
+        assert schema_class
+        assert schema_class.__doc__
+        assert len(schema_class.__doc__) != 0
+
     def test_schema_class(self, schema_class):
         assert schema_class
         assert schema_class.fields['devices']
