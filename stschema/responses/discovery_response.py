@@ -3,7 +3,7 @@ from stschema.interface import DeviceDiscoverySchema
 from stschema.responses.util import HeadersSchema, Header
 
 
-class DiscoveryResponse:
+class DiscoveryResponse(object):
     """The DiscoveryResponse class will handle the
     final representation of a Discovery Response as
     the ST Schema documentation refers.
@@ -35,7 +35,7 @@ class DiscoveryResponseSchema(Schema):
 
         :::param devices: [devices]
         :::param headers: dict with JSON
-        headers inherited from ST request."""
+        headers inherited from ST response."""
 
     devices = fields.List(fields.Nested(DeviceDiscoverySchema, attribute='devices'))
     headers = fields.Nested(HeadersSchema, attribute='headers')
