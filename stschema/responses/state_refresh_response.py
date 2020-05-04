@@ -14,7 +14,7 @@ class StateResponse(object):
         specifying the current state of each capability.
         :::param headers: headers or a request and response"""
 
-    def __init__(self, devices: List[Device], request_id):
+    def __init__(self, devices: List[Device], request_id: str):
         self.device_state = devices
         self.headers = Header(interaction_type='stateRefreshResponse', request_id=request_id)
 
