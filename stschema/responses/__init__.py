@@ -1,2 +1,2 @@
 from .discovery_response import DiscoveryResponse, DiscoveryResponseSchema
-from .state_refresh_response import StateRefresh, StateRefreshResponseSchema
+from .state_refresh_response import StateResponse, StateRefreshResponseSchema
