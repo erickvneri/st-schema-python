@@ -20,6 +20,11 @@ class TestDiscoveryResponse:
         schema = DiscoveryResponseSchema()
         yield schema
 
+    def test_class_documentation(self, discovery_response):
+        assert discovery_response
+        assert discovery_response.__doc__
+        assert len(discovery_response.__doc__) != 0
+
     def test_discovery_response_instance(self, discovery_response):
         assert discovery_response
         assert discovery_response.devices

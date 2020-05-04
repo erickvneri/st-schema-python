@@ -2,7 +2,7 @@ import pytest
 from tests.fixtures import DeviceFixture
 from stschema.interface import Device
 from stschema.responses.util import Header
-from stschema.responses import StateRefresh, StateRefreshResponseSchema
+from stschema.responses import StateResponse, StateRefreshResponseSchema
 
 
 class TestStateRefresh(object):
@@ -12,13 +12,21 @@ class TestStateRefresh(object):
         mock_req = dict(requestId='1j23n-1KJfs-f9Gk3')
         device = DeviceFixture()
         # State Refresh Instance
-        state_res = StateRefresh(devices=device, request_id=mock_req['requestId'])
+        state_res = StateResponse(
+            devices=[device, device, device],
+            request_id=mock_req['requestId']
+        )
         yield state_res
 
     @pytest.fixture
     def schema(self):
         schema = StateRefreshResponseSchema()
         yield schema
+
+    def test_class_documentation(self,state_response):
+        assert state_response
+        assert state_response.__doc__
+        assert len(state_response.__doc__) != 0
 
     def test_state_response_instance(self, state_response):
         assert state_response
