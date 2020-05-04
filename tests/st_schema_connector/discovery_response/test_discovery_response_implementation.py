@@ -34,3 +34,12 @@ class TestDiscoveryResponse:
         assert discovery_result['devices']
         assert type(discovery_result['devices']) is list
 
+    def test_key_error_discovery(self, schema, discovery_response):
+        discovery_result = schema.dump(discovery_response)
+        with pytest.raises(KeyError):
+            assert discovery_result
+            assert discovery_result['credentials']
+            assert discovery_result['password']
+            assert discovery_result['secret']
+            assert discovery_result['secretKey']
+            assert discovery_result['clientSecret']
