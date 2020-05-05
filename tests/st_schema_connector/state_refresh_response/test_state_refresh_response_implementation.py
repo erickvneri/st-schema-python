@@ -34,7 +34,15 @@ class TestStateRefresh(object):
         assert state_response.headers
         assert isinstance(state_response.headers, Header)
 
-    def test_state_refresh_response(self, state_response, schema):
+    def test_type_error_state_response_instance_null_values(self):
+        with pytest.raises(TypeError):
+            discovery_error_instance = StateResponse()
+
+    def test_type_error_state_response_instance_extra_values(self):
+        with pytest.raises(TypeError):
+            discovery_error_instance = StateResponse(devices=['device'], request_id='11bn23-fds', extra=0)
+
+    def test_state_refresh_response_implementation(self, state_response, schema):
         state_result = schema.dump(state_response)
         assert state_result
         assert state_result['deviceState']

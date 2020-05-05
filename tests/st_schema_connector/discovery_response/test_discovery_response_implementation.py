@@ -11,8 +11,7 @@ class TestDiscoveryResponse:
         mock_req = dict(requestId='1j23n-1KJfs-f9Gk3')
         # Device implementation
         device = DeviceFixture()
-        discovery_response = DiscoveryResponse(devices=[device])
-        discovery_response.handle_request(mock_req)
+        discovery_response = DiscoveryResponse(devices=[device], request_id=mock_req['requestId'])
         yield discovery_response
 
     @pytest.fixture
@@ -31,7 +30,15 @@ class TestDiscoveryResponse:
         assert type(discovery_response.devices) is list
         assert discovery_response.headers
 
-    def test_discovery_response(self, schema, discovery_response):
+    def test_type_error_discovery_response_instance_null_values(self):
+        with pytest.raises(TypeError):
+            discovery_error_instance = DiscoveryResponse()
+
+    def test_type_error_discovery_response_instance_extra_values(self):
+        with pytest.raises(TypeError):
+            discovery_error_instance = DiscoveryResponse(devices=['device'], request_id='11bn23-fds', extra=0)
+
+    def test_discovery_response_implementation(self, schema, discovery_response):
         discovery_result = schema.dump(discovery_response)
         assert discovery_result
         assert discovery_result['headers']
