@@ -1,6 +1,8 @@
-from stschema.base import BaseDevice, DeviceContext, ManufacturerInfo
+from stschema.base import (BaseDevice, DeviceContext,
+                           ManufacturerInfo, BaseCookie, BaseState)
 
-class DeviceInterface(BaseDevice):
+
+class Device(BaseDevice):
     """Inherits from BaseDevice.
 
         :::param external_device_id: required values
@@ -18,9 +20,10 @@ class DeviceInterface(BaseDevice):
                             external_device_id=info.get('external_device_id'),
                             friendly_name=info.get('friendly_name'),
                             device_unique_id=info.get('device_unique_id'),
-                            device_cookie=info.get('device_cookie'),
+                            device_cookie=BaseCookie(info.get('device_cookie')),
                             device_handler_type=info.get('device_handler_type')
                             )
+        self.states = []
         self.device_context = None
         self.manufacturer_info = None
 
@@ -52,3 +55,21 @@ class DeviceInterface(BaseDevice):
             sw_version=info.get('sw_version')
         )
 
+    def set_state(self, capability: str, attribute: str, value: str or int, component: str = 'main', unit: str = None):
+        """The set_state method add a capability-state
+        to the device that has been used passed to the
+        StateInterface constructor.
+
+        For more information about the capabilities
+        supported, please visit the Capabilities
+        Reference documentation:
+        https://smartthings.developer.samsung.com/docs/api-ref/capabilities.html"""
+
+        new_state = BaseState(
+            component=component,
+            capability=f'st.{capability}',
+            attribute=attribute,
+            value=value,
+            unit=unit
+        )
+        self.states.append(new_state)

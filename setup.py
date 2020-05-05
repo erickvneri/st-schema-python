@@ -6,7 +6,7 @@ setup(
     author='erickv',
     author_email='erickv@bluetrailsoft.com',
     description='Python ST-Schema SDK',
-    url='https://github.com/erickvneri/py-st-schema/',
+    url='https://github.com/erickvneri/st-schema-python/',
     packages=find_packages(),
     install_requires=[
         'pytest',

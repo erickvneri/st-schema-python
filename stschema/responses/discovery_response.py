@@ -1,30 +1,23 @@
 from marshmallow import Schema, fields
-from stschema.interface import DeviceSchema
+from typing import List
+from stschema.interface import DeviceDiscoverySchema, Device
 from stschema.responses.util import HeadersSchema, Header
 
-class DiscoveryResponse:
+
+class DiscoveryResponse(object):
     """The DiscoveryResponse class will handle the
     final representation of a Discovery Response as
     the ST Schema documentation refers.
 
         :::param devices: a list of devices.
-        :::param headers: headers or a request and response"""
+        :::param headers: headers of a request and response"""
 
     headers = None
-    devices = []
 
-    def __init__(self, **devices):
-        self.devices.append(devices.get('devices'))
+    def __init__(self, devices: List[Device], request_id: str):
+        self.devices = devices
+        self.headers = Header(interaction_type='discoveryResponse', request_id=request_id)
 
-    def handle_request(self, request: dict):
-        # FIXME: THIS IS JUST A TEST METHOD - PLEASE, IMPLEMENT PROPERLY
-        """This method is just a test implementation
-        of what the CloudConnector class will have.
-        DiscoveryResponse class will only receive devices"""
-
-        request_id = request.get('requestId')
-        interaction_type = 'discoveryResponse'
-        self.headers = Header(interaction_type=interaction_type, request_id=request_id)
 
 class DiscoveryResponseSchema(Schema):
     """The DiscoverySchema class will returns
@@ -33,7 +26,7 @@ class DiscoveryResponseSchema(Schema):
 
         :::param devices: [devices]
         :::param headers: dict with JSON
-        headers inherited from ST request."""
+        headers inherited from ST response."""
 
-    devices = fields.List(fields.Nested(DeviceSchema, attribute='devices'))
+    devices = fields.List(fields.Nested(DeviceDiscoverySchema, attribute='devices'))
     headers = fields.Nested(HeadersSchema, attribute='headers')

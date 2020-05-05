@@ -1,10 +1,12 @@
 from stschema.base.device_cookie import BaseCookie
 
+
 class BaseDevice:
     """The BaseDevice class is the basic SmartThings
     Device representation that will contain the main
     attributes for identifying a Cloud Integrated
     device:
+
         :::param external_device_id: device id for a
         third-party cloud.
         :::param friendly_name: Name set by the user.
@@ -21,5 +23,5 @@ class BaseDevice:
         self.external_device_id = external_device_id
         self.friendly_name = friendly_name
         self.device_unique_id = device_unique_id
-        self.device_cookie = BaseCookie(device_cookie)
+        self.device_cookie = device_cookie
         self.device_handler_type = device_handler_type
