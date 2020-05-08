@@ -1,7 +1,7 @@
 from marshmallow import Schema, fields
 from typing import List
 from stschema.interface import DeviceDiscoverySchema, Device
-from stschema.responses.util import HeadersSchema, Header
+from stschema.base.response.util import HeadersSchema, BaseHeaders
 
 
 class DiscoveryResponse(object):
@@ -16,7 +16,7 @@ class DiscoveryResponse(object):
 
     def __init__(self, devices: List[Device], request_id: str):
         self.devices = devices
-        self.headers = Header(interaction_type='discoveryResponse', request_id=request_id)
+        self.headers = BaseHeaders(interaction_type='discoveryResponse', request_id=request_id)
 
 
 class DiscoveryResponseSchema(Schema):

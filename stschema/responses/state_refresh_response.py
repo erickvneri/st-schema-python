@@ -1,7 +1,7 @@
 from typing import List
 from marshmallow import Schema, fields
 from stschema.interface import DeviceStateSchema, Device
-from stschema.responses.util import Header, HeadersSchema
+from stschema.base.response.util import BaseHeaders, HeadersSchema
 
 
 class StateResponse(object):
@@ -16,7 +16,7 @@ class StateResponse(object):
 
     def __init__(self, devices: List[Device], request_id: str):
         self.device_state = devices
-        self.headers = Header(interaction_type='stateRefreshResponse', request_id=request_id)
+        self.headers = BaseHeaders(interaction_type='stateRefreshResponse', request_id=request_id)
 
 
 class StateRefreshResponseSchema(Schema):
