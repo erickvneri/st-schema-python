@@ -1,6 +1,6 @@
 import pytest
 from tests.fixtures import DeviceFixture
-from stschema.responses.util import Header
+from stschema.base.response.util import BaseHeaders
 from stschema.responses import StateResponse, StateRefreshResponseSchema
 
 
@@ -31,7 +31,7 @@ class TestStateRefresh(object):
         assert state_response
         assert state_response.device_state
         assert state_response.headers
-        assert isinstance(state_response.headers, Header)
+        assert isinstance(state_response.headers, BaseHeaders)
 
     def test_type_error_state_response_instance_null_values(self):
         with pytest.raises(TypeError):

@@ -1,6 +1,6 @@
 import pytest
 from hashlib import sha1
-from stschema.responses.util import Header, HeadersSchema
+from stschema.base.response.util import BaseHeaders, HeadersSchema
 
 
 class TestResponseHeader(object):
@@ -11,7 +11,7 @@ class TestResponseHeader(object):
     @pytest.fixture
     def def_header(self):
         req_id = sha1(b'requestID').hexdigest()
-        header = Header(interaction_type='interactionType', request_id=req_id)
+        header = BaseHeaders(interaction_type='interactionType', request_id=req_id)
         yield header
 
     @pytest.fixture
@@ -20,15 +20,15 @@ class TestResponseHeader(object):
         yield header_schema
 
     def test_header_class_documentation(self):
-        assert Header.__doc__
-        assert len(Header.__doc__) != 0
+        assert BaseHeaders.__doc__
+        assert len(BaseHeaders.__doc__) != 0
 
     def test_header_schema_documentation(self):
         assert HeadersSchema.__doc__
         assert len(HeadersSchema.__doc__) != 0
 
     def test_header_instance(self, def_header):
-        assert isinstance(def_header, Header)
+        assert isinstance(def_header, BaseHeaders)
         assert def_header.interaction_type
         assert def_header.schema
         assert def_header.version
@@ -51,8 +51,8 @@ class TestResponseHeader(object):
 
     def test_type_error_instance_null_values(self):
         with pytest.raises(TypeError):
-            header = Header()
+            header = BaseHeaders()
 
     def test_type_error_instance_extra_value(self):
         with pytest.raises(TypeError):
-            header = Header(interaction_type='interaction_type', request_id='request_id_hash', extra=0)
+            header = BaseHeaders(interaction_type='interaction_type', request_id='request_id_hash', extra=0)
