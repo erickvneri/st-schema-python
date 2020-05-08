@@ -1,1 +1,1 @@
-from .header import HeadersSchema, Header
+from .header import HeadersSchema, BaseHeaders
