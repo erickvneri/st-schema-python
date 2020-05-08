@@ -1,5 +1,5 @@
 import pytest
-from stschema.base import BaseState, StateSchema
+from stschema.base.device import BaseState, StateSchema
 
 
 class TestStateSchema(object):

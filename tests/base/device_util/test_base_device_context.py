@@ -1,5 +1,5 @@
 import pytest
-from stschema.base import DeviceContext, DeviceContextSchema
+from stschema.base.device import DeviceContext, DeviceContextSchema
 
 
 class TestDeviceContext(object):

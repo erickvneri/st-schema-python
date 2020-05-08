@@ -1,6 +1,6 @@
 import pytest
 from datetime import datetime
-from stschema.base import BaseCookie, DeviceCookieSchema
+from stschema.base.device import BaseCookie, DeviceCookieSchema
 
 
 class TestDeviceCookie(object):

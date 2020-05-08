@@ -1,6 +1,7 @@
 from typing import List
 from marshmallow import Schema, fields
 
+
 class DeviceContext:
     """The DeviceContext class contains the information
     about the device that refers to its utility or
@@ -17,6 +18,7 @@ class DeviceContext:
         self.room_name = room_name
         self.groups = groups or list()
         self.categories = categories or list()
+
 
 class DeviceContextSchema(Schema):
     """The DeviceContextSchema handles the

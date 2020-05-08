@@ -1,5 +1,5 @@
 import pytest
-from stschema.base import BaseDevice
+from stschema.base.device import BaseDevice
 
 
 class TestBaseDevice(object):

@@ -1,6 +1,5 @@
 import pytest
 from tests.fixtures import DeviceFixture
-from stschema.interface import Device
 from stschema.responses.util import Header
 from stschema.responses import StateResponse, StateRefreshResponseSchema
 

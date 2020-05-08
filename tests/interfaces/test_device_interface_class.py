@@ -1,7 +1,7 @@
 import inspect
 import pytest
-from stschema.base import BaseDevice
 from stschema.interface import Device
+from stschema.base.device import BaseDevice
 
 
 class TestDeviceInterface(object):

@@ -1,7 +1,7 @@
 import pytest
 from tests.fixtures import DeviceFixture
 from stschema.interface import DeviceDiscoverySchema
-from stschema.base import (BaseCookie, DeviceContext, ManufacturerInfo)
+from stschema.base.device import (BaseCookie, DeviceContext, ManufacturerInfo)
 
 
 class TestDiscoveryImplementation(object):
