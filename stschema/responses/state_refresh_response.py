@@ -1,10 +1,10 @@
 from typing import List
 from marshmallow import Schema, fields
 from stschema.interface import DeviceStateSchema, Device
-from stschema.base.response.util import BaseHeaders, HeadersSchema
+from stschema.base.response import BaseResponse, HeadersSchema
 
 
-class StateResponse(object):
+class StateResponse(BaseResponse):
     """The StateResponse class will handle the
     final representation of a State Refresh
     Response as the ST Schema documentation
@@ -15,8 +15,8 @@ class StateResponse(object):
         :::param headers: headers or a request and response"""
 
     def __init__(self, devices: List[Device], request_id: str):
+        BaseResponse.__init__(self, interaction_type='stateRefreshResponse', request_id=request_id)
         self.device_state = devices
-        self.headers = BaseHeaders(interaction_type='stateRefreshResponse', request_id=request_id)
 
 
 class StateRefreshResponseSchema(Schema):

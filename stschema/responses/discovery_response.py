@@ -1,10 +1,11 @@
 from marshmallow import Schema, fields
 from typing import List
 from stschema.interface import DeviceDiscoverySchema, Device
-from stschema.base.response.util import HeadersSchema, BaseHeaders
+from stschema.base.response import HeadersSchema
+from stschema.base.response import BaseResponse
 
 
-class DiscoveryResponse(object):
+class DiscoveryResponse(BaseResponse):
     """The DiscoveryResponse class will handle the
     final representation of a Discovery Response as
     the ST Schema documentation refers.
@@ -12,11 +13,9 @@ class DiscoveryResponse(object):
         :::param devices: a list of devices.
         :::param headers: headers of a request and response"""
 
-    headers = None
-
     def __init__(self, devices: List[Device], request_id: str):
+        BaseResponse.__init__(self, interaction_type='discoveryResponse', request_id=request_id)
         self.devices = devices
-        self.headers = BaseHeaders(interaction_type='discoveryResponse', request_id=request_id)
 
 
 class DiscoveryResponseSchema(Schema):
