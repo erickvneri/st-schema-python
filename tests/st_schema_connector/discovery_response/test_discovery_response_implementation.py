@@ -1,6 +1,8 @@
 import pytest
 from tests.fixtures import DeviceFixture
 from stschema.responses import DiscoveryResponseSchema, DiscoveryResponse
+from stschema.base.response import BaseHeaders
+from stschema.base.device import BaseDevice, ManufacturerInfo, BaseCookie, DeviceContext
 
 
 class TestDiscoveryResponse:
@@ -23,6 +25,15 @@ class TestDiscoveryResponse:
         assert discovery_response
         assert discovery_response.__doc__
         assert len(discovery_response.__doc__) != 0
+
+    def test_class_instance_base_classes(self, discovery_response):
+        assert discovery_response
+        assert isinstance(discovery_response.headers, BaseHeaders)
+        assert isinstance(discovery_response.devices[0], BaseDevice)
+        assert isinstance(discovery_response.devices[0].device_context, DeviceContext)
+        assert isinstance(discovery_response.devices[0].device_cookie, BaseCookie)
+        assert isinstance(discovery_response.devices[0].manufacturer_info, ManufacturerInfo)
+
 
     def test_discovery_response_instance(self, discovery_response):
         assert discovery_response
