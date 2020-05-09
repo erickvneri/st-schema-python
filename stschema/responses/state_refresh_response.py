@@ -5,10 +5,10 @@ from stschema.base.response import BaseResponse, HeadersSchema
 
 
 class StateResponse(BaseResponse):
-    """The StateResponse class will handle the
-    final representation of a State Refresh
-    Response as the ST Schema documentation
-    refers:
+    """Inherits from the BaseResponse class.
+    The StateResponse class handles the final
+    representation of a State Refresh Response
+    as the ST Schema documentation refers:
 
         :::param device_state: a list of devices
         specifying the current state of each capability.

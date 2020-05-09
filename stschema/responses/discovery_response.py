@@ -6,9 +6,11 @@ from stschema.base.response import BaseResponse
 
 
 class DiscoveryResponse(BaseResponse):
-    """The DiscoveryResponse class will handle the
-    final representation of a Discovery Response as
-    the ST Schema documentation refers.
+    """Inherits from the BaseResponse class.
+    The DiscoveryResponse class handles the
+    final representation of a Discovery
+    Response as the ST Schema documentation
+    refers:
 
         :::param devices: a list of devices.
         :::param headers: headers of a request and response"""
