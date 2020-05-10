@@ -1,10 +1,12 @@
 import pytest
+import inspect
 from tests.fixtures import DeviceFixture
+from stschema.base.response import BaseHeaders, BaseResponse
 from stschema.responses import DiscoveryResponseSchema, DiscoveryResponse
+from stschema.base.device import BaseDevice, ManufacturerInfo, BaseCookie, DeviceContext
 
 
 class TestDiscoveryResponse:
-
     @pytest.fixture
     def discovery_response(self):
         # Request ST Headers
@@ -23,6 +25,18 @@ class TestDiscoveryResponse:
         assert discovery_response
         assert discovery_response.__doc__
         assert len(discovery_response.__doc__) != 0
+
+    def test_class_inheritance(self):
+        parent_class = inspect.getmro(DiscoveryResponse)[1]
+        assert parent_class == BaseResponse
+
+    def test_class_instance_base_classes(self, discovery_response):
+        assert discovery_response
+        assert isinstance(discovery_response.headers, BaseHeaders)
+        assert isinstance(discovery_response.devices[0], BaseDevice)
+        assert isinstance(discovery_response.devices[0].device_context, DeviceContext)
+        assert isinstance(discovery_response.devices[0].device_cookie, BaseCookie)
+        assert isinstance(discovery_response.devices[0].manufacturer_info, ManufacturerInfo)
 
     def test_discovery_response_instance(self, discovery_response):
         assert discovery_response

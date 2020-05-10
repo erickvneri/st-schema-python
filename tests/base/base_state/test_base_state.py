@@ -1,6 +1,5 @@
 import pytest
-from stschema.base import BaseState
-from marshmallow import Schema, fields
+from stschema.base.device import BaseState
 
 
 class TestDeviceState(object):

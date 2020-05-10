@@ -1,6 +1,7 @@
 from marshmallow import Schema, fields
 
-class Header:
+
+class BaseHeaders:
     """The HeaderClass is used by the
     Response constructor.
         :::param interaction_type: parameter

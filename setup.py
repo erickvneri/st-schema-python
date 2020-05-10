@@ -1,11 +1,15 @@
 from setuptools import setup, find_packages
 
+with open('README.md', 'r') as ld:
+    long_description = ld.read()
+
 setup(
     name='st-schema-python',
     version='0.0.1',
     author='erickv',
     author_email='erickv@bluetrailsoft.com',
-    description='Python ST-Schema SDK',
+    description='ST-Schema Python SDK',
+    long_description='',
     url='https://github.com/erickvneri/st-schema-python/',
     packages=find_packages(),
     install_requires=[

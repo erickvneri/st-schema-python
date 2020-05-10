@@ -1,7 +1,7 @@
 import pytest
 from tests.fixtures import DeviceFixture
 from stschema.interface import DeviceStateSchema
-from stschema.base import BaseState
+from stschema.base.device import BaseState
 
 
 class TestStateImplementation(object):

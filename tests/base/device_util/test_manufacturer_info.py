@@ -1,5 +1,5 @@
 import pytest
-from stschema.base import ManufacturerInfo, ManufacturerSchema
+from stschema.base.device import ManufacturerInfo, ManufacturerSchema
 
 
 class TestManufacturerInfo(object):

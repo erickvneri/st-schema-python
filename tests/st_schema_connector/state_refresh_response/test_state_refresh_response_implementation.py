@@ -1,8 +1,9 @@
+import inspect
 import pytest
 from tests.fixtures import DeviceFixture
-from stschema.interface import Device
-from stschema.responses.util import Header
+from stschema.base.response import BaseHeaders, BaseResponse
 from stschema.responses import StateResponse, StateRefreshResponseSchema
+from stschema.base.device import BaseState, BaseDevice
 
 
 class TestStateRefresh(object):
@@ -28,11 +29,22 @@ class TestStateRefresh(object):
         assert state_response.__doc__
         assert len(state_response.__doc__) != 0
 
+    def test_class_inheritance(self):
+        parent_class = inspect.getmro(StateResponse)[1]
+        assert parent_class == BaseResponse
+
     def test_state_response_instance(self, state_response):
         assert state_response
         assert state_response.device_state
         assert state_response.headers
-        assert isinstance(state_response.headers, Header)
+
+    def test_state_response_instance_base_classes(self, state_response):
+        device_state = state_response.device_state[0].states[0]
+        assert state_response
+        assert isinstance(device_state, BaseState)
+        assert isinstance(state_response.headers, BaseHeaders)
+        assert isinstance(state_response.device_state[0], BaseDevice)
+
 
     def test_type_error_state_response_instance_null_values(self):
         with pytest.raises(TypeError):
