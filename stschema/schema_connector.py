@@ -27,6 +27,7 @@ class SchemaConnector(object):
         the SchemaConnector will instance a custom logger
         to improve the debugging experience."""
 
+    # TODO: Implement actions of SchemaConnector.
     def __init__(
             self, auth_url: str = None, save_access_code: bool = False, logging: bool = False
     ):
@@ -34,11 +35,15 @@ class SchemaConnector(object):
 
     @staticmethod
     def discovery_handler(devices: List[Device], request_id: str):
-        pass
+        response = DiscoveryResponse(devices=devices, request_id=request_id)
+        discovery_schema = DiscoveryResponseSchema()
+        return discovery_schema.dump(response)
 
     @staticmethod
     def state_refresh_handler(devices: List[Device], request_id: str):
-        pass
+        response = StateResponse(devices=devices, request_id=request_id)
+        state_response = StateRefreshResponseSchema()
+        return state_response.dump(response)
 
     @staticmethod
     def command_handler(request_id: str):
