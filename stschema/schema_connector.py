@@ -16,10 +16,6 @@ class SchemaConnector(object):
 
         ::: devices: List of device instances.
 
-        :::param auth_url: None by  default.
-        URL which will validate that the
-        authorization token received is authorized.
-
         :::param save_access_code: False by default.
         If True, it will create a file to store the
         authorization code and stateCallback url received
@@ -31,7 +27,7 @@ class SchemaConnector(object):
 
     # TODO: Implement actions of SchemaConnector.
     def __init__(
-            self, devices: List[Device], auth_url: str = None, save_access_code: bool = False, logging: bool = False
+            self, devices: List[Device], save_access_code: bool = False, logging: bool = False
     ):
         self.devices = devices
 
@@ -46,5 +42,5 @@ class SchemaConnector(object):
         return state_response.dump(response)
 
     @staticmethod
-    def command_handler(request_id: str):
+    def command_handler(command_device: List, request_id: str):
         pass
