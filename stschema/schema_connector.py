@@ -14,6 +14,8 @@ class SchemaConnector(object):
     and reliability at the Cloud-to-Cloud
     communication:
 
+        ::: devices: List of device instances.
+
         :::param auth_url: None by  default.
         URL which will validate that the
         authorization token received is authorized.
@@ -29,19 +31,17 @@ class SchemaConnector(object):
 
     # TODO: Implement actions of SchemaConnector.
     def __init__(
-            self, auth_url: str = None, save_access_code: bool = False, logging: bool = False
+            self, devices: List[Device], auth_url: str = None, save_access_code: bool = False, logging: bool = False
     ):
-        pass
+        self.devices = devices
 
-    @staticmethod
-    def discovery_handler(devices: List[Device], request_id: str):
-        response = DiscoveryResponse(devices=devices, request_id=request_id)
+    def discovery_handler(self, request_id: str):
+        response = DiscoveryResponse(devices=self.devices, request_id=request_id)
         discovery_schema = DiscoveryResponseSchema()
         return discovery_schema.dump(response)
 
-    @staticmethod
-    def state_refresh_handler(devices: List[Device], request_id: str):
-        response = StateResponse(devices=devices, request_id=request_id)
+    def state_refresh_handler(self, request_id: str):
+        response = StateResponse(devices=self.devices, request_id=request_id)
         state_response = StateRefreshResponseSchema()
         return state_response.dump(response)
 

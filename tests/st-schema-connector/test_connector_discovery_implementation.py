@@ -19,7 +19,7 @@ class TestSchemaConnectorImplementation(object):
         device3 = DeviceFixture()
         device3.external_device_id = 'TRES'
         devices = [device, device2, device3]
-        response = SchemaConnector.discovery_handler(devices=devices, request_id=mock_req_id)
+        response = SchemaConnector(devices).discovery_handler(request_id=mock_req_id)
         yield response
 
     def test_schema_connector_discovery_handler(self, discovery_response):
