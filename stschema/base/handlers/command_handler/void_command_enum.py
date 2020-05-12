@@ -6,6 +6,7 @@ class VoidCommand(Enum):
     designed for commands that doesn't support
     additional values as arguments when receiving
     a CommandRequest interaction type."""
+
     on = 'on'
     off = 'off'
     open = 'open'
