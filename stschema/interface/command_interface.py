@@ -1,5 +1,5 @@
 from stschema.base.handlers import VoidCommand, BaseCommand
-
+from stschema.base.device import BaseState
 
 class CommandHandler(BaseCommand):
     """The CommandHandler interface inherits
@@ -10,12 +10,9 @@ class CommandHandler(BaseCommand):
         e.g.
         {
             'component': 'main'
-            'capability': 'st.colorControl'
-            'command': 'setControl'
-            'arguments': [{
-                'saturation': 99,
-                'hue': 66
-            }]
+            'capability': 'st.switch'
+            'command': 'off'
+            'arguments': []
         }"""
 
     def __init__(self, command: dict):
@@ -32,4 +29,13 @@ class CommandHandler(BaseCommand):
         on the information of the command
         received at te CommandRequest."""
 
+        # if self.arguments == []:
+        #     command = VoidCommand(self.command)
+        #     new_state = BaseState(
+        #         component='main',
+        #         capability=self.capability,
+        #         # attribute=FIXME: CAPABILITY ENUM,
+        #         value=command.name,
+        #         unit=None
+        #     )
         pass

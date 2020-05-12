@@ -20,6 +20,7 @@ class TestCommandInterface(object):
         assert cmd.capability
         assert cmd.command
         assert cmd.arguments
+        print(cmd.__dict__)
 
     def test_command_instance_method_documentation(self, command_interface):
         assert command_interface

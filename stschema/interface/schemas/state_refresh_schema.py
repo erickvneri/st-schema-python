@@ -1,5 +1,6 @@
 from marshmallow import Schema, fields
-from stschema.base.device import DeviceCookieSchema, StateSchema
+from stschema.base.device import StateSchema
+from stschema.base.util import DeviceCookieSchema
 
 
 class DeviceStateSchema(Schema):
