@@ -1,19 +1,9 @@
 import pytest
-from enum import Enum
-
+from stschema.base.handlers import VoidCommand
 
 class TestVoidCommandEnum(object):
     @pytest.fixture
     def cmd_enum(self):
-        class VoidCommand(Enum):
-            """The VoidCommand Enumerator class is
-            designed for commands that doesn't support
-            additional values as arguments when receiving
-            a CommandRequest interaction type."""
-            on = 'on'
-            off = 'off'
-            open = 'open'
-            closed = 'close'
         yield VoidCommand
 
     def test_enum_documentation(self, cmd_enum):
