@@ -1,5 +1,6 @@
 import pytest
 from stschema.interface import CommandHandler
+from stschema.base.handlers import BaseCommand
 
 
 class TestCommandInterface(object):
@@ -15,12 +16,12 @@ class TestCommandInterface(object):
     def test_command_instance(self, command_interface):
         st_cmd = dict(component='main', capability='st.switchLevel', command='setLevel', arguments=[66])
         cmd = command_interface(st_cmd)
+        assert isinstance(cmd, BaseCommand)
         assert cmd
         assert cmd.component
         assert cmd.capability
         assert cmd.command
         assert cmd.arguments
-        print(cmd.__dict__)
 
     def test_command_instance_method_documentation(self, command_interface):
         assert command_interface
