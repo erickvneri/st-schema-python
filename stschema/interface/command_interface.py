@@ -1,5 +1,7 @@
 from stschema.base.handlers import VoidCommand, BaseCommand
 from stschema.base.device import BaseState
+from stschema.base.util import CapabilityAttribute
+
 
 class CommandHandler(BaseCommand):
     """The CommandHandler interface inherits
@@ -29,13 +31,14 @@ class CommandHandler(BaseCommand):
         on the information of the command
         received at te CommandRequest."""
 
-        # if self.arguments == []:
-        #     command = VoidCommand(self.command)
-        #     new_state = BaseState(
-        #         component='main',
-        #         capability=self.capability,
-        #         # attribute=FIXME: CAPABILITY ENUM,
-        #         value=command.name,
-        #         unit=None
-        #     )
-        pass
+        if not self.arguments:
+            command = VoidCommand(self.command)
+            capability = CapabilityAttribute(self.capability)
+            new_state = BaseState(
+                component='main',
+                capability=capability.value,
+                attribute=capability.name,
+                value=command.name,
+                unit=None
+            )
+        return new_state
