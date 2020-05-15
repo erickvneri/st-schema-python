@@ -31,14 +31,24 @@ class CommandHandler(BaseCommand):
         on the information of the command
         received at te CommandRequest."""
 
+        new_state = None
         if not self.arguments:
             command = VoidCommand(self.command)
             capability = CapabilityAttribute(self.capability)
             new_state = BaseState(
-                component='main',
+                component=self.component,
                 capability=capability.value,
                 attribute=capability.name,
                 value=command.name,
+                unit=None
+            )
+        elif len(self.arguments) == 1:
+            capability = CapabilityAttribute(self.capability)
+            new_state = BaseState(
+                component=self.component,
+                capability=capability.value,
+                attribute=capability.name,
+                value=self.arguments[0],
                 unit=None
             )
         return new_state
