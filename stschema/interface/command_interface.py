@@ -33,8 +33,10 @@ class CommandHandler(BaseCommand):
 
         new_state = None
         if not self.arguments:
-            command = VoidCommand(self.command)
+            """If command received has
+            no arguments"""
             capability = CapabilityAttribute(self.capability)
+            command = VoidCommand(self.command)
             new_state = BaseState(
                 component=self.component,
                 capability=capability.value,
@@ -42,7 +44,10 @@ class CommandHandler(BaseCommand):
                 value=command.name,
                 unit=None
             )
-        elif len(self.arguments) == 1:
+
+        elif type(self.arguments[0]) is not dict:
+            """If command received has 
+            a single argument as value."""
             capability = CapabilityAttribute(self.capability)
             new_state = BaseState(
                 component=self.component,
@@ -51,4 +56,19 @@ class CommandHandler(BaseCommand):
                 value=self.arguments[0],
                 unit=None
             )
+
+        elif type(self.arguments[0]) is dict:
+            """If command received has 
+            multiple attributes as arguments."""
+            capability = CapabilityAttribute(self.capability)
+            args = self.arguments[0]
+            new_state = []
+            for attribute, value in args.items():
+                new_state.append(BaseState(
+                    component=self.component,
+                    capability=capability.value,
+                    attribute=attribute,
+                    value=value,
+                    unit=None
+                ))
         return new_state
