@@ -14,8 +14,8 @@ class StateResponse(BaseResponse):
         specifying the current state of each capability.
         :::param headers: headers or a request and response"""
 
-    def __init__(self, devices: List[Device], request_id: str):
-        BaseResponse.__init__(self, interaction_type='stateRefreshResponse', request_id=request_id)
+    def __init__(self, devices: List[Device], request_id: str, interaction_type: str = 'stateRefreshResponse'):
+        BaseResponse.__init__(self, interaction_type=interaction_type, request_id=request_id)
         self.device_state = devices
 
 

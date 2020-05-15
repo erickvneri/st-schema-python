@@ -43,4 +43,10 @@ class SchemaConnector(object):
 
     @staticmethod
     def command_handler(command_device: List, request_id: str):
+        """
+        1. Filter device.
+        2. Map Command - Get State.
+        3. Instance StateResponse.
+        4. Dump new state.
+        """
         pass
