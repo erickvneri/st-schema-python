@@ -14,7 +14,7 @@ class TestSingleArgCommand(object):
         )
         yield cmd
 
-    def test_result_instance(self, single_arg_command):
+    def test_single_arg_instance(self, single_arg_command):
         handled_cmd = CommandHandler(single_arg_command).get_state()
         assert isinstance(handled_cmd, BaseState)
         assert handled_cmd
