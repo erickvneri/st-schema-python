@@ -22,7 +22,7 @@ class TestSingleArgCommand(object):
         assert handled_cmd.capability
         assert handled_cmd.attribute
         assert handled_cmd.value
-        assert handled_cmd.unit or handled_cmd.unit is None
+        # assert handled_cmd.unit or handled_cmd.unit is None
 
     def test_value_error_capability(self, single_arg_command):
         """ValueError exception raised if
