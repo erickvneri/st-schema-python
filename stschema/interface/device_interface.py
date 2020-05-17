@@ -1,5 +1,6 @@
+from stschema.base.util import BaseCookie
 from stschema.base.device import (BaseDevice, DeviceContext,
-                                  ManufacturerInfo, BaseCookie, BaseState)
+                                  ManufacturerInfo, BaseState)
 
 
 class Device(BaseDevice):

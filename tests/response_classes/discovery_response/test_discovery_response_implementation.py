@@ -3,7 +3,8 @@ import inspect
 from tests.fixtures import DeviceFixture
 from stschema.base.response import BaseHeaders, BaseResponse
 from stschema.responses import DiscoveryResponseSchema, DiscoveryResponse
-from stschema.base.device import BaseDevice, ManufacturerInfo, BaseCookie, DeviceContext
+from stschema.base.device import BaseDevice, ManufacturerInfo, DeviceContext
+from stschema.base.util import BaseCookie
 
 
 class TestDiscoveryResponse:

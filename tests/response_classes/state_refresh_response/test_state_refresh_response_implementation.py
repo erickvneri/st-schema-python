@@ -45,7 +45,6 @@ class TestStateRefresh(object):
         assert isinstance(state_response.headers, BaseHeaders)
         assert isinstance(state_response.device_state[0], BaseDevice)
 
-
     def test_type_error_state_response_instance_null_values(self):
         with pytest.raises(TypeError):
             discovery_error_instance = StateResponse()
