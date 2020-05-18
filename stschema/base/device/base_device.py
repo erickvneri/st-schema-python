@@ -1,16 +1,12 @@
-class BaseDevice:
-    """The BaseDevice class is the basic SmartThings
-    Device representation that will contain the main
-    attributes for identifying a Cloud Integrated
-    device:
-
-        :::param external_device_id: device id for a
-        third-party cloud.
-        :::param friendly_name: Name set by the user.
-        :::param device_handler_type: value referred
-        at the main ST-Schema documentation:
-        https://smartthings.developer.samsung.com/docs/devices/smartthings-schema/device-handler-types.html
-        :::param device_cookie: DeviceCookie object.
+class BaseDevice(object):
+    """The BaseDevice class is the basic
+    representation of a device which will
+    contain the main attributes of
+    identification.
+        :::param external_device_id
+        :::param friendly_name
+        :::param device_handler_type
+        :::param device_cookie
         :::param unique_device_id"""
 
     def __init__(

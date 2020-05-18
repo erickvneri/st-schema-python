@@ -2,9 +2,9 @@ from enum import Enum
 
 
 class CapabilityAttribute(Enum):
-    """The Capability Enum keeps track
-    of the respective attribute for the
-    capability passed as parameter.
+    """The Capability Enum keeps
+    relation between capabilities and
+    its main attribute.
 
     For more information, please read the
     Capabilities Reference documentation:
