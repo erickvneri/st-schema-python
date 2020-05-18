@@ -13,7 +13,7 @@ class TestStateSchema(object):
 
     @pytest.fixture
     def state_instance(self):
-        instance = BaseState(component='main', capability='switch', attribute='switch', value='off', unit=None)
+        instance = BaseState(component='main', capability='switch', attribute='switch', value='off', unit='F')
         yield instance
 
     def test_schema_class_documentation(self, schema):
@@ -36,4 +36,10 @@ class TestStateSchema(object):
         assert state_result['capability']
         assert state_result['attribute']
         assert state_result['value']
-        assert state_result['unit'] or state_result['unit'] is None
+        assert state_result['unit']
+
+    def test_null_unit_instance(self, schema):
+        state_instance = BaseState(component='main', capability='switch', attribute='switch', value='off', unit=None)
+        state_result = schema.dump(state_instance)
+        with pytest.raises(KeyError):
+            assert state_result['unit']

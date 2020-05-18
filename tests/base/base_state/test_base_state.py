@@ -19,14 +19,19 @@ class TestDeviceState(object):
         assert len(state_class.__doc__) != 0
 
     def test_state_class_instance(self, state_class):
-        state = state_class(component='main', capability='switch', attribute='switch', value='off', unit=None)
+        state = state_class(component='main', capability='switch', attribute='switch', value='off', unit='F')
         assert state
         assert isinstance(state, state_class)
         assert state.component
         assert state.capability
         assert state.attribute
         assert state.value
-        assert state.unit or state.unit is None
+        assert state.unit
+
+    def test_null_unit(self, state_class):
+        state = state_class(component='main', capability='switch', attribute='switch', value='off', unit=None)
+        with pytest.raises(AttributeError):
+            assert state.unit
 
     def test_type_error_instance_null_values(self, state_class):
         with pytest.raises(TypeError):
