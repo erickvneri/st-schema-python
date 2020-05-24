@@ -1,4 +1,4 @@
-# ST-Schema Python SDK <img src="https://images.samsung.com/is/image/samsung/p5/au/faq/smartthings/smartthings-icon.png?$ORIGIN_PNG$" width=35><img src="http://assets.stickpng.com/images/5848152fcef1014c0b5e4967.png" width=35>
+# ST-Schema Python SDK <img src="https://images.samsung.com/is/image/samsung/p5/au/faq/smartthings/smartthings-icon.png?$ORIGIN_PNG$" width=35><img src="http://clipart-library.com/images_k/python-logo-transparent/python-logo-transparent-5.png" width=35>
 
 The ST-Schema Python SDK is a package that helps to simplify the development of 
 **Schema Connectors** with ordered resources through interfaces.
