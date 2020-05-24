@@ -62,7 +62,7 @@ get access to a series of handlers. See below:
 
     ```python
     from stschema import SchemaConnector
-    from some_where import device_example
+    from our_device_module import device_example # example import
     
     
     devices = [device_example]
