@@ -1,12 +1,11 @@
 from marshmallow import Schema, fields
-from stschema.base.util import DeviceCookieSchema
 
 
 class DeviceCommandMapper(Schema):
-    """The DeviceCommandMapper schema will
-    parse the Request payload into snake-case
-    format to directly handle values with the
-    Device Interface"""
+    """The DeviceCommandMapper will extract
+    the relevant device's data from the
+    Command Request."""
+
     def __init__(self):
         Schema.__init__(self, unknown=True)
 

@@ -1,11 +1,11 @@
 from marshmallow import Schema, fields
 
 
-class BaseState:
-    """The BaseState class will represents the state
-    of the capability of the device.
-
-        :::param component: 'main' by default
+class BaseState(object):
+    """The BaseState class is the basic representation
+    of the state of the device in reference to the
+    capabilities attributed.
+        :::param component
         :::param capability
         :::param attribute
         :::param value

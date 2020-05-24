@@ -5,17 +5,7 @@ from stschema.base.util import CapabilityAttribute
 
 class CommandHandler(BaseCommand):
     """The CommandHandler interface inherits
-    from the BaseCommand class. It receives
-    a dictionary of the command executed and
-    received at the CommandRequest:
-        :::param command: dict
-        e.g.
-        {
-            'component': 'main'
-            'capability': 'st.switch'
-            'command': 'off'
-            'arguments': []
-        }"""
+    its attributes from the BaseCommand class."""
 
     def __init__(self, command: dict):
         BaseCommand.__init__(
@@ -27,14 +17,13 @@ class CommandHandler(BaseCommand):
         )
 
     def get_state(self):
-        """Returns a new device state based
-        on the information of the command
-        received at te CommandRequest."""
+        """This instance method converts commands
+        into device's states."""
 
         new_state = None
         if not self.arguments:
             """If command received has
-            no arguments"""
+            no arguments."""
             capability = CapabilityAttribute(self.capability)
             command = VoidCommand(self.command)
             new_state = BaseState(

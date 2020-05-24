@@ -2,19 +2,15 @@ from typing import List
 from marshmallow import Schema, fields
 
 
-class DeviceContext:
-    """The DeviceContext class contains the information
-    about the device that refers to its utility or
-    location of use.
+class DeviceContext(object):
+    """The DeviceContext class handles the
+    device's information about its default
+    utility context.
+        :::param room_name
+        :::param groups
+        :::param categories"""
 
-        :::param room_name: dictate at which room
-        the device will be assigned at the One App.
-        :::param groups: group of devices that conforms
-        the environment of the device.
-        :::param categories: classifiers of the type of
-        device (light, thermostats, monitoring, etc.)."""
-
-    def __init__(self, room_name: str, groups: List[str] = None, categories: List[str] = None):
+    def __init__(self, room_name: str, groups: List[str], categories: List[str]):
         self.room_name = room_name
         self.groups = groups or list()
         self.categories = categories or list()
@@ -23,10 +19,9 @@ class DeviceContext:
 class DeviceContextSchema(Schema):
     """The DeviceContextSchema handles the
     serialization of the DeviceContext class.
-    It parses the Snake Cased attributes to a
-    Camel Case format following REST conventions
-    for Cloud-to-Cloud communication:
-
+    It converts Snake Case attributes to
+    Camel Case format following the REST
+    conventions.
         :::param room_name -> roomName
         :::param groups
         :::param categories"""

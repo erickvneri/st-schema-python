@@ -4,17 +4,13 @@ from stschema.base.device import (BaseDevice, DeviceContext,
 
 
 class Device(BaseDevice):
-    """Inherits from BaseDevice.
-
-        :::param external_device_id: required values
-        :::param friendly_name: required values
-        :::param device_handler_type: required values
-        :::param device_cookie: default as None
-        :::param device_unique_id: required value
-
-        Extends by adding the next methods:
-            - set_context
-            - set_mn"""
+    """The Device interface inherits its
+    attributes from the BaseDevice class.
+        :::param external_device_id (required)
+        :::param friendly_name (required)
+        :::param device_unique_id (required)
+        :::param device_cookie (None by default)
+        :::param device_handler_type (required)"""
 
     def __init__(self, **info):
         BaseDevice.__init__(self,
@@ -29,8 +25,8 @@ class Device(BaseDevice):
         self.manufacturer_info = None
 
     def set_context(self, **context):
-        """Defines the device_context values accordingly to the ST Schema specifications.
-
+        """Defines the device's context information.
+        Returns an instance of the DeviceContext class.
             :::param room_name
             :::param groups
             :::param categories"""
@@ -42,8 +38,8 @@ class Device(BaseDevice):
         )
 
     def set_mn(self, **info):
-        """Defines the manufacturer_info  values accordingly to the ST Schema specifications.
-
+        """Defines the device's manufacturer information.
+        Returns an instance of the ManufacturerInfo class.
             :::param manufacturer_name
             :::param model_name
             :::param hw_version
@@ -57,14 +53,9 @@ class Device(BaseDevice):
         )
 
     def set_state(self, capability: str, attribute: str, value: str or int, component: str = 'main', unit: str = None):
-        """The set_state method add a capability-state
-        to the device that has been used passed to the
-        StateInterface constructor.
-
-        For more information about the capabilities
-        supported, please visit the Capabilities
-        Reference documentation:
-        https://smartthings.developer.samsung.com/docs/api-ref/capabilities.html"""
+        """Defines the device's state by
+        adding one capability-state per call.
+        Returns an instance of the BaseState class."""
 
         new_state = BaseState(
             component=component,

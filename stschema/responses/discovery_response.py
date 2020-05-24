@@ -21,13 +21,11 @@ class DiscoveryResponse(BaseResponse):
 
 
 class DiscoveryResponseSchema(Schema):
-    """The DiscoverySchema class will returns
-    a DiscoveryResponse JSON as it is referred
-    at the ST Schema documentation.
-
-        :::param devices: [devices]
-        :::param headers: dict with JSON
-        headers inherited from ST response."""
+    """The DiscoverySchema handles the
+    serialization of the DiscoveryResponse class.
+    It converts Snake Case attributes to
+    Camel Case format following the REST
+    conventions."""
 
     devices = fields.List(fields.Nested(DeviceDiscoverySchema, attribute='devices'))
     headers = fields.Nested(HeadersSchema, attribute='headers')

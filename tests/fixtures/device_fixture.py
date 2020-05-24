@@ -26,7 +26,8 @@ class DeviceFixture(Device):
         self.set_mn(
             manufacturer_name='SmartThings',
             model_name='SmartLight',
-            hw_version='v1 MX 1.0', sw_version='0.1.0'
+            hw_version='v1 MX 1.0',
+            sw_version='0.1.0'
         )
         # SETTING STATE OF THERMOSTAT DEVICE (CAPABILITY)
         self.set_state(
