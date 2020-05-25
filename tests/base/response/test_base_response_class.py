@@ -1,4 +1,5 @@
-from stschema.base.response import BaseResponse, BaseHeaders
+from stschema.base.response import BaseResponse
+from stschema.base.util import BaseHeaders
 import hashlib
 import pytest
 

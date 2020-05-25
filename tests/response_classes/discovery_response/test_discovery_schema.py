@@ -1,5 +1,5 @@
 import pytest
-from stschema.responses import DiscoveryResponseSchema
+from stschema.schema_connector.response import ConnectorSchema
 
 
 class TestDiscoverySchema:
@@ -9,7 +9,7 @@ class TestDiscoverySchema:
 
     @pytest.fixture
     def schema_class(self):
-        schema = DiscoveryResponseSchema()
+        schema = ConnectorSchema()
         yield schema
 
     def test_schema_documentation(self, schema_class):

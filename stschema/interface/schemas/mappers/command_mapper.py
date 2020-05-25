@@ -10,4 +10,4 @@ class DeviceCommandMapper(Schema):
         Schema.__init__(self, unknown=True)
 
     externalDeviceId = fields.Str(attribute='external_device_id')
-    commands = fields.Field()
+    commands = fields.List(fields.Field())

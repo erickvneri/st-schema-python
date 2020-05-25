@@ -1,6 +1,6 @@
 import pytest
 from datetime import datetime
-from stschema.interface.schemas.command_mapper import DeviceCommandMapper
+from stschema.interface.schemas import DeviceCommandMapper
 
 
 class TestDeviceCommandMapperSchema(object):

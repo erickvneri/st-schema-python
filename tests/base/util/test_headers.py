@@ -1,6 +1,6 @@
 import pytest
 from hashlib import sha1
-from stschema.base.response import BaseHeaders, HeadersSchema
+from stschema.base.util import BaseHeaders, HeadersSchema
 
 
 class TestResponseHeader(object):

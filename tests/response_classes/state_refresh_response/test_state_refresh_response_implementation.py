@@ -1,8 +1,9 @@
 import inspect
 import pytest
 from tests.fixtures import DeviceFixture
-from stschema.base.response import BaseHeaders, BaseResponse
-from stschema.responses import StateResponse, StateRefreshResponseSchema
+from stschema.base.response import BaseResponse
+from stschema.base.util import BaseHeaders
+from stschema.schema_connector.response import StateResponse, ConnectorSchema
 from stschema.base.device import BaseState, BaseDevice
 
 
@@ -21,7 +22,7 @@ class TestStateRefresh(object):
 
     @pytest.fixture
     def schema(self):
-        schema = StateRefreshResponseSchema()
+        schema = ConnectorSchema()
         yield schema
 
     def test_class_documentation(self,state_response):

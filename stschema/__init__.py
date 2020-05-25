@@ -1,1 +1,1 @@
-from .schema_connector import SchemaConnector
+from stschema.schema_connector.schema_connector import SchemaConnector

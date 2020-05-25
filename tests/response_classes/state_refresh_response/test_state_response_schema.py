@@ -1,5 +1,5 @@
 import pytest
-from stschema.responses import StateRefreshResponseSchema
+from stschema.schema_connector.response import ConnectorSchema
 
 
 class TestStateRefreshResponse(object):
@@ -9,7 +9,7 @@ class TestStateRefreshResponse(object):
 
     @pytest.fixture
     def schema(self):
-        schema = StateRefreshResponseSchema()
+        schema = ConnectorSchema()
         yield schema
 
     def test_schema_documentation(self, schema):

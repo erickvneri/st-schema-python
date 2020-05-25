@@ -1,4 +1,4 @@
-from .util import BaseHeaders
+from stschema.base.util import BaseHeaders
 
 
 class BaseResponse(object):
