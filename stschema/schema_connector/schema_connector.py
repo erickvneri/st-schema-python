@@ -1,7 +1,9 @@
 from typing import List
+from copy import copy
 from stschema.interface import Device, CommandHandler
 from stschema.interface.schemas import DeviceCommandMapper
-from stschema.schema_connector.response import DiscoveryResponse, StateResponse, ConnectorSchema
+from stschema.schema_connector.response import (DiscoveryResponse, StateResponse,
+                                                DiscoveryResponseSchema, StateRefreshResponseSchema)
 
 
 class SchemaConnector(object):
@@ -11,8 +13,9 @@ class SchemaConnector(object):
     stateRefreshResponse and commandResponse.
         ::: devices: list of Device instances."""
 
-    response_schema = ConnectorSchema()
     command_schema = DeviceCommandMapper()
+    discovery_schema = DiscoveryResponseSchema()
+    state_schema = StateRefreshResponseSchema()
 
     def __init__(self, devices: List[Device]):
         self.devices = devices
@@ -20,12 +23,12 @@ class SchemaConnector(object):
     def discovery_handler(self, request_id: str):
         """Returns discoveryResponse JSON"""
         response = DiscoveryResponse(devices=self.devices, request_id=request_id)
-        return self.response_schema.dump(response)
+        return self.discovery_schema.dump(response)
 
     def state_refresh_handler(self, request_id: str):
         """Returns stateRefreshResponse JSON"""
         response = StateResponse(devices=self.devices, request_id=request_id)
-        return self.response_schema.dump(response)
+        return self.state_schema.dump(response)
 
     def command_handler(self, command_device: List, request_id: str):
         """Returns commandResponse"""
@@ -33,7 +36,7 @@ class SchemaConnector(object):
         command_req = self.command_schema.load(command_device)
 
         # Filter device by external_device_id
-        device = list(filter(lambda d: command_req['external_device_id'] == d.external_device_id, self.devices)).pop()
+        device = copy(list(filter(lambda d: command_req['external_device_id'] == d.external_device_id, self.devices)).pop())
 
         # CommandHandler to generate new state.
         handled_cmd = CommandHandler(command_req['commands'].pop()).get_state()
@@ -47,4 +50,4 @@ class SchemaConnector(object):
 
         # Instantiate StateResponse to handle command response
         response = StateResponse(devices=[device], request_id=request_id, interaction_type='commandResponse')
-        return self.response_schema.dump(response)
+        return self.state_schema.dump(response)
