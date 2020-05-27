@@ -37,6 +37,11 @@ class DeviceFixture(Device):
             unit='F'
         )
         self.set_state(
+            capability='switch',
+            attribute='switch',
+            value='off'
+        )
+        self.set_state(
             capability='waterSensor',
             attribute='water',
             value='dry'

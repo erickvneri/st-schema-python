@@ -2,7 +2,7 @@ import pytest
 import inspect
 from tests.fixtures import DeviceFixture
 from stschema.base.response import BaseResponse
-from stschema.schema_connector.response import DiscoveryResponse, ConnectorSchema
+from stschema.schema_connector.response import DiscoveryResponse, DiscoveryResponseSchema
 from stschema.base.device import BaseDevice, ManufacturerInfo, DeviceContext
 from stschema.base.util import BaseCookie, BaseHeaders
 
@@ -19,7 +19,7 @@ class TestDiscoveryResponse:
 
     @pytest.fixture
     def schema(self):
-        schema = ConnectorSchema()
+        schema = DiscoveryResponseSchema()
         yield schema
 
     def test_class_documentation(self, discovery_response):
