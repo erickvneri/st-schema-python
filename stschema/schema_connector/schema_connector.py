@@ -27,9 +27,9 @@ class SchemaConnector(object):
 
     def state_refresh_handler(self, devices: List[Device],  request_id: str = None):
         """Returns stateRefreshResponse JSON"""
-        # SAVE
-        # devices_req = [self.state_mapper.load(device)['external_device_id'] for device in devices]
+        # Save incoming ids
         devices_req = [device['externalDeviceId'] for device in devices]
+        # From self.devices, filter needed devices to update
         devices_res = [device for device in self.devices if device.external_device_id in devices_req]
 
         response = StateResponse(devices=devices_res, request_id=request_id)
