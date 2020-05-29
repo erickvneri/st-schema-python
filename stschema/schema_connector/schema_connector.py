@@ -1,7 +1,7 @@
 from typing import List
 from copy import copy
 from stschema.interface import Device, CommandHandler
-from stschema.interface.schemas import DeviceCommandMapper
+from stschema.schema_connector.handler_schemas import DeviceCommandMapper
 from stschema.schema_connector.response import (DiscoveryResponse, StateResponse,
                                                 DiscoveryResponseSchema, StateRefreshResponseSchema)
 
@@ -13,7 +13,7 @@ class SchemaConnector(object):
     stateRefreshResponse and commandResponse.
         ::: devices: list of Device instances."""
 
-    command_schema = DeviceCommandMapper()
+    command_mapper = DeviceCommandMapper()
     discovery_schema = DiscoveryResponseSchema()
     state_schema = StateRefreshResponseSchema()
 
@@ -25,15 +25,20 @@ class SchemaConnector(object):
         response = DiscoveryResponse(devices=self.devices, request_id=request_id)
         return self.discovery_schema.dump(response)
 
-    def state_refresh_handler(self, request_id: str):
+    def state_refresh_handler(self, devices: List[Device],  request_id: str = None):
         """Returns stateRefreshResponse JSON"""
-        response = StateResponse(devices=self.devices, request_id=request_id)
+        # SAVE
+        # devices_req = [self.state_mapper.load(device)['external_device_id'] for device in devices]
+        devices_req = [device['externalDeviceId'] for device in devices]
+        devices_res = [device for device in self.devices if device.external_device_id in devices_req]
+
+        response = StateResponse(devices=devices_res, request_id=request_id)
         return self.state_schema.dump(response)
 
-    def command_handler(self, command_device: List, request_id: str):
+    def command_handler(self, devices: List[Device], request_id: str):
         """Returns commandResponse"""
         # DeviceCommandMapper Schema mapping Command payload.
-        command_req = self.command_schema.load(command_device)
+        command_req = self.command_mapper.load(devices[0])
 
         # Filter device by external_device_id
         device = copy(list(filter(lambda d: command_req['external_device_id'] == d.external_device_id, self.devices)).pop())

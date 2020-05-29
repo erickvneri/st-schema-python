@@ -1,6 +1,6 @@
 import pytest
 from datetime import datetime
-from stschema.interface.schemas import DeviceCommandMapper
+from stschema.schema_connector.handler_schemas import DeviceCommandMapper
 
 
 class TestDeviceCommandMapperSchema(object):
@@ -35,7 +35,6 @@ class TestDeviceCommandMapperSchema(object):
     def test_map_command(self, device_cmd):
         schema = DeviceCommandMapper()
         mapped_cmd = schema.load(device_cmd)
-        print(mapped_cmd)
         assert mapped_cmd
         assert mapped_cmd['external_device_id']
         assert type(mapped_cmd['external_device_id']) is str

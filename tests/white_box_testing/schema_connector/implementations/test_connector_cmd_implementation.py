@@ -17,7 +17,7 @@ class TestCommandResponseImplementation(object):
         d3.external_device_id = 'THREE'
         connector = SchemaConnector(devices=[d1, d2, d3])
 
-        cmd = dict(
+        cmd = [dict(
             externalDeviceId='TWO',
             deviceCookie={'cookie': datetime.now().strftime('%Y/%m/%d %H:%M:%:S')},
             commands=[{
@@ -30,9 +30,9 @@ class TestCommandResponseImplementation(object):
                         "hue": 0.8333333333333334
                     }]
             }]
-        )
+        )]
         command_response = connector.command_handler(
-            command_device=cmd, request_id=hashlib.md5(b'requestId').hexdigest()
+            devices=cmd, request_id=hashlib.md5(b'requestId').hexdigest()
         )
         yield command_response
 

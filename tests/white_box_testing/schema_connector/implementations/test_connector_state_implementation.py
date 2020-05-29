@@ -13,13 +13,19 @@ class TestStateResponseImplementation(object):
     def state_refresh_response(self):
         mock_req_id = hashlib.md5(b'requestId').hexdigest()
         device = DeviceFixture()
-        device.external_device_id = 'UNO'
+        device.external_device_id = 'ONE'
         device2 = DeviceFixture()
-        device2.external_device_id = 'DOS'
+        device2.external_device_id = 'TWO'
         device3 = DeviceFixture()
-        device3.external_device_id = 'TRES'
+        device3.external_device_id = 'THREE'
         devices = [device, device2, device3]
-        response = SchemaConnector(devices).state_refresh_handler(request_id=mock_req_id)
+
+        devices_req = [
+            {'externalDeviceId': 'ONE'},
+            {'externalDeviceId': 'THREE'}
+        ]
+
+        response = SchemaConnector(devices).state_refresh_handler(devices=devices_req, request_id=mock_req_id)
         yield response
 
     def test_schema_connector_state_response(self, state_refresh_response):

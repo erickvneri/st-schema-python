@@ -1,4 +1,5 @@
 from marshmallow import Schema, fields
+from stschema.base.util import DeviceCookieSchema
 
 
 class DeviceCommandMapper(Schema):
@@ -6,8 +7,6 @@ class DeviceCommandMapper(Schema):
     the relevant device's data from the
     Command Request."""
 
-    def __init__(self):
-        Schema.__init__(self, unknown=True)
-
     externalDeviceId = fields.Str(attribute='external_device_id')
+    deviceCookie = fields.Nested(DeviceCookieSchema, attribute='device_cookie')
     commands = fields.List(fields.Field())
