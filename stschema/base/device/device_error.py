@@ -1,4 +1,5 @@
 from stschema.base.util import ErrorEnum
+from marshmallow import Schema, fields
 
 
 class DeviceError(object):
@@ -14,3 +15,16 @@ class DeviceError(object):
     def __init__(self, error_enum: ErrorEnum, detail: str):
         self.error_enum = ErrorEnum(error_enum)
         self.detail = detail
+
+
+class DeviceErrorSchema(Schema):
+    """The DeviceErrorSchema handles the
+        serialization of the DeviceError class.
+        It converts Snake Case attributes to
+        Camel Case format following the REST
+        conventions.
+            :::param error_enum -> errorEnum
+            :::param detail"""
+
+    errorEnum = fields.Str(attribute='error_enum')
+    detail = fields.Str()
