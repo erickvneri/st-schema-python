@@ -1,6 +1,6 @@
-from stschema.base.util import BaseCookie
+from stschema.base.util import BaseCookie, ErrorEnum
 from stschema.base.device import (BaseDevice, DeviceContext,
-                                  ManufacturerInfo, BaseState)
+                                  ManufacturerInfo, BaseState, DeviceError)
 
 
 class Device(BaseDevice):
@@ -65,3 +65,14 @@ class Device(BaseDevice):
             unit=unit
         )
         self.states.append(new_state)
+
+    def set_error_state(self, error_enum: ErrorEnum = 'DEVICE-UNAVAILABLE', detail: str = None):
+        """Defines the error specification when
+        if a device error is detected.
+        Returns an instance of the DeviceError
+        class.
+            :::param error_enum: based on the
+            documented errorEnum values."""
+
+        err = DeviceError(error_enum=error_enum, detail=detail)
+        self.device_error = [err]

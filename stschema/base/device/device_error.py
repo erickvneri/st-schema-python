@@ -17,7 +17,7 @@ class DeviceError(object):
         self.detail = detail
 
 
-class DeviceErrorSchema(Schema):
+class BaseErrorSchema(Schema):
     """The DeviceErrorSchema handles the
         serialization of the DeviceError class.
         It converts Snake Case attributes to

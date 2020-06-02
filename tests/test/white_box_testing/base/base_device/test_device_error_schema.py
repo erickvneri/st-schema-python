@@ -1,11 +1,11 @@
 import pytest
-from stschema.base.device import DeviceErrorSchema, DeviceError
+from stschema.base.device import BaseErrorSchema, DeviceError
 
 
 class TestDeviceErrorSchema(object):
     @pytest.fixture
     def schema(self):
-        s = DeviceErrorSchema()
+        s = BaseErrorSchema()
         yield s
 
     def test_schema_documentation(self, schema):
