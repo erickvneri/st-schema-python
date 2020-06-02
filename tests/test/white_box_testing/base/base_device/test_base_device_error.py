@@ -12,9 +12,7 @@ class TestBaseDeviceError(object):
     def test_error_instance(self):
         result = DeviceError(error_enum='DEVICE-UNAVAILABLE', detail='device out of range')
         assert isinstance(result, DeviceError)
-        assert isinstance(result.error_enum, ErrorEnum)
-        assert result.error_enum.name
-        assert result.error_enum.value
+        assert result.error_enum
         assert result.detail
 
     def test_value_error(self):

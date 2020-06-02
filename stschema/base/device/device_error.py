@@ -13,7 +13,7 @@ class DeviceError(object):
     - https://smartthings.developer.samsung.com/docs/devices/smartthings-schema/smartthings-schema-reference.html#Error-Responses"""
 
     def __init__(self, error_enum: ErrorEnum, detail: str):
-        self.error_enum = ErrorEnum(error_enum)
+        self.error_enum = ErrorEnum(error_enum).value
         self.detail = detail
 
 
