@@ -26,9 +26,16 @@ class SchemaConnector(object):
         return self.discovery_schema.dump(response)
 
     def state_refresh_handler(self, devices: List[Device],  request_id: str = None):
-        """Returns stateRefreshResponse JSON"""
+        """Takes 'devices' attribute from
+        stateRefreshResponse. Return
+        stateRefreshResponse according to
+        devices passed.
+            :::param: devices
+            :::param: request_id"""
+
         # Save incoming ids
-        devices_req = [device['externalDeviceId'] for device in devices]
+        # devices_req = [device['externalDeviceId'] for device in devices]  # TODO: TEST MAP LINE
+        devices_req = [map(lambda d: d['externalDeviceId'], devices)]
         # From self.devices, filter needed devices to update
         devices_res = [device for device in self.devices if device.external_device_id in devices_req]
 
@@ -36,7 +43,12 @@ class SchemaConnector(object):
         return self.state_schema.dump(response)
 
     def command_handler(self, devices: List[Device], request_id: str):
-        """Returns commandResponse"""
+        """Takes 'devices' attribute from
+        commandRequest. Return commandResponse
+        according to device passed.
+            :::param: devices
+            :::param: request_id"""
+
         # DeviceCommandMapper Schema mapping Command payload.
         command_req = self.command_mapper.load(devices[0])
 

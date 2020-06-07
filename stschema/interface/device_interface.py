@@ -21,6 +21,7 @@ class Device(BaseDevice):
                             device_handler_type=info.get('device_handler_type')
                             )
         self.states = []
+        self.device_error = []
         self.device_context = None
         self.manufacturer_info = None
 
@@ -75,4 +76,4 @@ class Device(BaseDevice):
             documented errorEnum values."""
 
         err = DeviceError(error_enum=error_enum, detail=detail)
-        self.device_error = [err]
+        self.device_error.append(err)
