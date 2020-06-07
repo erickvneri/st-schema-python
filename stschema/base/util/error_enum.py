@@ -2,9 +2,10 @@ from enum import Enum
 
 
 class ErrorEnum(Enum):
-    """The ErrorEnum describes in
-    concept the global error or
-    device error."""
+    """The ErrorEnum class specifies
+    the concept of the error generated.
+    Can be used with Global Error or
+    Device Error Responses."""
 
     DEVICE_DELETED = 'DEVICE-DELETED'
     RESOURCE_CONSTRAINT_VIOLATION = 'RESOURCE-CONSTRAINT-VIOLATION'
