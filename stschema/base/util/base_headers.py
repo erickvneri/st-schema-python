@@ -1,7 +1,7 @@
 from marshmallow import Schema, fields
 
 
-class BaseHeaders(object):
+class BaseHeaders:
     """The BaseHeaders handles the
     metadata of the communication
     between the Schema Connector and

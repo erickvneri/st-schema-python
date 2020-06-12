@@ -1,7 +1,7 @@
 from marshmallow import Schema, fields
 
 
-class ManufacturerInfo(object):
+class ManufacturerInfo:
     """The ManufacturerInfo class handles the
     device's information about its manufacture.
         :::param manufacturer_name: Company manufacturer
