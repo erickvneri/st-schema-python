@@ -60,7 +60,6 @@ class SchemaConnector(object):
         # Clean states repository
         device.states = []
         if isinstance(handled_cmd, list):
-        # if type(handled_cmd) is list:  # TODO: Check possible errors
             device.states = [state for state in handled_cmd]
         else:
             device.states.append(handled_cmd)
