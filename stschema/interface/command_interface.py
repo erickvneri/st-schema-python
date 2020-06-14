@@ -34,8 +34,8 @@ class CommandHandler(BaseCommand):
                 unit=None
             )
 
-        elif type(self.arguments[0]) is not dict:
-            """If command received has 
+        elif not isinstance(self.arguments[0], dict):
+            """If command received has
             a single argument as value."""
             capability = CapabilityAttribute(self.capability)
             new_state = BaseState(
@@ -46,8 +46,8 @@ class CommandHandler(BaseCommand):
                 unit=None
             )
 
-        elif type(self.arguments[0]) is dict:
-            """If command received has 
+        elif isinstance(self.arguments[0], dict):
+            """If command received has
             multiple attributes as arguments."""
             capability = CapabilityAttribute(self.capability)
             args = self.arguments[0]

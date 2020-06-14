@@ -25,7 +25,7 @@ class SchemaConnector(object):
         response = DiscoveryResponse(devices=self.devices, request_id=request_id)
         return self.discovery_schema.dump(response)
 
-    def state_refresh_handler(self, devices: List[Device], request_id: str = None):
+    def state_refresh_handler(self, devices: List[Device], request_id: str):
         """Takes 'devices' attribute from
         stateRefreshResponse. Return
         stateRefreshResponse according to
@@ -34,7 +34,6 @@ class SchemaConnector(object):
             :::param: request_id"""
 
         # Map reference of externalDeviceId at stateRefreshResponse.
-        # devices_req = [device['externalDeviceId'] for device in devices]  # TODO: SUBSTITUTE WITH MAP
         devices_req = list(map(lambda d: d['externalDeviceId'], devices))
         # From self.devices, filter needed devices to update
         devices_res = [device for device in self.devices if device.external_device_id in devices_req]

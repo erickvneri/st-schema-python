@@ -25,7 +25,7 @@ class TestStateRefresh(object):
         schema = StateRefreshResponseSchema()
         yield schema
 
-    def test_class_documentation(self,state_response):
+    def test_class_documentation(self, state_response):
         assert state_response
         assert state_response.__doc__
         assert len(state_response.__doc__) != 0

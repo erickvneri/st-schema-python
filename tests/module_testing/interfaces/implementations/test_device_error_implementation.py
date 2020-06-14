@@ -36,7 +36,6 @@ class TestDeviceErrorImplementation(object):
 
     def test_key_error_schema_implementation(self, device, err_schema):
         result = err_schema.dump(device)
-        print(result)
         with pytest.raises(KeyError):
             assert result['states']
             assert result['deviceCookie']
