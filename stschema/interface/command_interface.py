@@ -2,6 +2,7 @@ from stschema.base.handlers import BaseCommand
 from stschema.base.device import BaseState
 
 
+# FIXME: REFACTOR COMMAND HANDLER
 class CommandHandler(BaseCommand):
     """The CommandHandler interface inherits
     its attributes from the BaseCommand class."""
@@ -20,7 +21,6 @@ class CommandHandler(BaseCommand):
         into device's states."""
 
         new_state = None
-        # FIXME: REFACTOR COMMAND HANDLER
         # if not self.arguments:
         #     """If command received has
         #     no arguments."""
