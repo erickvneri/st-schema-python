@@ -1,8 +1,6 @@
 import pytest
 import hashlib
-from marshmallow import pprint
 from tests.fixtures import DeviceFixture
-# from stschema.schema_connector.response import DeviceErrorResponseSchema, StateResponse
 from stschema.schema_connector.response import StateRefreshResponseSchema, StateResponse
 
 
@@ -19,7 +17,6 @@ class TestDeviceErrorResponse(object):
         schema = StateRefreshResponseSchema(states=state_response.device_state)
         yield schema.dump(state_response)
 
-    @pytest.mark.skip()
     def test_error_state_response_headers(self, error_state_response):
         assert error_state_response
         assert error_state_response['headers']
@@ -30,14 +27,12 @@ class TestDeviceErrorResponse(object):
         assert error_state_response['headers']['interactionType'] == 'stateRefreshResponse'
 
     def test_error_state_response_device_state(self, error_state_response):
-        pprint(error_state_response)
         assert error_state_response
         assert error_state_response['deviceState']
         assert error_state_response['deviceState'][0]['deviceError']
         assert error_state_response['deviceState'][0]['deviceError'][0]['errorEnum']
         assert error_state_response['deviceState'][0]['deviceError'][0]['detail']
 
-    @pytest.mark.skip()
     def test_error_state_key_error(self, error_state_response):
         with pytest.raises(KeyError):
             assert error_state_response['deviceState'][0]['states']
