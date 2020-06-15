@@ -14,12 +14,12 @@ class Device(BaseDevice):
 
     def __init__(self, **info):
         BaseDevice.__init__(self,
-                            external_device_id=info.get('external_device_id'),
-                            friendly_name=info.get('friendly_name'),
-                            device_unique_id=info.get('device_unique_id'),
-                            device_cookie=BaseCookie(info.get('device_cookie')),
-                            device_handler_type=info.get('device_handler_type')
-                            )
+            external_device_id=info.get('external_device_id'),
+            friendly_name=info.get('friendly_name'),
+            device_unique_id=info.get('device_unique_id'),
+            device_cookie=BaseCookie(info.get('device_cookie')),
+            device_handler_type=info.get('device_handler_type')
+        )
         self.states = []
         self.device_error = []
         self.device_context = None
@@ -69,7 +69,7 @@ class Device(BaseDevice):
 
     def set_error_state(self, error_enum: ErrorEnum = 'DEVICE-UNAVAILABLE', detail: str = None):
         """Defines the error specification when
-        if a device error is detected.
+        a the device's API detectes an error.
         Returns an instance of the DeviceError
         class.
             :::param error_enum: based on the

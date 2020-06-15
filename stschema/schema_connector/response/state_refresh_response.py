@@ -1,6 +1,6 @@
 from typing import List
-from marshmallow import Schema, fields
-from stschema.interface import DeviceStateSchema, Device
+from marshmallow import Schema, fields, pre_dump, post_dump
+from stschema.interface import DeviceStateSchema, Device, DeviceErrorSchema
 from stschema.base.response import BaseResponse
 from stschema.base.util import HeadersSchema
 
@@ -21,9 +21,22 @@ class StateResponse(BaseResponse):
 class StateRefreshResponseSchema(Schema):
     """The StateRefreshResponseSchema handles
     the serialization of the StateResponse class.
+    If the state declared corresponds to a Device
+    Error State, the Schema will be dynamically
+    updated.
     It converts Snake Case attributes to
     Camel Case format following the REST
     conventions."""
 
     headers = fields.Nested(HeadersSchema, attribute='headers')
     deviceState = fields.List(fields.Nested(DeviceStateSchema), attribute='device_state')
+
+    def __init__(self, **states):
+        Schema.__init__(self)
+        self.states = states.get('states')
+        if self.states:
+            for state in self.states:
+                if state.device_error:
+                    self.dump_fields.update(
+                        deviceState=fields.List(fields.Nested(DeviceErrorSchema), attribute='device_state')
+                    )
