@@ -18,8 +18,7 @@ class Device(BaseDevice):
             friendly_name=info.get('friendly_name'),
             device_unique_id=info.get('device_unique_id'),
             device_cookie=BaseCookie(info.get('device_cookie')),
-            device_handler_type=info.get('device_handler_type')
-        )
+            device_handler_type=info.get('device_handler_type'))
         self.states = []
         self.device_error = []
         self.device_context = None
@@ -35,8 +34,7 @@ class Device(BaseDevice):
         self.device_context = DeviceContext(
             room_name=context.get('room_name'),
             groups=context.get('groups'),
-            categories=context.get('categories')
-        )
+            categories=context.get('categories'))
 
     def set_mn(self, **info):
         """Defines the device's manufacturer information.

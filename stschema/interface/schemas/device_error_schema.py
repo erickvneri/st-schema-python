@@ -1,6 +1,5 @@
-from stschema.base.device import BaseErrorSchema
-from stschema.base.util import DeviceCookieSchema
 from marshmallow import Schema, fields
+from stschema.base.device import BaseErrorSchema
 
 
 class DeviceErrorSchema(Schema):
