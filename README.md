@@ -1,6 +1,6 @@
-# ST-Schema Python SDK <img src="https://images.samsung.com/is/image/samsung/p5/au/faq/smartthings/smartthings-icon.png?$ORIGIN_PNG$" width=35><img src="http://clipart-library.com/images_k/python-logo-transparent/python-logo-transparent-5.png" width=35>
+# SmartThings Schema Python SDK
 
-The _ST-Schema Python SDK_ is a package that helps to simplify the development of 
+The _SmartThings Schema Python SDK_ is a package that helps to simplify the development of 
 **Schema Connectors** with ordered resources through interfaces.
 
 ## Installation

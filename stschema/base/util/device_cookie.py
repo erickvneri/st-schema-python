@@ -15,5 +15,3 @@ class DeviceCookieSchema(Schema):
     serialization of the DeviceCookie class."""
 
     cookie = fields.Str(attribute='cookie')
-
-

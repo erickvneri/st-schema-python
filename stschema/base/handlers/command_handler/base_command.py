@@ -1,7 +1,7 @@
 from typing import List
 
 
-class BaseCommand(object):
+class BaseCommand:
     """The BaseCommand class is the basic
     representation of a command emitted by
     the SmartThings Cloud.

@@ -79,9 +79,9 @@ class TestDeviceInterface(object):
         Device."""
 
         def test_set_state_interface_method_documentation(self, interface_class):
-            assert interface_class
-            assert interface_class.__doc__
-            assert len(interface_class.__doc__) != 0
+            assert interface_class.set_state
+            assert interface_class.set_state.__doc__
+            assert len(interface_class.set_state.__doc__) != 0
 
         def test_type_error_set_state_method_null_values(self, interface_class):
             with pytest.raises(TypeError):
@@ -95,4 +95,25 @@ class TestDeviceInterface(object):
                     value=86,
                     unit='F',
                     extra=0
+                )
+
+    class TestSetErrorStateMethod(object):
+        def test_set_state_interface_method_documentation(self, interface_class):
+            assert interface_class.set_error_state
+            assert interface_class.set_error_state.__doc__
+            assert len(interface_class.set_error_state.__doc__) != 0
+
+        def test_type_error_set_state_method_null_values(self, interface_class):
+            with pytest.raises(TypeError):
+                interface_class.set_error_state()
+
+        def test_key_error_set_state_method_null_values(self, interface_class):
+            with pytest.raises(TypeError):
+                interface_class.set_error_state(error='error', message='not supported')
+
+        def test_type_error_set_state_method_extra_values(self, interface_class):
+            with pytest.raises(TypeError):
+                interface_class.set_error_state(
+                    error_enum='DEVICE-DELETED',
+                    detail='device deleted by user'
                 )

@@ -1,7 +1,7 @@
 from stschema.base.util import BaseHeaders
 
 
-class BaseResponse(object):
+class BaseResponse:
     """The BaseResponse class inherit the
     attributes from the BaseHeaders class.
     It handles the instantiation of the

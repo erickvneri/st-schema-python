@@ -1,7 +1,7 @@
 from marshmallow import Schema, fields
 
 
-class BaseState(object):
+class BaseState:
     """The BaseState class is the basic representation
     of the state of the device in reference to the
     capabilities attributed.

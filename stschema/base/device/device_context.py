@@ -2,7 +2,7 @@ from typing import List
 from marshmallow import Schema, fields
 
 
-class DeviceContext(object):
+class DeviceContext:
     """The DeviceContext class handles the
     device's information about its default
     utility context.
