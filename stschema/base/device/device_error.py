@@ -13,9 +13,11 @@ class DeviceError:
     https://smartthings.developer.samsung.com/docs/devices/smartthings-schema/smartthings-schema-reference.html#Error-Responses"""
 
     def __init__(self, error_enum: ErrorEnum, detail: str):
-        self.error_enum = ErrorEnum(error_enum).value
-        self.detail = detail
-
+        try:
+            self.error_enum = ErrorEnum(error_enum).value
+            self.detail = detail
+        except ValueError:
+            raise ValueError('ERROR ENUM NOT SUPPORTED')
 
 class BaseErrorSchema(Schema):
     """The DeviceErrorSchema handles the
