@@ -14,8 +14,6 @@ class SchemaConnector(object):
         ::: devices: list of Device instances."""
 
     command_mapper = DeviceCommandMapper()
-    discovery_schema = DiscoveryResponseSchema()
-    state_schema = StateRefreshResponseSchema
 
     def __init__(self, devices: list = None):
         self.devices = devices
@@ -26,7 +24,8 @@ class SchemaConnector(object):
             :::param request_id"""
 
         response = DiscoveryResponse(devices=devices, request_id=request_id)
-        return self.discovery_schema.dump(response)
+        discovery_schema = DiscoveryResponseSchema()
+        return discovery_schema.dump(response)
 
     def state_refresh_handler(self, devices: list, request_id: str):
         """Returns stateRefreshREsponse  JSON.
@@ -36,7 +35,8 @@ class SchemaConnector(object):
             :::param: request_id"""
 
         response = StateResponse(devices=devices, request_id=request_id)
-        return self.state_schema(states=response.device_state).dump(response)
+        state_schema = StateRefreshResponseSchema(states=response.device_state)
+        return state_schema.dump(response)
 
     def command_handler(self, devices: List[Device], request_id: str):
         """Takes 'devices' attribute from

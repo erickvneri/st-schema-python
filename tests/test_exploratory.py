@@ -12,7 +12,7 @@ class Test:
     def devices(self):
         d = DeviceFixture()
         d.external_device_id = 'ONE'
-        # d.set_error_state(error_enum='DEVICE-DELETED', detail='deleted by user')
+        d.set_error_state(error_enum='DEVICE-DELETED', detail='deleted by user')
         devices = []
         devices.append(d)
         yield devices
