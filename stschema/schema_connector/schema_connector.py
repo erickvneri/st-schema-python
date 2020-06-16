@@ -15,31 +15,28 @@ class SchemaConnector(object):
 
     command_mapper = DeviceCommandMapper()
     discovery_schema = DiscoveryResponseSchema()
-    state_schema = StateRefreshResponseSchema()
+    state_schema = StateRefreshResponseSchema
 
-    def __init__(self, devices: List[Device]):
+    def __init__(self, devices: list = None):
         self.devices = devices
 
-    def discovery_handler(self, request_id: str):
-        """Returns discoveryResponse JSON"""
-        response = DiscoveryResponse(devices=self.devices, request_id=request_id)
+    def discovery_handler(self, devices: list, request_id: str):
+        """Returns discoveryResponse JSON
+            :::param devices
+            :::param request_id"""
+
+        response = DiscoveryResponse(devices=devices, request_id=request_id)
         return self.discovery_schema.dump(response)
 
-    def state_refresh_handler(self, devices: List[Device], request_id: str):
-        """Takes 'devices' attribute from
-        stateRefreshResponse. Return
-        stateRefreshResponse according to
-        devices passed.
+    def state_refresh_handler(self, devices: list, request_id: str):
+        """Returns stateRefreshREsponse  JSON.
+        If devices passed has deviceError state,
+        it will be handled properly.
             :::param: devices
             :::param: request_id"""
 
-        # Map reference of externalDeviceId at stateRefreshResponse.
-        devices_req = list(map(lambda d: d['externalDeviceId'], devices))
-        # From self.devices, filter needed devices to update
-        devices_res = [device for device in self.devices if device.external_device_id in devices_req]
-
-        response = StateResponse(devices=devices_res, request_id=request_id)
-        return self.state_schema.dump(response)
+        response = StateResponse(devices=devices, request_id=request_id)
+        return self.state_schema(states=response.device_state).dump(response)
 
     def command_handler(self, devices: List[Device], request_id: str):
         """Takes 'devices' attribute from
