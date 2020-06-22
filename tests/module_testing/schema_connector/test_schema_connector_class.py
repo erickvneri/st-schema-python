@@ -21,9 +21,9 @@ class TestSchemaConnector(object):
 
     def test_schema_connector_composition(self, connector):
         assert connector
-        assert connector.discovery_handler
-        assert connector.state_refresh_handler
-        assert connector.command_handler
+        assert connector.discovery_response
+        assert connector.state_refresh_response
+        assert connector.command_response
 
     def test_attribute_error_composition_schema_connector(self, connector):
         with pytest.raises(AttributeError):

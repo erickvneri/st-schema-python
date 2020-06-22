@@ -10,8 +10,7 @@ class TestExploratory:
     @pytest.fixture
     def devices(self):
         d = Device(external_device_id='ONE')
-        # with pytest.raises(ValueError):
-        d.set_error_state(error_enum='', detail='deleted by user')
+        d.set_error_state(error_enum='DEVICE-DELETED', detail='deleted by user')
         devices = []
         devices.append(d)
         yield devices
