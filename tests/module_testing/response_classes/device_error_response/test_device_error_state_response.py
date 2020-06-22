@@ -1,7 +1,7 @@
 import pytest
 import hashlib
 from tests.fixtures import DeviceFixture
-from stschema.schema_connector.response import StateRefreshResponseSchema, StateResponse
+from stschema.interface.schema_response.responses import StateRefreshResponseSchema, StateResponse
 
 
 class TestDeviceErrorResponse(object):

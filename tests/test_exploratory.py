@@ -1,10 +1,10 @@
 import pytest
 from marshmallow import pprint
 from datetime import datetime
-from stschema import SchemaConnector, Device
+from stschema.interface import Device, SchemaResponse
 
 
-connector = SchemaConnector()
+connector = SchemaResponse()
 
 class TestExploratory:
     @pytest.fixture

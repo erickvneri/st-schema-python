@@ -1,2 +1,1 @@
-from stschema.schema_connector.schema_connector import SchemaConnector
-from stschema.interface import Device
+from stschema.interface import Device, SchemaResponse

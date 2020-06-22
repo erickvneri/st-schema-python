@@ -1,3 +1,8 @@
+# The Device interface provides a series of
+# methods to collect the information about
+# the devices that will be served to the
+# SmartThings Schema Connector integration
+# type.
 from stschema.base.util import BaseCookie, ErrorEnum
 from stschema.base.device import (BaseDevice, DeviceContext,
                                   ManufacturerInfo, BaseState, DeviceError)

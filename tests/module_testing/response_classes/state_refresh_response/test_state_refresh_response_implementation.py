@@ -3,7 +3,7 @@ import pytest
 from tests.fixtures import DeviceFixture
 from stschema.base.response import BaseResponse
 from stschema.base.util import BaseHeaders
-from stschema.schema_connector.response import StateResponse, StateRefreshResponseSchema
+from stschema.interface.schema_response.responses import StateResponse, StateRefreshResponseSchema
 from stschema.base.device import BaseState, BaseDevice
 
 

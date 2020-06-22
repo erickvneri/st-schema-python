@@ -1,8 +1,8 @@
-from stschema.schema_connector.response import (DiscoveryResponse, StateResponse,
+from stschema.interface.schema_response.responses import (DiscoveryResponse, StateResponse,
                                                 DiscoveryResponseSchema, StateRefreshResponseSchema)
 
 
-class SchemaConnector:
+class SchemaResponse:
     """The SchemaConnector class is the main
     API interface. It handles the instantiation
     and serialization of the discoveryResponse,

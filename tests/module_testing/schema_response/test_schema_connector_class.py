@@ -1,11 +1,11 @@
 import pytest
-from stschema import SchemaConnector
+from stschema.interface.schema_response import SchemaResponse
 
 
-class TestSchemaConnector(object):
+class TestSchemaResponseInterface(object):
     @pytest.fixture
     def connector(self):
-        yield SchemaConnector
+        yield SchemaResponse
 
     def test_schema_connector_documentation(self, connector):
         assert connector
