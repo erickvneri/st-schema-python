@@ -1,5 +1,5 @@
 import pytest
-from stschema.interface.schema_response.schemas import DeviceStateSchema
+from stschema.interface.device.schemas import DeviceStateSchema
 
 
 class TestStateSchema(object):

@@ -1,2 +1,2 @@
-from .device_interface import Device
+from .device import Device
 from .schema_response import SchemaResponse

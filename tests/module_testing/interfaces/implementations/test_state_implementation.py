@@ -1,6 +1,6 @@
 import pytest
 from tests.fixtures import DeviceFixture
-from stschema.interface.schema_response.schemas import DeviceStateSchema
+from stschema.interface.device.schemas import DeviceStateSchema
 from stschema.base.device import BaseState
 
 

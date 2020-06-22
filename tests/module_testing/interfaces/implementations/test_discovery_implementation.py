@@ -1,6 +1,6 @@
 import pytest
 from tests.fixtures import DeviceFixture
-from stschema.interface.schema_response.schemas import DeviceDiscoverySchema
+from stschema.interface.device.schemas import DeviceDiscoverySchema
 from stschema.base.device import DeviceContext, ManufacturerInfo
 from stschema.base.util import BaseCookie
 

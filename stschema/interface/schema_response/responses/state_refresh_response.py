@@ -1,6 +1,6 @@
 from typing import List
 from marshmallow import Schema, fields, pre_dump, post_dump
-from stschema.interface.schema_response.schemas import DeviceStateSchema, DeviceErrorSchema
+from stschema.interface.device.schemas import DeviceStateSchema, DeviceErrorSchema
 from stschema.base.response import BaseResponse
 from stschema.base.util import HeadersSchema
 
