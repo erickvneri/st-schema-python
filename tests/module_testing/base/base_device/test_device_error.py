@@ -17,7 +17,7 @@ class TestBaseDeviceError(object):
 
     def test_value_error(self):
         with pytest.raises(ValueError):
-            result = DeviceError(error_enum='UNSUPPORTED-ENUM', detail='deice error detail')
+            result = DeviceError(error_enum=__name__, detail=__name__)
 
     def test_type_error(self):
         with pytest.raises(TypeError):

@@ -10,11 +10,11 @@ class TestBaseDevice(object):
     @pytest.fixture
     def device_instance(self):
         device_instance = BaseDevice(
-            external_device_id='xqdbQ@2346G',
-            device_cookie='my_initial_cookie',
-            friendly_name='Light',
-            device_handler_type='c2c-device-handler-type',
-            device_unique_id='x1b4v3sSgc'
+            external_device_id=__name__,
+            device_cookie=__name__,
+            friendly_name=__name__,
+            device_handler_type=__name__,
+            device_unique_id=__name__
         )
         yield device_instance
 
@@ -35,13 +35,20 @@ class TestBaseDevice(object):
     def test_type_error_definition(self):
         with pytest.raises(TypeError):
             device_instance = BaseDevice()
-            device_instance.external_device_id = 'devx-122-jaku'
-            device_instance.device_cookie = 'test_cookie'
-            device_instance.friendly_name = 'testo'
-            device_instance.device_handler_type = 'c2c-test-handler'
-            device_instance.device_unique_id = '123abc'
-            assert device_instance.external_device_id
-            assert device_instance.device_cookie is not None
-            assert device_instance.friendly_name
-            assert device_instance.device_handler_type
-            assert device_instance.device_unique_id
+
+    def test_type_error_wrong_attrs(self):
+        with pytest.raises(TypeError):
+            BaseDevice(protocol=__name__)
+            BaseDevice(secret=__name__)
+            BaseDevice(key=__name__)
+
+    def test_type_error_extra_value(self):
+        with pytest.raises(TypeError):
+            BaseDevice(
+                external_device_id=__name__,
+                device_cookie=__name__,
+                friendly_name=__name__,
+                device_handler_type=__name__,
+                device_unique_id=__name__,
+                key=__name__
+            )
