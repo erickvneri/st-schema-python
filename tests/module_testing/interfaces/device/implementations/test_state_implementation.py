@@ -34,10 +34,3 @@ class TestStateImplementation(object):
         assert state_result['externalDeviceId']
         assert state_result['deviceCookie']
         assert state_result['states'] or state_result['states'] == []
-
-    def test_state_capability_prefix(self, state_schema, device):
-        prefix = 'st.'
-        state_result = state_schema.dump(device)
-        assert state_result
-        for state in state_result['states']:
-            assert state['capability'].startswith(prefix)

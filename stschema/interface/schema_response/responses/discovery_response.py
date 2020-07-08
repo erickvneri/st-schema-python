@@ -1,5 +1,4 @@
 from marshmallow import Schema, fields
-from typing import List
 from stschema.interface.device.schemas import DeviceDiscoverySchema
 from stschema.base.util import HeadersSchema
 from stschema.base.response import BaseResponse
