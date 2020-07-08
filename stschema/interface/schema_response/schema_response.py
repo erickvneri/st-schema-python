@@ -4,10 +4,8 @@ from stschema.interface.device import Device
 
 
 class SchemaResponse:
-    """The SchemaConnector class is the main
-    API interface. It handles the instantiation
-    and serialization of the discoveryResponse,
-    stateRefreshResponse and commandResponse."""
+    """The SchemaResponse class handles the instantiation
+    and serialization of the SchemaConnector Http Responses."""
 
     @classmethod
     def discovery_response(cls, devices: list, request_id: str):
@@ -60,9 +58,9 @@ class SchemaResponse:
 
     @staticmethod
     def _discovery_response(devices: list, request_id: str):
-        """This private static method creates the
-        proper DiscoveryResponse class and handles
-        the serialization of the object.
+        """This method creates the DiscoveryResponse
+        class and call the correspondent Schema to serialize
+        the Response object.
             :::param devices
             :::param request_id"""
 
@@ -73,9 +71,9 @@ class SchemaResponse:
 
     @staticmethod
     def _state_refresh_response(devices: list, request_id: str):
-        """Returns stateRefreshREsponse  JSON.
-        If devices passed has deviceError state,
-        it will be handled properly.
+        """This method creates the StateRefreshResponse
+        class and call the correspondent Schema to serialize
+        the Response object.
             :::param: devices
             :::param: request_id"""
 
@@ -85,9 +83,8 @@ class SchemaResponse:
 
     @staticmethod
     def _command_response(devices: list, request_id: str):
-        """Returns commandResponse JSON.
-        If devices passed has deviceError state,
-        it will be handled properly.
+        """This method creates a StateRefreshResponse in
+        response of a Command Request.
             :::param: devices
             :::param: request_id"""
 
