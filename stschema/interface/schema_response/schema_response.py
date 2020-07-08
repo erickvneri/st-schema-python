@@ -15,7 +15,7 @@ class SchemaResponse:
         response.
             :::param devices: list of Device instances
             :::param request_id: str"""
-        return cls._schema_validator(devices, request_id, cls._discovery_response)
+        return cls._validate_schema_response(devices, request_id, cls._discovery_response)
 
     @classmethod
     def state_refresh_response(cls, devices: list, request_id: str):
@@ -25,7 +25,7 @@ class SchemaResponse:
         response.
             :::param devices: list of Device instances
             :::param request_id: str"""
-        return cls._schema_validator(devices, request_id, cls._state_refresh_response)
+        return cls._validate_schema_response(devices, request_id, cls._state_refresh_response)
 
     @classmethod
     def command_response(cls, devices:list, request_id: str):
@@ -34,10 +34,10 @@ class SchemaResponse:
         State isntance in response of a Command Request.
             :::param devices: list of Device instances
             :::param request_id: str"""
-        return cls._schema_validator(devices, request_id, cls._command_response)
+        return cls._validate_schema_response(devices, request_id, cls._command_response)
 
     @staticmethod
-    def _schema_validator(devices: list, request_id: str, response_callback):
+    def _validate_schema_response(devices: list, request_id: str, response_callback):
         # This private classmethod will validate the data passed
         # to instantiate a DiscoveryResponse or StateRefreshResponse
         # (CommmandResponse).
@@ -55,7 +55,6 @@ class SchemaResponse:
             raise TypeError('request_id must be instance of str')
         return response_callback(devices, request_id)
 
-
     @staticmethod
     def _discovery_response(devices: list, request_id: str):
         """This method creates the DiscoveryResponse
@@ -67,7 +66,6 @@ class SchemaResponse:
         response = DiscoveryResponse(devices=devices, request_id=request_id)
         discovery_schema = DiscoveryResponseSchema()
         return discovery_schema.dump(response)
-
 
     @staticmethod
     def _state_refresh_response(devices: list, request_id: str):
