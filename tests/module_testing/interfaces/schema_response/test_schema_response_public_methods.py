@@ -27,7 +27,7 @@ class TestSchemaResponseInterface(object):
 
     def test_schema_connector_composition(self):
         assert SchemaResponse
-        assert SchemaResponse._schema_validator
+        assert SchemaResponse._validate_schema_response
         assert SchemaResponse.discovery_response
         assert SchemaResponse._discovery_response
         assert SchemaResponse.state_refresh_response
