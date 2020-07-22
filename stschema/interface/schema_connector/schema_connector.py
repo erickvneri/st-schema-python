@@ -72,8 +72,8 @@ class SchemaConnector(SchemaResponse):
     def grant_callback_access(self, callback_authentication):
         raise NotImplementedError('Interaction resource handler not implemented')
 
-    def integration_deleted(self):
+    def integration_deleted(self):  # TODO: Define arguments
         raise NotImplementedError('Interaction resource handler not implemented')
 
-    def interaction_result_handler(self):
+    def interaction_result_handler(self):  # TODO: Define arguments
         raise NotImplementedError('Interaction resource handler not implemented')
