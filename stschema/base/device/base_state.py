@@ -14,7 +14,7 @@ class BaseState:
     capabilities read te Capabilities Reference:
     - https://smartthings.developer.samsung.com/docs/api-ref/capabilities.html"""
 
-    def __init__(self, component: str, capability: str, attribute: str, value, unit: str):
+    def __init__(self, capability: str, attribute: str, value, unit: str, component: str):
         self.component = component
         self.capability = capability
         self.attribute = attribute

@@ -69,14 +69,14 @@ class Device(BaseDevice):
         hw_version = kwargs_info.get('hw_version')
         sw_version = kwargs_info.get('sw_version')
 
-        # Iteration to check if Manufacturer information
+        # Iteration to check if Manufacturer's information
         # has been passed with straight arguments and if
-        # key value arguemts haven't been defined already.
+        # key word arguemts haven't been defined already.
         for i in range(len(args_info)):
             if len(args_info) > 4:
                 unexpected_arguments = [arg for arg in args_info[4:]]
                 raise TypeError('Unexpected arguments: %s' % unexpected_arguments)
-            if i == 0 and manufacturer_name is None:
+            elif i == 0 and manufacturer_name is None:
                 manufacturer_name = args_info[0]
             elif i == 1 and not model_name:
                 model_name = args_info[1]
@@ -103,31 +103,101 @@ class Device(BaseDevice):
             sw_version
         )
 
-    def set_context(self, **device_context):
+    def set_context(self, *args_info, **kwargs_info):
         """Defines the device's context information.
         Returns an instance of the DeviceContext class.
             :::param room_name
             :::param groups
             :::param categories"""
+        # By  default DeviceContext information is being
+        # declared from kwargs_info.
+        room_name = kwargs_info.get('room_name')
+        groups = kwargs_info.get('groups')
+        categories = kwargs_info.get('categories')
 
-        self.device_context = DeviceContext(
-            room_name=device_context.get('room_name'),
-            groups=device_context.get('groups'),
-            categories=device_context.get('categories')
+        # Handle redefinition of device_context
+        # based on straight arguments.
+        for i in range(len(args_info)):
+            if len(args_info) > 3:
+                unexpected_arguments = [arg for arg in args_info[3:]]
+                raise TypeError('Unexpected arguments: %s' % unexpected_arguments)
+            elif i == 0 and not room_name:
+                room_name = args_info[0]
+            elif i == 1 and not groups:
+                groups = args_info[1]
+            elif i == 2 and not categories:
+                categories = args_info[2]
+
+        # Type handling for list arguments
+        if not isinstance(groups, list):
+            raise TypeError('list argument expected, not (%s, %s)' % (type(groups), groups))
+        elif not isinstance(categories, list):
+            raise TypeError('list argument expected, not (%s, %s)' % (type(categories), categories))
+
+        self._set_context(
+            room_name,
+            groups,
+            categories
         )
 
+    def _set_context(self, room_name, groups, categories):
+        # Private method called to instanciate
+        # the DeviceContext class after data has
+        # been prepared by public method.
+        self.device_context = DeviceContext(
+            room_name,
+            groups,
+            categories
+        )
 
-    def set_state(self, capability: str, attribute: str, value: str or int, component: str = 'main', unit: str = None):
+    def set_state(self, *args_info, **kwargs_info):
         """Defines the device's state by
         adding one capability-state per call.
         Returns an instance of the BaseState class."""
+        # By default State information is
+        # being declared from kwargs_info.
+        component = kwargs_info.get('component')
+        capability = kwargs_info.get('capability')
+        attribute = kwargs_info.get('attribute')
+        value = kwargs_info.get('value')
+        unit = kwargs_info.get('unit')
 
+        # Iteration to check if State's information
+        # has been passed with straight arguments and if
+        # key word arguemts haven't been defined already.
+        for i in range(len(args_info)):
+            if len(args_info) > 5:
+                unexpected_arguments = [arg for arg in args_info[5:]]
+                raise TypeError('Unexpected arguments: %s' % unexpected_arguments)
+            if i == 0 and not capability:
+                capability = args_info[0]
+            elif i == 1 and not attribute:
+                attribute = args_info[1]
+            elif i == 2 and not value:
+                value  = args_info[2]
+            elif i == 3 and not unit:
+                unit = args_info[3]
+            elif i == 4 and not component:
+                component = args_info[4]
+
+        self._set_state(
+            capability,
+            attribute,
+            value,
+            unit,
+            component
+        )
+
+    def _set_state(self, capability, attribute, value, unit, component):
+        # Private method called to instanciate
+        # the BaseState class after data has
+        # been prepared by public method.
         new_state = BaseState(
-            component=component,
-            capability=f'{capability}',
+            capability=capability,
             attribute=attribute,
             value=value,
-            unit=unit
+            unit=unit,
+            component=component
         )
         self.states.append(new_state)
 
