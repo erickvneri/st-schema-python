@@ -13,23 +13,95 @@ class Device(BaseDevice):
     attributes from the BaseDevice class.
         :::param external_device_id (required)
         :::param friendly_name (required)
-        :::param device_unique_id (required)
-        :::param device_cookie (None by default)
-        :::param device_handler_type (required)"""
+        :::param device_handler_type (required)
+        :::param device_unique_id
+        :::param device_cookie"""
 
-    def __init__(self, **device_info):
+    def __init__(self, *args_info, **kwargs_info):
+        # By default instance is being created
+        # from kwargs_info to discard None values.
         BaseDevice.__init__(
             self,
-            external_device_id=device_info.get('external_device_id'),
-            friendly_name=device_info.get('friendly_name'),
-            device_unique_id=device_info.get('device_unique_id'),
-            device_cookie=BaseCookie(device_info.get('device_cookie')),
-            device_handler_type=device_info.get('device_handler_type')
+            external_device_id=kwargs_info.get('external_device_id'),
+            friendly_name=kwargs_info.get('friendly_name'),
+            device_unique_id=kwargs_info.get('device_unique_id'),
+            device_cookie=BaseCookie(kwargs_info.get('device_cookie')),
+            device_handler_type=kwargs_info.get('device_handler_type')
         )
+        # Args instance handler
+        if args_info:
+            self._device_arg_instance(args_info)
+
         self.states = []
         self.device_error = None
         self.device_context = None
         self.manufacturer_info = None
+
+    def _device_arg_instance(self, args_info):
+        # Handler to define Device instance
+        # from straight args.
+        for i in range(len(args_info)):
+            if len(args_info) > 5:
+                unexpected_args = [arg for arg in args_info[5:]]
+                raise TypeError('Unexpected arguments: %s' % unexpected_args)
+            if i == 0:
+                self.external_device_id = args_info[0]
+            if i == 1:
+                self.friendly_name = args_info[1]
+            if i == 2:
+                self.device_handler_type = args_info[2]
+            if i == 3:
+                self.device_unique_id = args_info[3]
+            if i == 4:
+                self.device_cookie = BaseCookie(args_info[4])
+
+    def set_mn(self, *args_info, **kwargs_info):
+        """Defines the device's manufacturer information.
+        Returns an instance of the ManufacturerInfo class.
+            :::param manufacturer_name (required)
+            :::param model_name (required)
+            :::param hw_version
+            :::param sw_version"""
+        # By default Manufacturer information is being
+        # declared from kwargs_info.
+        manufacturer_name = kwargs_info.get('manufacturer_name')
+        model_name = kwargs_info.get('model_name')
+        hw_version = kwargs_info.get('hw_version')
+        sw_version = kwargs_info.get('sw_version')
+
+        # Iteration to check if Manufacturer information
+        # has been passed with straight arguments and if
+        # key value arguemts haven't been defined already.
+        for i in range(len(args_info)):
+            if len(args_info) > 4:
+                unexpected_arguments = [arg for arg in args_info[4:]]
+                raise TypeError('Unexpected arguments: %s' % unexpected_arguments)
+            if i == 0 and manufacturer_name is None:
+                manufacturer_name = args_info[0]
+            elif i == 1 and not model_name:
+                model_name = args_info[1]
+            elif i == 2 and not hw_version:
+                hw_version = args_info[2]
+            elif i == 3 and not sw_version:
+                sw_version = args_info[3]
+
+        self._set_mn(
+            manufacturer_name,
+            model_name,
+            hw_version,
+            sw_version
+        )
+
+    def _set_mn(self, manufacturer_name, model_name, hw_version, sw_version):
+        # Private method called to instance
+        # ManufacturerInfo class after data
+        # has been prepared by public method.
+        self.manufacturer_info = ManufacturerInfo(
+            manufacturer_name,
+            model_name,
+            hw_version,
+            sw_version
+        )
 
     def set_context(self, **device_context):
         """Defines the device's context information.
@@ -44,20 +116,6 @@ class Device(BaseDevice):
             categories=device_context.get('categories')
         )
 
-    def set_mn(self, **mn_info):
-        """Defines the device's manufacturer information.
-        Returns an instance of the ManufacturerInfo class.
-            :::param manufacturer_name
-            :::param model_name
-            :::param hw_version
-            :::param sw_version"""
-
-        self.manufacturer_info = ManufacturerInfo(
-            manufacturer_name=mn_info.get('manufacturer_name'),
-            model_name=mn_info.get('model_name'),
-            hw_version=mn_info.get('hw_version'),
-            sw_version=mn_info.get('sw_version')
-        )
 
     def set_state(self, capability: str, attribute: str, value: str or int, component: str = 'main', unit: str = None):
         """Defines the device's state by
