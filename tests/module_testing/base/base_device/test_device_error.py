@@ -1,6 +1,6 @@
 import pytest
 from stschema.base.device import DeviceError
-from stschema.base.util import ErrorEnum
+from stschema.base.util import StateErrorEnum
 
 
 class TestBaseDeviceError(object):
@@ -14,10 +14,6 @@ class TestBaseDeviceError(object):
         assert isinstance(result, DeviceError)
         assert result.error_enum
         assert result.detail
-
-    def test_value_error(self):
-        with pytest.raises(ValueError):
-            result = DeviceError(error_enum=__name__, detail=__name__)
 
     def test_type_error(self):
         with pytest.raises(TypeError):

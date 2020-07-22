@@ -1,1 +1,1 @@
-from stschema.interface import Device, SchemaResponse
+from stschema.interface import Device, SchemaResponse, SchemaConnector
