@@ -1,5 +1,4 @@
 from marshmallow import Schema, fields
-from stschema.base.util import ErrorEnum
 
 
 class DeviceError:
@@ -12,12 +11,10 @@ class DeviceError:
     error enums, read te ErrorResponses documentation:
     https://smartthings.developer.samsung.com/docs/devices/smartthings-schema/smartthings-schema-reference.html#Error-Responses"""
 
-    def __init__(self, error_enum: ErrorEnum, detail: str):
-        try:
-            self.error_enum = ErrorEnum(error_enum).value
-            self.detail = detail
-        except ValueError:
-            raise ValueError('ERROR ENUM NOT SUPPORTED')
+    def __init__(self, error_enum: str, detail: str):
+        self.error_enum = error_enum
+        self.detail = detail
+
 
 class BaseErrorSchema(Schema):
     """The DeviceErrorSchema handles the

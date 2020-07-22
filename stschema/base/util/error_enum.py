@@ -1,22 +1,31 @@
-from enum import Enum
+import enum
 
 
-class ErrorEnum(Enum):
-    """The ErrorEnum class specifies
-    the concept of the error generated.
-    Can be used with Global Error or
-    Device Error Responses."""
+class StateErrorEnum(enum.Enum):
+    """The StateErrorEnum class
+    specifies the concept of the
+    error ocurred specifically for
+    devices' states."""
 
-    DEVICE_DELETED = 'DEVICE-DELETED'
-    RESOURCE_CONSTRAINT_VIOLATION = 'RESOURCE-CONSTRAINT-VIOLATION'
-    DEVICE_UNAVAILABLE = 'DEVICE-UNAVAILABLE'
     CAPABILITY_NOT_SUPPORTED = 'CAPABILITY-NOT-SUPPORTED'
-    TOKEN_EXPIRED = 'TOKEN-EXPIRED'
-    INTEGRATION_DELETED = 'INTEGRATION-DELETED'
+    DEVICE_DELETED = 'DEVICE-DELETED'
+    DEVICE_UNAVAILABLE = 'DEVICE-UNAVAILABLE'
+    RESOURCE_CONSTRAINT_VIOLATION = 'RESOURCE-CONSTRAINT-VIOLATION'
+
+
+class GlobalErrorEnum(enum.Enum):
+    """The GlobalErrorEnum class
+    specifies the concept of the
+    error ocurred in a global
+    context (e.g. access token used
+    has expired -> TOKEN_EXPIRED enum)"""
+
     BAD_REQUEST = 'BAD-REQUEST'
-    INVALID_TOKEN = 'INVALID-TOKEN'
-    INVALID_INTERACTION_TYPE = 'INVALID-INTERACTION-TYPE'
-    UNSUPPORTED_GRANT_TYPE = 'UNSUPPORTED-GRANT-TYPE'
-    INVALID_CODE = 'INVALID-CODE'
-    INVALID_CLIENT_SECRET = 'INVALID-CLIENT-SECRET'
+    INTEGRATION_DELETED = 'INTEGRATION-DELETED'
     INVALID_CLIENT = 'INVALID-CLIENT'
+    INVALID_CLIENT_SECRET = 'INVALID-CLIENT-SECRET'
+    INVALID_CODE = 'INVALID-CODE'
+    INVALID_INTERACTION_TYPE = 'INVALID-INTERACTION-TYPE'
+    INVALID_TOKEN = 'INVALID-TOKEN'
+    TOKEN_EXPIRED = 'TOKEN-EXPIRED'
+    UNSUPPORTED_GRANT_TYPE = 'UNSUPPORTED-GRANT-TYPE'

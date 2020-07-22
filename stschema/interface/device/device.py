@@ -3,7 +3,7 @@
 # the devices that will be served to the
 # SmartThings Schema Connector integration
 # type.
-from stschema.base.util import BaseCookie, ErrorEnum
+from stschema.base.util import BaseCookie, StateErrorEnum
 from stschema.base.device import (BaseDevice, DeviceContext,
                                   ManufacturerInfo, BaseState, DeviceError)
 
@@ -192,6 +192,8 @@ class Device(BaseDevice):
         # Private method called to instanciate
         # the BaseState class after data has
         # been prepared by public method.
+        if not component:
+            component = 'main'
         new_state = BaseState(
             capability=capability,
             attribute=attribute,
@@ -201,13 +203,33 @@ class Device(BaseDevice):
         )
         self.states.append(new_state)
 
-    def set_error_state(self, error_enum: ErrorEnum = 'DEVICE-UNAVAILABLE', detail: str = 'unexpected error occurred.'):
-        """Defines the error specification when
-        a the device's API detectes an error.
-        Returns an instance of the DeviceError
-        class.
-            :::param error_enum: based on the
-            documented errorEnum values."""
+    def set_error_state(self, error_enum: str='DEVICE-UNAVAILABLE', detail: str='unexpected error occurred.'):
+        """Defines the error state of the device.
+        Supported device error enumerators:
+            - DEVICE-UNAVAILABLE
+            - CAPABILITY-NOT-SUPPORTED
+            - RESOURCE-CONSTRAINT-VIOLATION
+            - DEVICE-DELETED
 
-        err = DeviceError(error_enum=error_enum, detail=detail)
+            :::param error_enum: (DEVICE-UNAVAILABLE by default).
+            :::param detail: detail or message about device error"""
+
+        try:
+            error_enum = StateErrorEnum(error_enum)
+        except ValueError as e:
+            raise ValueError('Device error enumerator not supported: %s' % error_enum)
+        else:
+            self._set_error_state(
+                error_enum.value,
+                detail
+            )
+
+    def _set_error_state(self, error_enum, detail):
+        # Private method that will define
+        # the DeviceError state device's
+        # attribute.
+        err = DeviceError(
+            error_enum=error_enum,
+            detail=detail
+        )
         self.device_error = [err]
