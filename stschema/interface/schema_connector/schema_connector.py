@@ -40,7 +40,6 @@ class SchemaConnector(SchemaResponse):
                 else:
                     return self._interaction_handler(json_data)
 
-
     def _interaction_handler(self, data):
         data_headers = data['headers']
         interaction_type = data_headers['interactionType']
@@ -58,7 +57,6 @@ class SchemaConnector(SchemaResponse):
             return self.integration_deleted()
         elif interaction_type == 'interactionResult':
             return self.interaction_result_handler()
-
 
     def discovery_handler(self, request_id):
         raise NotImplementedError('Interaction resource handler not implemented')

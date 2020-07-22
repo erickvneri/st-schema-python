@@ -44,7 +44,7 @@ class SchemaResponse:
         # It will enhance early development stages of Schema Connector
         # instances.
         if not isinstance(devices, list):
-            raise TypeError('devices must be isntance of list.')
+            raise TypeError('devices must be instance of list not %s' % type(devices))
         if devices:
             for device in devices:
                 if not isinstance(device, Device):
@@ -52,7 +52,7 @@ class SchemaResponse:
         # Validate data type of request_id.
         # It must be string value
         if not isinstance(request_id, str):
-            raise TypeError('request_id must be instance of str')
+            raise TypeError('request_id must be instance of str not %s' % type(request_id))
         return response_callback(devices, request_id)
 
     @staticmethod
