@@ -1,10 +1,15 @@
 import pytest
 import inspect
 from tests.fixtures import DeviceFixture
-from stschema.base.response import BaseResponse
-from stschema.interface.schema_response.responses import DiscoveryResponse, DiscoveryResponseSchema
-from stschema.base.device import BaseDevice, ManufacturerInfo, DeviceContext
-from stschema.base.util import BaseCookie, BaseHeaders
+from stschema.schema_response.responses import DiscoveryResponse, DiscoveryResponseSchema
+from stschema.util import (
+    BaseCookie,
+    BaseHeaders,
+    BaseResponse,
+    BaseDevice,
+    ManufacturerInfo,
+    DeviceContext
+)
 
 
 class TestDiscoveryResponse:

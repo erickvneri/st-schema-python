@@ -1,5 +1,5 @@
 import pytest
-from stschema.interface.schema_response.responses import StateRefreshResponseSchema
+from stschema.schema_response.responses import StateRefreshResponseSchema
 
 
 class TestStateRefreshResponse(object):

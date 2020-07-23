@@ -1,10 +1,13 @@
 import inspect
 import pytest
 from tests.fixtures import DeviceFixture
-from stschema.base.response import BaseResponse
-from stschema.base.util import BaseHeaders
-from stschema.interface.schema_response.responses import StateResponse, StateRefreshResponseSchema
-from stschema.base.device import BaseState, BaseDevice
+from stschema.schema_response.responses import StateResponse, StateRefreshResponseSchema
+from stschema.util import (
+    BaseState,
+    BaseDevice,
+    BaseHeaders,
+    BaseResponse
+)
 
 
 class TestStateRefresh(object):

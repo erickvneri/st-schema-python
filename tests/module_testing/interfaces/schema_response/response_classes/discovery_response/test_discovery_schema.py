@@ -1,5 +1,5 @@
 import pytest
-from stschema.interface.schema_response.responses import DiscoveryResponseSchema
+from stschema.schema_response.responses import DiscoveryResponseSchema
 
 
 class TestDiscoverySchema:

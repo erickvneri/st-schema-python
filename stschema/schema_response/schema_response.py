@@ -44,11 +44,11 @@ class SchemaResponse:
         # It will enhance early development stages of Schema Connector
         # instances.
         if not isinstance(devices, list):
-            raise TypeError('devices must be instance of list not %s' % type(devices))
+            raise TypeError('"devices" argument must be instance of list not %s' % type(devices))
         if devices:
             for device in devices:
                 if not isinstance(device, SchemaDevice):
-                    raise TypeError('devices items must be instances of %s, not %s' % (Device, device))
+                    raise TypeError('"devices" items must be instances of %s, not %s' % (SchemaDevice, device))
         # Validate data type of request_id.
         # It must be string value
         if not isinstance(request_id, str):
@@ -57,11 +57,9 @@ class SchemaResponse:
 
     @staticmethod
     def _discovery_response(devices: list, request_id: str):
-        """This method creates the DiscoveryResponse
-        class and call the correspondent Schema to serialize
-        the Response object.
-            :::param devices
-            :::param request_id"""
+        # Private method with the responsibility to
+        # instantiate a DiscoveryResponse and serialize it
+        # into a readable JSON object.
 
         response = DiscoveryResponse(devices=devices, request_id=request_id)
         discovery_schema = DiscoveryResponseSchema()
@@ -69,11 +67,9 @@ class SchemaResponse:
 
     @staticmethod
     def _state_refresh_response(devices: list, request_id: str):
-        """This method creates the StateRefreshResponse
-        class and call the correspondent Schema to serialize
-        the Response object.
-            :::param: devices
-            :::param: request_id"""
+        # Private method with the responsibility to
+        # instantiate a StateResponse and serialize it
+        # into a readable JSON object.
 
         response = StateResponse(devices=devices, request_id=request_id)
         state_schema = StateRefreshResponseSchema(states=response.device_state)
@@ -81,10 +77,9 @@ class SchemaResponse:
 
     @staticmethod
     def _command_response(devices: list, request_id: str):
-        """This method creates a StateRefreshResponse in
-        response of a Command Request.
-            :::param: devices
-            :::param: request_id"""
+        # Private method with the responsibility to
+        # instantiate a command response(StateResponse)
+        # and serialize it into a readable JSON object.
 
         response = StateResponse(
             devices=devices,
