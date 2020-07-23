@@ -1,5 +1,5 @@
 import pytest
-from stschema.interface.device.schemas import DeviceDiscoverySchema
+from stschema.schema_device.schemas import DeviceDiscoverySchema
 
 
 class TestDiscoverySchema(object):

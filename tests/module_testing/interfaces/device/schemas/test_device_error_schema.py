@@ -1,5 +1,5 @@
 import pytest
-from stschema.interface.device.schemas import DeviceErrorSchema
+from stschema.schema_device.schemas import DeviceErrorSchema
 
 
 class TestDeviceErrorSchema(object):

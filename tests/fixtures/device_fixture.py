@@ -1,14 +1,14 @@
-from stschema.interface import Device
+from stschema import SchemaDevice
 from datetime import datetime
 
 
-class DeviceFixture(Device):
-    """The DeviceFixture class is a Mock Device
+class DeviceFixture(SchemaDevice):
+    """The SchemaDeviceFixture class is a Mock Device
     Implementation which handles the device info
     JSON that a DiscoveryResponse must contain."""
 
     def __init__(self):
-        Device.__init__(
+        SchemaDevice.__init__(
             self,
             external_device_id='xaf0as8FASd2jkl',
             friendly_name='ThermoSensor',

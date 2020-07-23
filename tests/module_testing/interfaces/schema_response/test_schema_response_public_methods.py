@@ -4,7 +4,7 @@
 # Object into a readable JSON response.
 import pytest
 from stschema.interface.schema_response import SchemaResponse
-from stschema import Device
+from stschema.schema_device import SchemaDevice
 
 class TestSchemaResponseInterface(object):
     @pytest.fixture
@@ -38,9 +38,9 @@ class TestSchemaResponseInterface(object):
     # This test will demonstrate the most basic use of the
     # response handlers.
     def test_responses_happy_path(self):
-        assert SchemaResponse.discovery_response([Device()], 'request_id')
-        assert SchemaResponse.state_refresh_response([Device()], 'request_id')
-        assert SchemaResponse.command_response([Device()], 'request_id')
+        assert SchemaResponse.discovery_response([SchemaDevice()], 'request_id')
+        assert SchemaResponse.state_refresh_response([SchemaDevice()], 'request_id')
+        assert SchemaResponse.command_response([SchemaDevice()], 'request_id')
 
     # Testing DiscoveryResponse public classmethod.
     # This method will be handled by the _schema_validator
@@ -58,7 +58,7 @@ class TestSchemaResponseInterface(object):
         dtypes.pop(0) # Popint string datatype
         for dt in dtypes:
             with pytest.raises(TypeError):
-                SchemaResponse.discovery_response(devices=[Device()], request_id=dt)
+                SchemaResponse.discovery_response(devices=[SchemaDevice()], request_id=dt)
 
     # Testing state_refresh_response public classmethod.
     # This method will be handled by the _schema_validator
@@ -76,7 +76,7 @@ class TestSchemaResponseInterface(object):
         dtypes.pop(0) # Popint string datatype
         for dt in dtypes:
             with pytest.raises(TypeError):
-                SchemaResponse.state_refresh_response(devices=[Device()], request_id=dt)
+                SchemaResponse.state_refresh_response(devices=[SchemaDevice()], request_id=dt)
 
     # Testing command_response public classmethod.
     # This method will be handled by the _schema_validator
@@ -96,4 +96,4 @@ class TestSchemaResponseInterface(object):
         dtypes.pop(0) # Popint string datatype
         for dt in dtypes:
             with pytest.raises(TypeError):
-                SchemaResponse.command_response(devices=[Device()], request_id=dt)
+                SchemaResponse.command_response(devices=[SchemaDevice()], request_id=dt)
