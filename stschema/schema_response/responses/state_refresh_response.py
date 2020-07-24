@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields
-from stschema.schema_device.schemas import DeviceStateSchema, DeviceErrorSchema
 from stschema.util import HeadersSchema, BaseResponse
+from stschema.schema_device.schemas import DeviceStateSchema, DeviceErrorSchema
 
 
 class StateResponse(BaseResponse):
@@ -18,13 +18,14 @@ class StateResponse(BaseResponse):
 
 class StateRefreshResponseSchema(Schema):
     """The StateRefreshResponseSchema handles
-    the serialization of the StateResponse class.
-    If the state declared corresponds to a Device
-    Error State, the Schema will be dynamically
-    updated.
-    It converts Snake Case attributes to
-    Camel Case format following the REST
-    conventions."""
+    the serialization of the StateResponse
+    class supporting the nested
+    DeviceStateSchema, HeadersSchema and
+    DeviceErrorSchema (dynamicly handled).
+    It converts Snake Case attributes
+    to Camel Case format following REST
+    formatting conventions for JSON
+    string objects."""
 
     headers = fields.Nested(HeadersSchema, attribute='headers')
     deviceState = fields.List(fields.Nested(DeviceStateSchema), attribute='device_state')

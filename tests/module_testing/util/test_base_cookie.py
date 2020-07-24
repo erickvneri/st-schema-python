@@ -1,6 +1,6 @@
 import pytest
 from datetime import datetime
-from stschema.util import BaseCookie, DeviceCookieSchema
+from stschema.util import BaseCookie, CookieSchema
 
 
 class TestDeviceCookie(object):
@@ -16,7 +16,7 @@ class TestDeviceCookie(object):
 
     @pytest.fixture
     def schema(self):
-        schema = DeviceCookieSchema()
+        schema = CookieSchema()
         yield schema
 
     def test_class_documentation(self):
@@ -24,8 +24,8 @@ class TestDeviceCookie(object):
         assert len(BaseCookie.__doc__) != 0
 
     def test_schema_documentation(self):
-        assert DeviceCookieSchema.__doc__
-        assert len(DeviceCookieSchema.__doc__) != 0
+        assert CookieSchema.__doc__
+        assert len(CookieSchema.__doc__) != 0
 
     def test_device_cookie_instance(self, device_cookie):
         assert device_cookie

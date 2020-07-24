@@ -23,7 +23,7 @@ class SchemaDevice(BaseDevice):
         :::param device_unique_id
         :::param device_cookie"""
 
-    def __init__(self, *args_info, **kwargs_info):
+    def __init__(self, *args_info, **kwargs_info) -> 'SchemaDevice':
         # By default instance is being created
         # from kwargs_info to discard None values.
         BaseDevice.__init__(

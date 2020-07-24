@@ -2,14 +2,15 @@ from marshmallow import Schema, fields
 
 
 class ManufacturerInfo:
-    """The ManufacturerInfo class handles the
-    device's information about its manufacture.
-        :::param manufacturer_name: Company manufacturer
-        :::param model_name: Commercial name of the device
-        :::param hw_version: Hardware version
-        :::param sw_version: Software version"""
+    """The ManufacturerInfo represents
+    the device's metadata in context of
+    a product.
+        :::param manufacturer_name
+        :::param model_name
+        :::param hw_version
+        :::param sw_version"""
 
-    def __init__(self, manufacturer_name: str, model_name: str, hw_version: str, sw_version: str):
+    def __init__(self, manufacturer_name: str, model_name: str, hw_version: str, sw_version: str) -> 'ManufacturerInfo':
         self.manufacturer_name = manufacturer_name
         self.model_name = model_name
         self.hw_version = hw_version
@@ -18,14 +19,12 @@ class ManufacturerInfo:
 
 class ManufacturerSchema(Schema):
     """The ManufacturerSchema handles the
-    serialization of the ManufacturerInfo class.
-    It converts Snake Case attributes to
-    Camel Case format following the REST
-    conventions.
-            :::param manufacturer_name -> manufacturerName
-            :::param model_name -> modelName
-            :::param hw_version -> hwVersion
-            :::param sw_version -> swVersion"""
+    serialization of the ManufacturerInfo
+    class.
+    It converts Snake Case attributes
+    to Camel Case format following REST
+    formatting conventions for JSON
+    string objects."""
 
     manufacturerName = fields.Str(attribute='manufacturer_name')
     modelName = fields.Str(attribute='model_name')

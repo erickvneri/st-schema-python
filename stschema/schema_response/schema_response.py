@@ -1,11 +1,16 @@
-from stschema.schema_response.responses import DiscoveryResponse, DiscoveryResponseSchema
-from stschema.schema_response.responses import StateResponse, StateRefreshResponseSchema
 from stschema.schema_device import SchemaDevice
+from stschema.schema_response.responses import (
+    StateResponse,
+    StateRefreshResponseSchema,
+    DiscoveryResponse,
+    DiscoveryResponseSchema
+)
 
 
 class SchemaResponse:
-    """The SchemaResponse class handles the instantiation
-    and serialization of the SchemaConnector Http Responses."""
+    """The SchemaResponse class handles
+    the instantiation and serialization
+    of the SchemaConnector JSON Responses."""
 
     @classmethod
     def discovery_response(cls, devices: list, request_id: str):
@@ -88,3 +93,15 @@ class SchemaResponse:
         )
         state_schema = StateRefreshResponseSchema(states=response.device_state)
         return state_schema.dump(response)
+
+    @staticmethod
+    def access_token_request(client_id: str, client_secret: str, code: str):
+        raise NotImplementedError('Interaction resource not implemented.')
+
+    @staticmethod
+    def discovery_callback(devices: list, access_token: str):
+        raise NotImplementedError('Interaction resource not implemented.')
+
+    @staticmethod
+    def state_callback(devices: list, access_token: str):
+        raise NotImplementedError('Interaction resource not implemented.')
