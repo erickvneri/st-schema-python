@@ -56,6 +56,7 @@ class TestSuiteSchemaConnector:
             assert SchemaConnector._discovery_response
             assert SchemaConnector._state_refresh_response
             assert SchemaConnector._command_response
+            assert SchemaConnector._validate_schema_response
 
 
     class TestCaseInteractionHandlerMethod:

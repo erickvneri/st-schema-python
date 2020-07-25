@@ -26,7 +26,7 @@ class ManufacturerSchema(Schema):
     formatting conventions for JSON
     string objects."""
 
-    manufacturerName = fields.Str(attribute='manufacturer_name')
-    modelName = fields.Str(attribute='model_name')
+    manufacturerName = fields.Str(attribute='manufacturer_name', required=True)
+    modelName = fields.Str(attribute='model_name', required=True)
     hwVersion = fields.Str(attribute='hw_version')
     swVersion = fields.Str(attribute='sw_version')

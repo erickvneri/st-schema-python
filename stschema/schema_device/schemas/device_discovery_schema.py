@@ -17,10 +17,10 @@ class DeviceDiscoverySchema(Schema):
     formatting conventions for JSON
     string objects."""
 
-    externalDeviceId = fields.Field(attribute='external_device_id')
-    friendlyName = fields.Field(attribute='friendly_name')
-    deviceHandlerType = fields.Field(attribute='device_handler_type')
+    externalDeviceId = fields.Field(attribute='external_device_id', required=True)
+    friendlyName = fields.Field(attribute='friendly_name', required=True)
+    deviceHandlerType = fields.Field(attribute='device_handler_type', required=True)
     deviceUniqueId = fields.Field(attribute='device_unique_id')
     deviceCookie = fields.Nested(CookieSchema, attribute='device_cookie')
-    manufacturerInfo = fields.Nested(ManufacturerSchema, attribute='manufacturer_info')
+    manufacturerInfo = fields.Nested(ManufacturerSchema, attribute='manufacturer_info', required=True)
     deviceContext = fields.Nested(DeviceContextSchema, attribute='device_context')
