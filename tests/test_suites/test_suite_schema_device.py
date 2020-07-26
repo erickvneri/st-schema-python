@@ -300,7 +300,7 @@ class TestDeviceInterface:
 #
 # For this test suite, four fixtures
 # will be used following the DRY
-# principles.
+# principles on SchemaDevice instances.
 #   - device_fixture
 #   - discovery_device
 #   - state_device
@@ -398,6 +398,7 @@ class TestSchemaDeviceSerialization:
             assert device_state_1[0]['value'] == fixture_state_1[0].value
             assert device_state_1[0]['unit'] == fixture_state_1[0].unit
             assert device_state_1[0]['component'] == fixture_state_1[0].component
+
             # Test State: capability_2
             # No unit declared
             fixture_state_2 = list(filter(lambda state: state.capability == 'capability_2', device_fixture.states))
@@ -406,6 +407,16 @@ class TestSchemaDeviceSerialization:
             assert device_state_2[0]['attribute'] == fixture_state_2[0].attribute
             assert device_state_2[0]['value'] == fixture_state_2[0].value
             assert device_state_2[0]['component'] == fixture_state_2[0].component
+            # KeyError raised at SchemaDevice
+            # serialization due to undeclared
+            # unit attribute.
+            # AttributeError raised at SchemaDevice
+            # objcet due to undeclared unit attribute.
+            with pytest.raises(KeyError):
+                assert device_state_2[0]['unit']
+            with pytest.raises(AttributeError):
+                assert fixture_state_2[0].unit
+
             # Test State: capability_3
             # No component declared
             # No unit declared
@@ -415,6 +426,15 @@ class TestSchemaDeviceSerialization:
             assert device_state_3[0]['attribute'] == fixture_state_3[0].attribute
             assert device_state_3[0]['value'] == fixture_state_3[0].value
             assert device_state_3[0]['component'] == fixture_state_3[0].component
+            # KeyError raised at SchemaDevice
+            # serialization due to undeclared
+            # unit attribute.
+            # AttributeError raised at SchemaDevice
+            # objcet due to undeclared unit attribute.
+            with pytest.raises(KeyError):
+                assert device_state_3[0]['unit']
+            with pytest.raises(AttributeError):
+                assert fixture_state_3[0].unit
 
 
     class TestErrorStateDevice:
