@@ -18,7 +18,7 @@ from stschema.util import ManufacturerInfo
 
 class TestDeviceInterface:
     """Test Suite on Device class interface"""
-    class TestDeviceClassElements:
+    class TestSchemaDeviceClassAttributes:
         # Test case on the construction
         # of the Device class interface.
         def test_documentation(self):
