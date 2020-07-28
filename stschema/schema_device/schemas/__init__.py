@@ -1,3 +1,3 @@
-from .discovery_schema import DeviceDiscoverySchema
-from .state_refresh_schema import DeviceStateSchema
+from .device_discovery_schema import DeviceDiscoverySchema
+from .device_state_schema import DeviceStateSchema
 from .device_error_schema import DeviceErrorSchema

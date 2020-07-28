@@ -1,3 +1,6 @@
+# Updates that need to be applied:
+#   - classifiers
+#   - type attr for markup.
 from setuptools import setup, find_packages
 
 with open('README.md', 'r') as ld:

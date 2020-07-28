@@ -2,10 +2,11 @@ import enum
 
 
 class StateErrorEnum(enum.Enum):
-    """The StateErrorEnum class
-    specifies the concept of the
-    error ocurred specifically for
-    devices' states."""
+    """
+    The StateErrorEnum represents
+    the supported device error states
+    enumerators.
+    """
 
     CAPABILITY_NOT_SUPPORTED = 'CAPABILITY-NOT-SUPPORTED'
     DEVICE_DELETED = 'DEVICE-DELETED'
@@ -14,11 +15,11 @@ class StateErrorEnum(enum.Enum):
 
 
 class GlobalErrorEnum(enum.Enum):
-    """The GlobalErrorEnum class
-    specifies the concept of the
-    error ocurred in a global
-    context (e.g. access token used
-    has expired -> TOKEN_EXPIRED enum)"""
+    """
+    The GlobalErrorEnum represents
+    the supported global-context error
+    enumerators.
+    """
 
     BAD_REQUEST = 'BAD-REQUEST'
     INTEGRATION_DELETED = 'INTEGRATION-DELETED'

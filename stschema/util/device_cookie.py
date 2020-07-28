@@ -2,16 +2,26 @@ from marshmallow import Schema, fields
 
 
 class BaseCookie:
-    """The DeviceCookie class handles
-    the device's cookie value.
-        :::param cookie"""
+    """
+    The BaseCookie represents the
+    a customizable cookie to control
+    updates metadata on devices.
+        :::param cookie
+    """
 
-    def __init__(self, cookie: str):
+    def __init__(self, cookie) -> 'BaseCookie':
         self.cookie = cookie
 
 
-class DeviceCookieSchema(Schema):
-    """The DeviceCookieSchema handles the
-    serialization of the DeviceCookie class."""
+class CookieSchema(Schema):
+    """
+    The CookieSchema handles the
+    serialization of the BaseCookie
+    class.
+    It converts Snake Case attributes
+    to Camel Case format following REST
+    formatting conventions for JSON
+    string objects.
+    """
 
-    cookie = fields.Str(attribute='cookie')
+    cookie = fields.Field(attribute='cookie')

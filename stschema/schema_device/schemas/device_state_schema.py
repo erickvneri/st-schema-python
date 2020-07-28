@@ -1,13 +1,13 @@
 from marshmallow import Schema, fields
-from stschema.util import BaseErrorSchema
+from stschema.util import CookieSchema, StateSchema
 
 
-class DeviceErrorSchema(Schema):
+class DeviceStateSchema(Schema):
     """
-    The DeviceErrorSchema handles the
+    The DeviceStateSchema handles the
     serialization of the SchemaDevice
     class supporting the nested
-    BaseErrorSchema.
+    CookieSchema and StateSchema.
     It converts Snake Case attributes
     to Camel Case format following REST
     formatting conventions for JSON
@@ -15,4 +15,5 @@ class DeviceErrorSchema(Schema):
     """
 
     externalDeviceId = fields.Str(attribute='external_device_id')
-    deviceError = fields.List(fields.Nested(BaseErrorSchema), attribute='device_error')
+    deviceCookie = fields.Nested(CookieSchema, attribute='device_cookie')
+    states = fields.List(fields.Nested(StateSchema), attribute='states')
