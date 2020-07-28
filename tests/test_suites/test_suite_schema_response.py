@@ -10,8 +10,8 @@
 #   - discovery_response_fixture
 #   - state_refresh_fixture
 import pytest
-from stschema.schema_response import SchemaResponse
 from stschema import SchemaDevice
+from stschema.schema_response import SchemaResponse
 from tests.device_fixture import SchemaDeviceFixture
 # Fixtures import
 from tests.fixtures import (
@@ -41,22 +41,26 @@ class TestSchemaResponseInterface(object):
         def test_documentation(self):
             assert SchemaResponse
             assert SchemaResponse.__doc__
-            assert len(SchemaResponse.__doc__) != 0
 
         def test_public_methods(self):
             assert SchemaResponse
             assert SchemaResponse.discovery_response
             assert SchemaResponse.state_refresh_response
             assert SchemaResponse.command_response
+            assert SchemaResponse.global_error_response
 
         def test_private_methods(self):
             assert SchemaResponse._validate_schema_response
             assert SchemaResponse._discovery_response
             assert SchemaResponse._state_refresh_response
             assert SchemaResponse._command_response
+            assert SchemaResponse._global_error_response
 
 
     class TestDiscoveryResponse:
+        def test_discovery_response_documentation(self, discovery_response_fixture):
+            assert discovery_response_fixture
+            assert discovery_response_fixture.__doc__
         # Test case on discovery_response
         # resource from SchemaResponse class.
         def test_discovery_response(self, discovery_response_fixture, discovery_device):
@@ -114,6 +118,9 @@ class TestSchemaResponseInterface(object):
 
 
     class TestStateRefreshResponse:
+        def test_state_refresh_documentation(self, state_refresh_response_fixture):
+            assert state_refresh_response_fixture
+            assert state_refresh_response_fixture.__doc__
         # Test case on state_refresh_response
         # resource from SchemaResponse class.
         def test_state_refresh_response(self, state_refresh_response_fixture, state_device):
@@ -184,6 +191,10 @@ class TestSchemaResponseInterface(object):
 
 
     class TestCommandResponse:
+        def test_command_response_documentation(self, command_response_fixture):
+            assert command_response_fixture
+            assert command_response_fixture.__doc__
+
         # Test case on discovery_response
         # resource from SchemaResponse class.
         def test_command_response(self, command_response_fixture, state_device):
@@ -235,3 +246,52 @@ class TestSchemaResponseInterface(object):
                 SchemaResponse.command_response(request_id=bytes(b'BYTES_ARG'), devices=[SchemaDevice()])
             with pytest.raises(TypeError):
                 SchemaResponse.command_response(request_id=list([123, 456]), devices=[SchemaDevice()])
+
+
+    class TestGlobalError:
+        def test_global_error_response_class_documentation(self):
+            from stschema.schema_response.responses import (
+                GlobalErrorResponse,
+                GlobalErrorSchema
+            )
+            assert GlobalErrorResponse.__doc__
+            assert GlobalErrorSchema.__doc__
+
+        def test_global_error_handler_documentation(self):
+            assert SchemaResponse.global_error_response
+            assert SchemaResponse.global_error_response.__doc__
+
+        # Test case on a GlobalError
+        # response.
+        def test_global_error_response_default(self):
+            global_error_response = SchemaResponse \
+                .global_error_response(
+                    'interaction_type',
+                    'request_id',
+                )
+            assert global_error_response
+            assert global_error_response['headers']['requestId'] == 'request_id'
+            assert global_error_response['headers']['interactionType'] == 'interaction_type'
+            assert global_error_response['headers']['schema'] == 'st-schema'
+            assert global_error_response['headers']['version'] == '1.0'
+            assert global_error_response['globalError']
+            assert global_error_response['globalError']['errorEnum'] == 'BAD-REQUEST'
+            assert global_error_response['globalError']['detail'] == 'invalid request arguments.'
+
+        def test_exception_errors_global_error_instance(self):
+            with pytest.raises(TypeError):
+                SchemaResponse.global_error_response()
+            with pytest.raises(ValueError):
+                SchemaResponse.global_error_response(
+                    'interaction_type',
+                    'request_id',
+                    'UNSUPPORTED-ENUM'
+                )
+            with pytest.raises(TypeError):
+                SchemaResponse.global_error_response(
+                    'interaction_type',
+                    'request_id',
+                    'BAD-REQUEST',
+                    'detail',
+                    'UNEXPECTED_ARGUMENT'
+                )

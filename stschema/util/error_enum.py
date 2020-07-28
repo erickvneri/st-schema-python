@@ -2,9 +2,11 @@ import enum
 
 
 class StateErrorEnum(enum.Enum):
-    """The StateErrorEnum represents
+    """
+    The StateErrorEnum represents
     the supported device error states
-    enumerators."""
+    enumerators.
+    """
 
     CAPABILITY_NOT_SUPPORTED = 'CAPABILITY-NOT-SUPPORTED'
     DEVICE_DELETED = 'DEVICE-DELETED'
@@ -13,9 +15,11 @@ class StateErrorEnum(enum.Enum):
 
 
 class GlobalErrorEnum(enum.Enum):
-    """The GlobalErrorEnum represents
+    """
+    The GlobalErrorEnum represents
     the supported global-context error
-    enumerators."""
+    enumerators.
+    """
 
     BAD_REQUEST = 'BAD-REQUEST'
     INTEGRATION_DELETED = 'INTEGRATION-DELETED'

@@ -2,7 +2,8 @@ from stschema.util import BaseHeaders
 
 
 class BaseResponse:
-    """The BaseResponse represents the
+    """
+    The BaseResponse represents the
     base information that will be extended
     in response to the following interaction
     types.
@@ -11,7 +12,8 @@ class BaseResponse:
         - commandRequest
         - discoveryCallback
         - stateCallback
-        - accessTokenRequest"""
+        - accessTokenRequest
+    """
 
     devices = []
     device_state = []

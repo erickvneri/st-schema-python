@@ -2,16 +2,15 @@ from marshmallow import Schema, fields
 
 
 class BaseState:
-    """The BaseState uses the capability's
+    """
+    The BaseState uses the capability's
     metadata to represent a device's state.
         :::param component
         :::param capability
         :::param attribute
         :::param value
-
-    For more information about the supported
-    capabilities read te Capabilities Reference:
-    - https://smartthings.developer.samsung.com/docs/api-ref/capabilities.html"""
+        :::param unit
+    """
 
     def __init__(self, capability: str, attribute: str, value, unit: str, component: str) -> 'BaseState':
         self.component = component
@@ -23,13 +22,15 @@ class BaseState:
 
 
 class StateSchema(Schema):
-    """The StateSchema handles the
+    """
+    The StateSchema handles the
     serialization of the BaseState
     class.
     It converts Snake Case attributes
     to Camel Case format following REST
     formatting conventions for JSON
-    string objects."""
+    string objects.
+    """
 
     component = fields.Str()
     capability = fields.Str()

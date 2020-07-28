@@ -7,7 +7,8 @@ from stschema.util import (
 
 
 class DeviceDiscoverySchema(Schema):
-    """The DeviceDiscoverySchema handles
+    """
+    The DeviceDiscoverySchema handles
     the serialization of the SchemaDevice
     class supporting the nested
     CookieSchema, ManufacturerSchema, and
@@ -15,7 +16,8 @@ class DeviceDiscoverySchema(Schema):
     It converts Snake Case attributes
     to Camel Case format following REST
     formatting conventions for JSON
-    string objects."""
+    string objects.
+    """
 
     externalDeviceId = fields.Field(attribute='external_device_id', required=True)
     friendlyName = fields.Field(attribute='friendly_name', required=True)

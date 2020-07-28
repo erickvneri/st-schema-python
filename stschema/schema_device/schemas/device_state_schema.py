@@ -3,14 +3,16 @@ from stschema.util import CookieSchema, StateSchema
 
 
 class DeviceStateSchema(Schema):
-    """The DeviceStateSchema handles the
+    """
+    The DeviceStateSchema handles the
     serialization of the SchemaDevice
     class supporting the nested
     CookieSchema and StateSchema.
     It converts Snake Case attributes
     to Camel Case format following REST
     formatting conventions for JSON
-    string objects."""
+    string objects.
+    """
 
     externalDeviceId = fields.Str(attribute='external_device_id')
     deviceCookie = fields.Nested(CookieSchema, attribute='device_cookie')

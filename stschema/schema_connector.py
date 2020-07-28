@@ -13,20 +13,24 @@ from stschema.schema_response import SchemaResponse
 
 
 class SchemaConnector(SchemaResponse):
-    """The Schema Connector class provides
+    """
+    The Schema Connector class provides
     a developer interface to control the flow
     of Interaction Types through interaction
-    resource handlers."""
-    def __init__(self, enable_loggings: bool=False):
-        # TODO: SchemaConnector logger
+    resource handlers.
+        :::param enable_logger: boolean (WIP) # TODO: Create logger instance
+    """
+    def __init__(self, enable_logger: bool=False):
         pass
 
     def interaction_handler(self, json_data: dict):
-        """This method helps with the
+        """
+        This method helps with the
         flow-control of Interaction Types
         and returns interaction resource
         handlers respectively.
-            :::param json_data: dict"""
+            :::param json_data: dict
+        """
 
         if not isinstance(json_data, dict):
             raise TypeError('dict argument expected, not (%s, %s)' % (type(json_data), json_data))

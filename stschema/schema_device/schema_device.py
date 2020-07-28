@@ -8,20 +8,22 @@ from stschema.util import (
     DeviceContext,
     ManufacturerInfo,
     BaseState,
-    DeviceError,
+    BaseError,
     BaseCookie,
     StateErrorEnum
 )
 
 
 class SchemaDevice(BaseDevice):
-    """The Device interface inherits its
+    """
+    The Device interface inherits its
     attributes from the BaseDevice class.
         :::param external_device_id (required)
         :::param friendly_name (required)
         :::param device_handler_type (required)
         :::param device_unique_id
-        :::param device_cookie"""
+        :::param device_cookie
+    """
 
     def __init__(self, *args_info, **kwargs_info) -> 'SchemaDevice':
         # By default instance is being created
@@ -210,15 +212,17 @@ class SchemaDevice(BaseDevice):
         self.states.append(new_state)
 
     def set_error_state(self, error_enum: str='DEVICE-UNAVAILABLE', detail: str='unexpected error occurred.'):
-        """Defines the error state of the device.
+        """
+        Defines the error state of the device.
         Supported device error enumerators:
             - DEVICE-UNAVAILABLE
             - CAPABILITY-NOT-SUPPORTED
             - RESOURCE-CONSTRAINT-VIOLATION
             - DEVICE-DELETED
 
-            :::param error_enum: (DEVICE-UNAVAILABLE by default).
-            :::param detail: detail or message about device error"""
+            :::param error_enum: "DEVICE-UNAVAILABLE" by default.
+            :::param detail: detail or message about device error
+        """
 
         try:
             error_enum = StateErrorEnum(error_enum)
@@ -232,9 +236,9 @@ class SchemaDevice(BaseDevice):
 
     def _set_error_state(self, error_enum, detail):
         # Private method that will define
-        # the DeviceError state device's
+        # the BaseError state device's
         # attribute.
-        err = DeviceError(
+        err = BaseError(
             error_enum=error_enum,
             detail=detail
         )
