@@ -17,7 +17,8 @@ setup(
     packages=find_packages(),
     install_requires=[
         'pytest',
-        'marshmallow'
+        'marshmallow',
+        'requests'
     ],
     python_requires='>=3.6',
     classifiers=[
