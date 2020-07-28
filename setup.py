@@ -13,6 +13,7 @@ setup(
     author_email='erickv@bluetrailsoft.com',
     description='ST-Schema Python SDK',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     url='https://github.com/erickvneri/st-schema-python/',
     packages=find_packages(),
     install_requires=[
