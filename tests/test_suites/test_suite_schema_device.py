@@ -17,7 +17,17 @@ from stschema.util import ManufacturerInfo
 
 
 class TestDeviceInterface:
-    """Test Suite on Device class interface"""
+    """
+    Test Suite on Device class interface.
+
+    Index:
+        - TestSchemaDeviceClassAttributes
+        - TestDeviceDefinition
+        - TestManufacturerInfo
+        - TestDeviceContext
+        - TestSetState
+        - TestDeviceError
+    """
     class TestSchemaDeviceClassAttributes:
         # Test case on the construction
         # of the Device class interface.
@@ -336,8 +346,15 @@ def error_state_device():
 
 
 class TestSchemaDeviceSerialization:
-    """Test Suite on Serialization of
-    SchemaDevice isntances"""
+    """
+    Test Suite on SchemaDevice serialization
+    through Schemas.
+
+    Index:
+        - TestDiscoveryDevice
+        - TestStateDevice
+        - TestErrorStateDevice
+    """
     class TestDiscoveryDevice:
         # Test case on DeviceDiscoverySchema
         # class attributes.
