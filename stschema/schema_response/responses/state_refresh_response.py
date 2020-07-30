@@ -1,7 +1,8 @@
-from marshmallow import Schema, fields
-from stschema.util import HeadersSchema, BaseResponse
+from marshmallow import Schema, fields, pre_dump, post_dump
+from stschema.util import HeadersSchema, BaseResponse, AuthenticationSchema
 from stschema.schema_device.schemas import DeviceStateSchema, DeviceErrorSchema
 
+from pprint import pprint # Delete line
 
 class StateResponse(BaseResponse):
     """
@@ -9,7 +10,7 @@ class StateResponse(BaseResponse):
     The StateResponse class handles the
     representation of the stateRefreshResponse.
 
-        :::param headers"
+        :::param headers
         :::param device_state
     """
 
@@ -31,15 +32,39 @@ class StateRefreshResponseSchema(Schema):
     string objects.
     """
 
-    headers = fields.Nested(HeadersSchema, attribute='headers')
-    deviceState = fields.List(fields.Nested(DeviceStateSchema), attribute='device_state')
+    @pre_dump
+    def _verify_dump(self, data, **kwargs):
+        # Verify Headers attribute
+        if data.headers:
+            self.dump_fields.update(
+                headers = fields.Nested(HeadersSchema, attribute='headers', required=True)
+            )
+        # Verify Authentication attribute
+        if data.authentication:
+            self.dump_fields.update(
+                authentication = fields.Nested(AuthenticationSchema, attribute='authentication')
+            )
+        # Verify State instance attribute
+        # If device_error at device instance,
+        # DeviceErrorSchema will be used, else
+        # DeviceStateSchema will be used.
+        if data.device_state:
+            if data.device_state[0].device_error:
+                self.dump_fields.update(
+                    deviceState=fields.List(fields.Nested(DeviceErrorSchema), attribute='device_state')
+                )
+            else:
+                self.dump_fields.update(
+                    deviceState = fields.List(fields.Nested(DeviceStateSchema), attribute='device_state')
+                )
+        return data
 
-    def __init__(self, **state_info):
-        Schema.__init__(self)
-        self.states = state_info.get('states')
-        if self.states:
-            for state in self.states:
-                if state.device_error:
-                    self.dump_fields.update(
-                        deviceState=fields.List(fields.Nested(DeviceErrorSchema), attribute='device_state')
-                    )
+    @post_dump
+    def _reset_device_state(self, data, **kwargs):
+        # Reset deviceState to support
+        # DeviceStateSchema as default
+        # schema.
+        self.dump_fields.update(
+            deviceState = fields.List(fields.Nested(DeviceStateSchema), attribute='device_state')
+        )
+        return data
