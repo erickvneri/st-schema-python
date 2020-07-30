@@ -31,6 +31,8 @@ def error_state_device():
     schema = DeviceErrorSchema()
     return schema.dump(device), device
 
+
+#********************Interaction Type Fixtures*************************
 #######################################################################
 #################### Device Discovery Fixture #########################
 #######################################################################
@@ -51,6 +53,8 @@ def state_device(device_fixture):
     schema = DeviceStateSchema()
     return schema.dump(device_fixture)
 
+
+#********************Interaction Type Fixtures*************************
 #######################################################################
 #################### Discovery Response Fixture #######################
 #######################################################################

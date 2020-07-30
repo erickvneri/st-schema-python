@@ -1,5 +1,4 @@
 from stschema import SchemaDevice
-from datetime import datetime
 
 
 class SchemaDeviceFixture(SchemaDevice):
