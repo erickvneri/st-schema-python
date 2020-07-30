@@ -1,11 +1,10 @@
-# TODO:
-# CallbackAuthentication -> AccessTokenRequest Body
-# Authentication -> authentication attribute to perform
-# state and discovery callbacks.
 import requests
+from stschema import SchemaDevice
+from stschema.schema_response.responses import StateRefreshResponseSchema
 from stschema.schema_callbacks.callbacks import (
     AccessTokenRequest,
-    AccessTokenRequestSchema
+    AccessTokenRequestSchema,
+    StateCallback
 )
 
 class SchemaCallback:
@@ -17,7 +16,7 @@ class SchemaCallback:
 
     This class covers:
         - Access Token Request.
-        - Refresh token Request (TBD).
+        - Refresh Token Request (TBD).
         - Device State Callback.
         - Device Discovery Callback.
     """
@@ -35,7 +34,7 @@ class SchemaCallback:
             :::param url (required)
         """
         if not url.startswith('https://'):
-            raise TypeError('"url" argument not valid, must be an "https://" Url.')
+            raise TypeError('"url" argument not valid, must be Http Secure.')
         else:
             return cls._access_token_request(
                 client_id,
@@ -58,25 +57,65 @@ class SchemaCallback:
             code=auth_args[2],
             request_id=auth_args[3]
         )
-        # Schema Instance and serialization steps,
+        # Schema Instance and serialization steps.
         schema = AccessTokenRequestSchema()
         authentication_body = schema.dump(authentication_data)
         # POST Http Request to ST Schema
         # OAuth server.
-        token_request = requests.post(
+        token_http_request = requests.post(
             url=auth_args[4],  # Url argument
             json=authentication_body
         )
-        return token_request.json()
+        return token_http_request
 
-    def state_callback(self, request_id: str, devices: list, access_token: str):
-        # WIP
-        pass
+    @classmethod
+    def state_callback(cls, access_token: str, request_id: str, url: str, devices: list) -> object:
+        """
+        The state_callback performs a
+        POST Http Requests to the SmartThings
+        platform to push a new state to the
+        devices passed
+            :::param access_token (required)
+            :::param request_id (required)
+            :::param url (required)
+            :::param devices (required)
+        """
+        if not url.startswith('https://'):
+            raise TypeError('url argument not valid, must be Http Secure.')
+        if not isinstance(devices, list):
+            raise TypeError('devices argument must be instance of list, not %s' % type(devices))
+        else:
+            for device in devices:
+                if not isinstance(device, SchemaDevice):
+                    raise TypeError('devices items must be instance of %s, not %s', (SchemaDevice, type(device)))
+        return cls._state_callback(
+            access_token,
+            request_id,
+            url,
+            devices
+        )
 
     @staticmethod
-    def _state_callback():
-        # WIP
-        pass
+    def _state_callback(*callback_args):
+        # Private method that will instance and
+        # serialize a StateCallback object as
+        # Request Body to ST Schema cloud.
+        #
+        # StateCallback Instance
+        state_callback = StateCallback(
+            callback_args[0],
+            callback_args[1],
+            callback_args[3]
+        )
+        # Schema Instance and serialization steps.
+        schema = StateRefreshResponseSchema()
+        state_callback_body = schema.dump(state_callback)
+        # Post Http Request to ST Schema
+        state_http_callback = requests.post(
+            url=callback_args[2],
+            json=state_callback_body
+        )
+        return state_http_callback
 
     def discovery_callback(self, request_id: str, devices: list, access_token: str):
         # WIP

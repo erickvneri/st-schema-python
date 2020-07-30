@@ -88,7 +88,7 @@ class SchemaResponse:
         # into a readable JSON object.
 
         response = StateResponse(devices=devices, request_id=request_id)
-        state_schema = StateRefreshResponseSchema(states=response.device_state)
+        state_schema = StateRefreshResponseSchema()
         return state_schema.dump(response)
 
     @staticmethod
@@ -102,7 +102,7 @@ class SchemaResponse:
             request_id=request_id,
             interaction_type='commandResponse'
         )
-        state_schema = StateRefreshResponseSchema(states=response.device_state)
+        state_schema = StateRefreshResponseSchema()
         return state_schema.dump(response)
 
     @classmethod
@@ -148,6 +148,7 @@ class SchemaResponse:
                     request_id,
                     global_error
                 )
+
     @staticmethod
     def _global_error_response(*error_info):
         response = GlobalErrorResponse(
