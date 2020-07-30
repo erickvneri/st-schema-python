@@ -8,7 +8,7 @@ class BaseAuthentication:
     the Authorization Token needed to perform
     successful Calbacks into the SmartThings API.
     """
-    def __init__(self, token: str, token_type: str) -> 'BaseAuthentication':
+    def __init__(self, token: str, token_type: str='Bearer') -> 'BaseAuthentication':
         self.token = token
         self.token_type = token_type
 

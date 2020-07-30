@@ -8,3 +8,4 @@ from .base_error import *
 from .error_enum import *
 from .manufacturer_info import *
 from .callback_authentication import *
+from .base_authentication import *
