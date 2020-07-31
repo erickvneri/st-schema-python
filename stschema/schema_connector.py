@@ -18,13 +18,13 @@ class SchemaConnector(SchemaResponse):
     a developer interface to control the flow
     of Interaction Types through interaction
     resource handlers.
-        :::param enable_logger: boolean (WIP) # TODO: Create logger instance
+        :::param enable_logger: boolean
     """
     def __init__(self, enable_logger: bool=False):
-        self.logger = self._active_logger(enable_logger)
+        self.logger = self._logger(enable_logger)
 
     @staticmethod
-    def _active_logger(enable_logger):
+    def _logger(enable_logger):
         # Logger instance.
         logger = logging.getLogger('[stschema]')
         # Handle levels
