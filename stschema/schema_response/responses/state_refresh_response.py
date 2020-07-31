@@ -24,8 +24,8 @@ class StateRefreshResponseSchema(Schema):
     The StateRefreshResponseSchema handles
     the serialization of the StateResponse
     class supporting the nested
-    DeviceStateSchema, HeadersSchema and
-    DeviceErrorSchema (dynamicly handled).
+    DeviceStateSchema, HeadersSchema,
+    DeviceErrorSchema, and AuthenticationSchema.
     It converts Snake Case attributes
     to Camel Case format following REST
     formatting conventions for JSON
@@ -34,16 +34,10 @@ class StateRefreshResponseSchema(Schema):
 
     @pre_dump
     def _verify_dump(self, data, **kwargs):
-        # Verify Headers attribute
-        if data.headers:
-            self.dump_fields.update(
-                headers = fields.Nested(HeadersSchema, attribute='headers', required=True)
-            )
-        # Verify Authentication attribute
-        if data.authentication:
-            self.dump_fields.update(
-                authentication = fields.Nested(AuthenticationSchema, attribute='authentication')
-            )
+        # Declare headers as required attribute.
+        self.dump_fields.update(
+            headers = fields.Nested(HeadersSchema, attribute='headers', required=True)
+        )
         # Verify State instance attribute
         # If device_error at device instance,
         # DeviceErrorSchema will be used, else
@@ -57,6 +51,11 @@ class StateRefreshResponseSchema(Schema):
                 self.dump_fields.update(
                     deviceState = fields.List(fields.Nested(DeviceStateSchema), attribute='device_state')
                 )
+        # Verify Authentication non-required attribute.
+        if data.authentication:
+            self.dump_fields.update(
+                authentication = fields.Nested(AuthenticationSchema, attribute='authentication')
+            )
         return data
 
     @post_dump

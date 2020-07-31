@@ -3,6 +3,10 @@ from stschema.schema_callbacks import SchemaCallback
 from tests.device_fixture import SchemaDeviceFixture
 
 # Url for testing Callbacks
+# Comment/Unskip test cases:
+#   - line 46
+#   - line 109
+#   - line 195
 custom_test_url = ''
 
 class TestSuiteSchemaCallbacks:
@@ -22,13 +26,14 @@ class TestSuiteSchemaCallbacks:
 
         def test_public_methods(self):
             assert SchemaCallback.access_token_request
-            assert SchemaCallback.state_callback
             assert SchemaCallback.discovery_callback
+            assert SchemaCallback.state_callback
 
         def test_private_methods(self):
             assert SchemaCallback._access_token_request
-            assert SchemaCallback._state_callback
             assert SchemaCallback._discovery_callback
+            assert SchemaCallback._state_callback
+            assert SchemaCallback._validate_callback_args
 
 
     class TestAccessTokenResource:
@@ -86,6 +91,16 @@ class TestSuiteSchemaCallbacks:
 
 
     class TestStateCallbackMethod:
+        # TODO: Review for fixture update
+        # Partial Fixture to test SchemaDevice
+        # types inputs on responses.
+        state_devices_argument = lambda data_type: \
+                SchemaCallback.state_callback(
+                    'access_token',
+                    'request_id',
+                    'https://TEST_URL_ARG',
+                    data_type
+                )
         # Test case on SchemaCallback.state_callback
         def test_documentation(self):
             assert SchemaCallback.state_callback
@@ -128,54 +143,118 @@ class TestSuiteSchemaCallbacks:
                     []
                 )
 
-        def test_type_error_devices_argument(self):
-            # TODO: Review for fixture update
-            # Partial Fixture to test SchemaDevice
-            # types inputs on responses.
-            devices_argument = lambda data_type: \
-                SchemaCallback.state_callback(
-                    'access_token',
-                    'request_id',
-                    'https://TEST_URL_ARG',
-                    data_type
-                )
+        def test_type_error_state_devices_argument(self):
             with pytest.raises(TypeError):
-                assert devices_argument(str('INVALID'))
+                assert self.state_devices_argument(str('INVALID'))
             with pytest.raises(TypeError):
-                assert devices_argument(int(10101010))
+                assert self.state_devices_argument(int(10101010))
             with pytest.raises(TypeError):
-                assert devices_argument(tuple(('INVALID')))
+                assert self.state_devices_argument(tuple(('INVALID')))
             with pytest.raises(TypeError):
-                assert devices_argument(dict(key='val'))
+                assert self.state_devices_argument(dict(key='val'))
             with pytest.raises(TypeError):
-                assert devices_argument(bytes(b'1010101'))
+                assert self.state_devices_argument(bytes(b'1010101'))
             with pytest.raises(TypeError):
-                assert devices_argument(frozenset({'INVALID'}))
+                assert self.state_devices_argument(frozenset({'INVALID'}))
             with pytest.raises(TypeError):
-                assert devices_argument(set({'INVALID'}))
+                assert self.state_devices_argument(set({'INVALID'}))
 
         def test_type_error_devices_arg_items(self):
-            # TODO: Review for fixture update
-            # Partial Fixture to test SchemaDevice
-            # types inputs on responses.
-            devices_argument = lambda data_type: \
-                SchemaCallback.state_callback(
+            with pytest.raises(TypeError):
+                assert self.state_devices_argument([str('INVALID')])
+            with pytest.raises(TypeError):
+                assert self.state_devices_argument([int(10101010)])
+            with pytest.raises(TypeError):
+                assert self.state_devices_argument([tuple(('INVALID'))])
+            with pytest.raises(TypeError):
+                assert self.state_devices_argument([dict(key='val')])
+            with pytest.raises(TypeError):
+                assert self.state_devices_argument([bytes(b'1010101')])
+            with pytest.raises(TypeError):
+                assert self.state_devices_argument([frozenset({'INVALID'})])
+            with pytest.raises(TypeError):
+                assert self.state_devices_argument([set({'INVALID'})])
+
+
+    class TestDiscoveryCallbackMethod:
+        # TODO: Review for fixture update
+        # Partial Fixture to test SchemaDevice
+        # types inputs on responses.
+        discovery_devices_argument = lambda data_type: \
+                SchemaCallback.discovery_callback(
                     'access_token',
                     'request_id',
                     'https://TEST_URL_ARG',
                     data_type
                 )
+        # Test case on SchemaCallback.discovery_request
+        def test_documentation(self):
+            assert SchemaCallback.discovery_callback
+            assert SchemaCallback.discovery_callback.__doc__
+
+        @pytest.mark.skip('COMMENT THIS LINE TO ENABLE TEST CASE')
+        def test_discovery_callback(self):
+            # Test case to check real-time HttpRequests,
+            # unskip to enable.
+            assert SchemaCallback.discovery_callback(
+                'access_token',
+                'request_id',
+                custom_test_url,
+                [SchemaDeviceFixture()]
+            )
+
+        def test_type_error_missing_arguments(self):
             with pytest.raises(TypeError):
-                assert devices_argument([str('INVALID')])
+                assert SchemaCallback.discovery_callback('access_token')
             with pytest.raises(TypeError):
-                assert devices_argument([int(10101010)])
+                assert SchemaCallback.discovery_callback(
+                    'access_token',
+                    'request_id'
+                )
             with pytest.raises(TypeError):
-                assert devices_argument([tuple(('INVALID'))])
+                assert SchemaCallback.discovery_callback(
+                    'access_token',
+                    'request_id',
+                    'url'
+                )
+
+        def test_type_error_invalid_url(self):
             with pytest.raises(TypeError):
-                assert devices_argument([dict(key='val')])
+                assert SchemaCallback.discovery_callback(
+                    'access_token',
+                    'request_id',
+                    'http://INVALID_URL',
+                    []
+                )
+
+        def test_type_error_discovery_devices_argument(self):
             with pytest.raises(TypeError):
-                assert devices_argument([bytes(b'1010101')])
+                assert self.discovery_devices_argument(str('INVALID'))
             with pytest.raises(TypeError):
-                assert devices_argument([frozenset({'INVALID'})])
+                assert self.discovery_devices_argument(int(10101010))
             with pytest.raises(TypeError):
-                assert devices_argument([set({'INVALID'})])
+                assert self.discovery_devices_argument(tuple(('INVALID')))
+            with pytest.raises(TypeError):
+                assert self.discovery_devices_argument(dict(key='val'))
+            with pytest.raises(TypeError):
+                assert self.discovery_devices_argument(bytes(b'1010101'))
+            with pytest.raises(TypeError):
+                assert self.discovery_devices_argument(frozenset({'INVALID'}))
+            with pytest.raises(TypeError):
+                assert self.discovery_devices_argument(set({'INVALID'}))
+
+        def test_type_error_devices_arg_items(self):
+            with pytest.raises(TypeError):
+                assert self.discovery_devices_argument([str('INVALID')])
+            with pytest.raises(TypeError):
+                assert self.discovery_devices_argument([int(10101010)])
+            with pytest.raises(TypeError):
+                assert self.discovery_devices_argument([tuple(('INVALID'))])
+            with pytest.raises(TypeError):
+                assert self.discovery_devices_argument([dict(key='val')])
+            with pytest.raises(TypeError):
+                assert self.discovery_devices_argument([bytes(b'1010101')])
+            with pytest.raises(TypeError):
+                assert self.discovery_devices_argument([frozenset({'INVALID'})])
+            with pytest.raises(TypeError):
+                assert self.discovery_devices_argument([set({'INVALID'})])

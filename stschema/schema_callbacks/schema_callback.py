@@ -1,10 +1,16 @@
 import requests
 from stschema import SchemaDevice
-from stschema.schema_response.responses import StateRefreshResponseSchema
+# Schemas
+from stschema.schema_response.responses import (
+    StateRefreshResponseSchema,
+    DiscoveryResponseSchema
+)
+# Callback interaction type objects and schemas
 from stschema.schema_callbacks.callbacks import (
     AccessTokenRequest,
     AccessTokenRequestSchema,
-    StateCallback
+    StateCallback,
+    DiscoveryCallback
 )
 
 class SchemaCallback:
@@ -80,20 +86,13 @@ class SchemaCallback:
             :::param url (required)
             :::param devices (required)
         """
-        if not url.startswith('https://'):
-            raise TypeError('url argument not valid, must be Http Secure.')
-        if not isinstance(devices, list):
-            raise TypeError('devices argument must be instance of list, not %s' % type(devices))
-        else:
-            for device in devices:
-                if not isinstance(device, SchemaDevice):
-                    raise TypeError('devices items must be instance of %s, not %s', (SchemaDevice, type(device)))
-        return cls._state_callback(
-            access_token,
-            request_id,
-            url,
-            devices
-        )
+        if not cls._validate_callback_args(url, devices):
+            return cls._state_callback(
+                access_token,
+                request_id,
+                url,
+                devices
+            )
 
     @staticmethod
     def _state_callback(*callback_args):
@@ -109,19 +108,66 @@ class SchemaCallback:
         )
         # Schema Instance and serialization steps.
         schema = StateRefreshResponseSchema()
-        state_callback_body = schema.dump(state_callback)
+        callback_request_body = schema.dump(state_callback)
         # Post Http Request to ST Schema
-        state_http_callback = requests.post(
+        # server.
+        return requests.post(
             url=callback_args[2],
-            json=state_callback_body
+            json=callback_request_body
         )
-        return state_http_callback
 
-    def discovery_callback(self, request_id: str, devices: list, access_token: str):
-        # WIP
-        pass
+    @classmethod
+    def discovery_callback(cls, access_token: str, request_id: str, url: str, devices: list) -> object:
+        """
+        The discovery_callback performs a
+        POST Http Requests to the SmartThings
+        platform to push new SchemaDevice
+        instances.
+            :::param access_token (required)
+            :::param request_id (required)
+            :::param url (required)
+            :::param devices (required)
+        """
+        if not cls._validate_callback_args(url, devices):
+            return cls._discovery_callback(
+                access_token,
+                request_id,
+                url,
+                devices
+            )
 
     @staticmethod
-    def _discovery_callback():
-        # WIP
-        pass
+    def _discovery_callback(*callback_args):
+        # Private method that will instance and
+        # serialize a DiscoveryCallback object as
+        # Request body to ST Schema Cloud.
+        #
+        # DiscoveryCallback Instance.
+        discovery_callback = DiscoveryCallback(
+            access_token=callback_args[0],
+            request_id=callback_args[1],
+            devices=callback_args[3]
+        )
+        # Schema Instance and serialization steps
+        schema = DiscoveryResponseSchema()
+        discovery_callback_body = schema.dump(discovery_callback)
+        # POST Http Request to ST Schema
+        # server.
+        return requests.post(
+            url=callback_args[2],
+            json=discovery_callback_body
+        )
+
+    @staticmethod
+    def _validate_callback_args(*callback_args) -> None:
+        # Validate Url's protocol
+        if not callback_args[0].startswith('https://'):
+            raise TypeError('url argument not valid, must be Http Secure.')
+        # Validate devices argument type
+        if not isinstance(callback_args[1], list):
+            raise TypeError('devices argument must be instance of list, not %s' % type(callback_args[1]))
+        else:
+            # Validate devices items instances
+            for device in callback_args[1]:
+                if not isinstance(device, SchemaDevice):
+                    raise TypeError('devices items must be instance of %s, not %s', (SchemaDevice, type(callback_args[1])))

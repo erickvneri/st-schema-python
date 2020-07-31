@@ -14,33 +14,32 @@ class DiscoveryResponse(BaseResponse):
         :::param request_id
     """
 
-    def __init__(self, devices: list, request_id: str) -> 'DiscoveryResponse':
-        BaseResponse.__init__(self, interaction_type='discoveryResponse', request_id=request_id)
+    def __init__(self, devices: list, request_id: str, interaction_type: str='discoveryResponse') -> 'DiscoveryResponse':
+        BaseResponse.__init__(self, interaction_type=interaction_type, request_id=request_id)
         self.devices = devices
 
 
-class DiscoveryResponseSchema(Schema):  # Refactor Schema as StateRefreshResponseSchema
+class DiscoveryResponseSchema(Schema):
     """
     The DiscoveryResponseSchema handles
     the serialization of the DiscoveryResponse
     class supporting the nested
-    DeviceDiscoverySchema and HeadersSchema.
+    DeviceDiscoverySchema, HeadersSchema,
+    and AuthenticationSchema.
     It converts Snake Case attributes
     to Camel Case format following REST
     formatting conventions for JSON
     string objects.
     """
 
-    devices = fields.List(fields.Nested(DeviceDiscoverySchema, attribute='devices'))
-    headers = fields.Nested(HeadersSchema, attribute='headers')
-
     @pre_dump
-    def _dump_authentication(self, data, **kwargs):
-        if data.headers:
-            self.dump_fields.update(
-                headers = fields.Nested(HeadersSchema, attribute='headers'),
-                devices = fields.List(fields.Nested(DeviceDiscoverySchema, attribute='devices'))
-            )
+    def _verify_dump(self, data, **kwargs):
+        # Declare required attributes
+        self.dump_fields.update(
+            headers = fields.Nested(HeadersSchema, attribute='headers', required=True),
+            devices = fields.List(fields.Nested(DeviceDiscoverySchema, attribute='devices', required=True))
+        )
+        # Verify Authentication non-required attribute.
         if data.authentication:
             self.dump_fields.update(
                 authentication = fields.Nested(AuthenticationSchema, attribute='authentication')
