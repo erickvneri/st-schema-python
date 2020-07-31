@@ -67,24 +67,34 @@ class SchemaConnector(SchemaResponse):
         elif interaction_type == 'grantCallbackAccess':
             return self.grant_callback_access(data['callbackAuthentication'])
         elif interaction_type == 'integrationDeleted':
-            return self.integration_deleted()
+            return self.integration_deleted(data['callbackAuthentication'])
         elif interaction_type == 'interactionResult':
-            return self.interaction_result_handler()
+            # Since detail of Interaction Types
+            # are dynamic, instead of complex
+            # flow-control conditions, headers
+            # and authentication will be poped
+            # before calling handler.
+            if data.get('authentication'):
+                data.pop('authentication')
+            data.pop('headers')
+            # Originating Interaction Type
+            origin = data.get('originatingInteractionType')
+            return self.interaction_result_handler(data, origin)
 
-    def discovery_handler(self, request_id):
+    def discovery_handler(self, request_id: str):
         raise NotImplementedError('Interaction resource handler not implemented')
 
-    def state_refresh_handler(self, devices, request_id):
+    def state_refresh_handler(self, devices: list, request_id: str):
         raise NotImplementedError('Interaction resource handler not implemented')
 
-    def command_handler(self, devices, request_id):
+    def command_handler(self, devices: list, request_id: str):
         raise NotImplementedError('Interaction resource handler not implemented')
 
-    def grant_callback_access(self, callback_authentication):
+    def grant_callback_access(self, callback_authentication: dict):
         raise NotImplementedError('Interaction resource handler not implemented')
 
-    def integration_deleted(self):  # TODO: Define arguments
+    def integration_deleted(self, callback_authentication: dict):
         raise NotImplementedError('Interaction resource handler not implemented')
 
-    def interaction_result_handler(self):  # TODO: Define arguments
+    def interaction_result_handler(self, interaction_result: dict, origin: str):
         raise NotImplementedError('Interaction resource handler not implemented')
