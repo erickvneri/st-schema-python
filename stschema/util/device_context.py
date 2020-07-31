@@ -21,7 +21,7 @@ class DeviceContext:
 class DeviceContextSchema(Schema):
     """
     The DeviceContextSchema handles the
-    serialization of the DeviceContext class
+    serialization of the DeviceContext
     class.
     It converts Snake Case attributes
     to Camel Case format following REST

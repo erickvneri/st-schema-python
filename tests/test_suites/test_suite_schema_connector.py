@@ -22,7 +22,13 @@ from stschema import SchemaConnector
 
 
 class TestSuiteSchemaConnector:
-    """Test Suite on SchemaConnector interface class"""
+    """
+    Test Suite on SchemaConnector interface class:
+
+    Index:
+        - TestCaseInterfaceClass
+        - TestCaseInteractionHandlerMethod
+    """
     class TestCaseInterfaceClass:
         # Test case on construction attributes
         # of the SchemaConnector interface class.

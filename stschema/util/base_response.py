@@ -14,9 +14,11 @@ class BaseResponse:
         - stateCallback
         - accessTokenRequest
     """
-
-    devices = []
-    device_state = []
+    # Future implementation reference
+    devices = list()
+    device_state = list()
+    authentication = dict()
+    global_error = dict()
 
     def __init__(self, interaction_type: str, request_id: str) -> 'BaseResponse':
         self.headers = BaseHeaders(interaction_type=interaction_type, request_id=request_id)
