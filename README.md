@@ -13,6 +13,10 @@ Copy the `stschema` package into your working directory.
 
     cp -r ./st-schema-python/stschema /your/working/directory/
 
+Install SDK's dependencies.
+
+    python3 -m pip install -r ./st-schema-python/requirements.txt
+
 ---
 
 ## SchemaConnector structure
