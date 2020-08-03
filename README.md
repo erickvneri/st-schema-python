@@ -16,7 +16,7 @@ For Windows OS:
 
 ---
 
-## Schema Connector structure
+## SchemaConnector structure
 
 Using class inheritance, we'll gain access to a series of resources to control the request and response data of _Interaction types_.
 
