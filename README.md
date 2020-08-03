@@ -1,16 +1,3 @@
-```
-Todos:
-    - Refactor util package:
-        - util
-            - error_handler
-            - event_logger
-            - base_modules
-    - Descriptive error messages:
-        - ErrorHandler class.
-        - Implement colorama with error messages.
-    - Logger and descriptive message:
-        - Implement interaction_type at event log.
-```
 # SmartThings Schema Python SDK
 
 The _SmartThings Schema Python SDK_ is a package that helps to simplify the development of
