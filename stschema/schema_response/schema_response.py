@@ -1,5 +1,5 @@
 from stschema.schema_device import SchemaDevice
-from stschema.util import GlobalErrorEnum, BaseError
+from stschema.util.base_modules import GlobalErrorEnum, BaseError
 from stschema.schema_response.responses import (
     DiscoveryResponse,
     DiscoveryResponseSchema,

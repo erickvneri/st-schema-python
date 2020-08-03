@@ -1,6 +1,19 @@
+```
+Todos:
+    - Refactor util package:
+        - util
+            - error_handler
+            - event_logger
+            - base_modules
+    - Descriptive error messages:
+        - ErrorHandler class.
+        - Implement colorama with error messages.
+    - Logger and descriptive message:
+        - Implement interaction_type at event log.
+```
 # SmartThings Schema Python SDK
 
-The _SmartThings Schema Python SDK_ is a package that helps to simplify the development of 
+The _SmartThings Schema Python SDK_ is a package that helps to simplify the development of
 **Schema Connectors** with ordered resources through interfaces.
 
 ## Installation
@@ -8,29 +21,29 @@ The _SmartThings Schema Python SDK_ is a package that helps to simplify the deve
 For macOS or Linux distributions:
 
     pyhton3 -m pip install st-schema-python
-    
+
 For Windows OS:
 
     python -m pip install st-schema-python
-    
+
 ## Getting started
 
-This is a basic use-case example of the Device Interface that this SDK provides to 
+This is a basic use-case example of the Device Interface that this SDK provides to
 improve the organization of resources.
 
 1. First, we define the device's main attributes:
     ```python
     from stschema.interface import Device
-    
-    
+
+
     device_example = Device(
         external_device_id='xxx123',
-        friendly_name='my_first_device_example', 
+        friendly_name='my_first_device_example',
         device_unique_id='xxx-yyy-zzz',
         device_cookie='cookie-example',
         device_handler_type='device-profile-id'
     )
-    
+
     device_example.set_mn(
         manufacturer_name='Example IoT co.',
         model_name='example office lightning',
@@ -56,26 +69,26 @@ improve the organization of resources.
         attribute='switch',
         value='on'
     )
-    ``` 
-3. Finally, we pass our device as argument to our SchemaConnector instance and we'll 
+    ```
+3. Finally, we pass our device as argument to our SchemaConnector instance and we'll
 get access to a series of handlers. See below:
 
     ```python
     from stschema import SchemaConnector
     from our_device_module import device_example # example import
-    
-    
+
+
     devices = [device_example]
     connector = SchemaConnector(devices)
-    
+
     # Discovery Request handler
     if interaction_type == 'discoveryRequest':
        return connector.discovery_handler(request_id)
-   
+
     # State Refresh Request handler
     elif interaction_type == 'stateRefreshRequest':
        return connector.state_handler(devices, request_id)
-    
+
     # Command Request handler
     elif interaction_type == 'commandRequest':
        return connector.command_handler(device_command, request_id)

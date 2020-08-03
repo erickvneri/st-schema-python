@@ -3,7 +3,7 @@
 # the devices that will be served to the
 # SmartThings Schema Connector integration
 # type.
-from stschema.util import (
+from stschema.util.base_modules import (
     BaseDevice,
     DeviceContext,
     ManufacturerInfo,

@@ -13,7 +13,7 @@
 # Device instances.
 import pytest
 from stschema import SchemaDevice
-from stschema.util import ManufacturerInfo
+from stschema.util.base_modules import ManufacturerInfo
 
 
 class TestDeviceInterface:

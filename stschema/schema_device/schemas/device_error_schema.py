@@ -1,5 +1,5 @@
 from marshmallow import Schema, fields
-from stschema.util import BaseErrorSchema
+from stschema.util.base_modules import BaseErrorSchema
 
 
 class DeviceErrorSchema(Schema):

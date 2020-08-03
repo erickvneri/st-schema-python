@@ -1,4 +1,4 @@
-from stschema.util import BaseHeaders
+from stschema.util.base_modules import BaseHeaders
 
 
 class BaseResponse:

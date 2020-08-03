@@ -10,6 +10,7 @@
 # the development of Schema Connector instances.
 import logging
 from stschema.schema_response import SchemaResponse
+from stschema.util import EventLogger
 
 
 class SchemaConnector(SchemaResponse):
@@ -20,25 +21,8 @@ class SchemaConnector(SchemaResponse):
     resource handlers.
         :::param enable_logger: boolean
     """
-    def __init__(self, enable_logger: bool=False):
-        self.logger = self._logger(enable_logger)
-
-    @staticmethod
-    def _logger(enable_logger):
-        # Logger instance.
-        logger = logging.getLogger('[stschema]')
-        # Handle levels
-        if enable_logger:
-            logger.setLevel(logging.NOTSET)
-        logger.setLevel(logging.WARNING)
-
-        #  Stream handler instance.
-        stream  = logging.StreamHandler()
-        # Formatter instance
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(message)s')
-        stream.setFormatter(formatter)
-        logger.addHandler(stream)
-        return logger
+    def __init__(self, enable_logger: bool=True):
+        self.logger = EventLogger(enable_logger).logger
 
     def interaction_handler(self, json_data: dict):
         """
@@ -68,7 +52,8 @@ class SchemaConnector(SchemaResponse):
                 elif not interaction_type_arg:
                     raise AttributeError('missing "interactionType" attribute at json_data.headers')
                 else:
-                    self.logger.info(data)
+                    # Logging respective json_data
+                    self.logger.info('[%s] - %s' % (interaction_type_arg, json_data))
                     return self._interaction_handler(json_data)
 
     def _interaction_handler(self, data):

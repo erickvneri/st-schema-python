@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields, pre_dump
 from stschema.schema_device.schemas import DeviceDiscoverySchema
-from stschema.util import BaseResponse, HeadersSchema
+from stschema.util.base_modules import BaseResponse, HeadersSchema
 
 
 class DiscoveryResponse(BaseResponse):

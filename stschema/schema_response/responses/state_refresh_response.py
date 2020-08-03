@@ -1,5 +1,5 @@
 from marshmallow import Schema, fields, pre_dump, post_dump
-from stschema.util import HeadersSchema, BaseResponse, AuthenticationSchema
+from stschema.util.base_modules import HeadersSchema, BaseResponse, AuthenticationSchema
 from stschema.schema_device.schemas import DeviceStateSchema, DeviceErrorSchema
 
 from pprint import pprint # Delete line
