@@ -1,5 +1,5 @@
 from stschema.schema_response.responses import StateResponse
-from stschema.util import BaseAuthentication
+from stschema.util.base_modules import BaseAuthentication
 
 class StateCallback(StateResponse):
     """
