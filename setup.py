@@ -19,7 +19,8 @@ setup(
     install_requires=[
         'pytest',
         'marshmallow',
-        'requests'
+        'requests',
+        'colorama'
     ],
     python_requires='>=3.6',
     classifiers=[
