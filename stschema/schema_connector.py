@@ -69,7 +69,7 @@ class SchemaConnector(SchemaResponse):
         elif interaction_type == 'commandRequest':
             return self.command_handler(data['devices'], request_id)
         elif interaction_type == 'grantCallbackAccess':
-            return self.grant_callback_access(data['callbackAuthentication'])
+            return self.grant_callback_access(data['callbackAuthentication'], data['callbackUrls'])
         elif interaction_type == 'integrationDeleted':
             return self.integration_deleted(data['callbackAuthentication'])
         elif interaction_type == 'interactionResult':
@@ -115,7 +115,7 @@ class SchemaConnector(SchemaResponse):
         """
         return self.error_handler.not_implemented_error('command_handler')
 
-    def grant_callback_access(self, callback_authentication: dict):
+    def grant_callback_access(self, callback_authentication: dict, callback_urls: dict):
         """
         Implementation example handling
         specific attributes from json_data:

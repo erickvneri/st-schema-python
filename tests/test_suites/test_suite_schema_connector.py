@@ -128,6 +128,7 @@ class TestSuiteSchemaConnector:
             with pytest.raises(NotImplementedError):
                 headers_arg['interactionType'] = 'grantCallbackAccess'
                 json_data_dict['callbackAuthentication'] = 'xxxxx'
+                json_data_dict['callbackUrls'] = 'xxxxx'
                 sc.interaction_handler(json_data_dict)
             with pytest.raises(NotImplementedError):
                 headers_arg['interactionType'] = 'integrationDeleted'
