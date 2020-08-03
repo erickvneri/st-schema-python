@@ -10,7 +10,7 @@
 # the development of Schema Connector instances.
 import logging
 from stschema.schema_response import SchemaResponse
-from stschema.util import EventLogger
+from stschema.util import EventLogger, ErrorHandler
 
 
 class SchemaConnector(SchemaResponse):
@@ -21,8 +21,9 @@ class SchemaConnector(SchemaResponse):
     resource handlers.
         :::param enable_logger: boolean
     """
-    def __init__(self, enable_logger: bool=True):
+    def __init__(self, enable_logger: bool=False):
         self.logger = EventLogger(enable_logger).logger
+        self.error_handler = ErrorHandler()
 
     def interaction_handler(self, json_data: dict):
         """
@@ -85,19 +86,61 @@ class SchemaConnector(SchemaResponse):
             return self.interaction_result_handler(data, origin)
 
     def discovery_handler(self, request_id: str):
-        raise NotImplementedError('Interaction resource handler not implemented')
+        """
+        Implementation example handling
+        specific attributes from json_data:
+
+            discovery_handler(self, devices, request_id):
+            ...
+        """
+        return self.error_handler.not_implemented_error('discovery_handler')
 
     def state_refresh_handler(self, devices: list, request_id: str):
-        raise NotImplementedError('Interaction resource handler not implemented')
+        """
+        Implementation example handling
+        specific attributes from json_data:
+
+            state_refresh_handler(self, devices, request_id):
+            ...
+        """
+        return self.error_handler.not_implemented_error('state_refresh_handler')
 
     def command_handler(self, devices: list, request_id: str):
-        raise NotImplementedError('Interaction resource handler not implemented')
+        """
+        Implementation example handling
+        specific attributes from json_data:
+
+            command_handler(self, devices, request_id):
+            ...
+        """
+        return self.error_handler.not_implemented_error('command_handler')
 
     def grant_callback_access(self, callback_authentication: dict):
-        raise NotImplementedError('Interaction resource handler not implemented')
+        """
+        Implementation example handling
+        specific attributes from json_data:
+
+            grant_callback_access(self, callback_authentication):
+            ...
+        """
+        return self.error_handler.not_implemented_error('grant_callback_access')
 
     def integration_deleted(self, callback_authentication: dict):
-        raise NotImplementedError('Interaction resource handler not implemented')
+        """
+        Implementation example handling
+        specific attributes from json_data:
+
+            integration_deleted(self, callback_authentication):
+            ...
+        """
+        return self.error_handler.not_implemented_error('integration_deleted')
 
     def interaction_result_handler(self, interaction_result: dict, origin: str):
-        raise NotImplementedError('Interaction resource handler not implemented')
+        """
+        Implementation example handling
+        specific attributes from json_data:
+
+            interaction_result_handler(self, devices, request_id):
+            ...
+        """
+        return self.error_handler.not_implemented_error('interaction_result_handler')
