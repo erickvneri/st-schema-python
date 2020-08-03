@@ -1,6 +1,5 @@
 # Updates that need to be applied:
 #   - classifiers
-#   - type attr for markup.
 from setuptools import setup, find_packages
 
 with open('README.md', 'r') as ld:
@@ -11,7 +10,7 @@ setup(
     version='0.0.1',
     author='erickv',
     author_email='erickv@bluetrailsoft.com',
-    description='ST-Schema Python SDK',
+    description='SmartThings Schema Connector Python SDK',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/erickvneri/st-schema-python/',
