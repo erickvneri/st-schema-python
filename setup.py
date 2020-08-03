@@ -1,9 +1,13 @@
-# Updates that need to be applied:
-#   - classifiers
+# TODO: Update classifiers
+import os
 from setuptools import setup, find_packages
 
-with open('README.md', 'r') as ld:
+
+# Long description definition
+readme_path = os.path.abspath('st-schema-python/README.md')
+with open(readme_path, 'r') as ld:
     long_description = ld.read()
+
 
 setup(
     name='st-schema-python',
