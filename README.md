@@ -108,14 +108,15 @@ my_device.set_state(
 )
 ```
 
-### SchemaConnector as a web-service with _Flask_.
+### SchemaConnector as a web-service with the _Http.server_ built-in module.
 
-Using _Flask_, the web development framework, here's an example of an application that will host our Webhook endpoint and our _SchemaConnector_ instance
+Using the Python's built-in module _Http - Server_, here's an example of an application that will host our Webhook endpoint and our _SchemaConnector_ instance
 to create and control a virtual switch at the _SmartThings_ app.
 
 ```python
-from flask import Flask, request
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from stschema import SchemaConnector, SchemaDevice
+import json
 
 
 # MyConnector definition
@@ -126,7 +127,7 @@ class MyConnector(SchemaConnector):
     def discovery_handler(self, request_id):
         # Device definition using the SchemaDevice class
         my_switch = SchemaDevice(
-            '1a2b3c4d-x97y98z99',
+            'xyz_example_id_xyz',
             'Office light',
             'c2c-switch'
         )
@@ -158,7 +159,6 @@ class MyConnector(SchemaConnector):
         # Command Request information
         device_id = devices[0]['externalDeviceId']
         command = devices[0]['commands'][0]
-
         # SchemaDevice instance applying
         # the updated state as commanded.
         my_device = SchemaDevice(device_id)
@@ -172,25 +172,49 @@ class MyConnector(SchemaConnector):
         return  self.command_response(updated_device, request_id)
 
 
-# Flask app definition
-app = Flask(__name__)
 # MyConnector instance
 my_connector = MyConnector()
 
 
-# Endpoint definition
-@app.route('/webhook-endpoint', methods=['POST'])
-def main():
-    # Request JSON body
-    json_data = request.get_json()
-    # The interaction_handler built-in method
-    # will handle the JSON data and call every
-    # resource accordingly.
-    return my_connector.interaction_handler(json_data)
+class WebhookServer(BaseHTTPRequestHandler):
+    """
+    This class will serve as endpoint to handle
+    the POST Http Requests sent to the
+    registered Target Url. Notice that this
+    webhook instance won't differentiate endpoints.
+    """
+    def do_POST(self):
+        # POST Http Request handler.
+        content_length = int(self.headers['Content-Length'])
+        req_body = self.rfile.read(content_length).decode('utf-8')
+        # getting JSON body from request.
+        json_data = json.loads(req_body)
+        return self._set_response(json_data)
+
+    def _set_response(self, data):
+        # interaction_handler is a
+        # SchemaConnector built-in method
+        # that takes the JSON body as
+        # argument.
+        connector_handler = my_connector.interaction_handler(data)
+        # JSON Interaction types responses
+        res_data = json.dumps(connector_handler).encode('utf-8')
+        self._set_headers()
+        self.wfile.write(res_data)
+
+    def _set_headers(self):
+        # Declare application/json
+        # headers to parse JSON string
+        # response.
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
 
 
 if __name__ == '__main__':
-    app.run('localhost', 8000)
+    server_address = ('', 8000)
+    http = HTTPServer(server_address, WebhookServer)
+    http.serve_forever()
 
 ```
 
