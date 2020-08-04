@@ -110,7 +110,7 @@ my_device.set_state(
 
 ### SchemaConnector as a web-service with the _Http.server_ built-in module.
 
-Using the Python's built-in module _Http - Server_, here's an example of an application that will host our Webhook endpoint and our _SchemaConnector_ instance
+Using the Python's built-in module _Http.server_, here's an example of an application that will host our Webhook endpoint and our _SchemaConnector_ instance
 to create and control a virtual switch at the _SmartThings_ app.
 
 ```python
