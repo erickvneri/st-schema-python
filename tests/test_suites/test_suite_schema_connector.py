@@ -113,8 +113,13 @@ class TestSuiteSchemaConnector:
                 requestId='abcdefg',
                 interactionType='discoveryRequest'
             )
+            auth_args = dict(
+                token='abc-123-xyz',
+                tokenType='Bearer'
+            )
             json_data_dict = dict(
                 headers=headers_arg,
+                authorization=auth_args,
                 devices=devices_arg
             )
             with pytest.raises(NotImplementedError):
