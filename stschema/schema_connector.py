@@ -37,21 +37,27 @@ class SchemaConnector(SchemaResponse):
         if not isinstance(json_data, dict):
             raise TypeError('dict argument expected, not (%s, %s)' % (type(json_data), json_data))
         else:
-            # Collectiong SmartThings Schema Headers
+            # Validating SmartThings Schema Headers
             # information that contains critical
-            # information:
+            # values of requests persinstence.
             #   - Request Id
-            #   - Interaction Types.
+            #   - Interaction Type reference.
             headers_args = json_data.get('headers')
+            # Validating authorization attribute
+            # that contains the access token issued
+            # by the OAuth2.0 server.
+            auth_args = json_data.get('authorization')
             if not headers_args:
-                raise AttributeError('missing "headers" attribute at json_data')
+                raise AttributeError('missing or null "headers" attribute at json_data')
+            elif not auth_args:
+                raise AttributeError('missing or null "authorization" attribute at json_data')
             else:
                 request_id_arg = headers_args.get('requestId')
                 interaction_type_arg = headers_args.get('interactionType')
                 if not request_id_arg:
-                    raise AttributeError('missing "requestId" attribute at json_data.headers')
+                    raise AttributeError('missing or null "requestId" attribute at json_data.headers')
                 elif not interaction_type_arg:
-                    raise AttributeError('missing "interactionType" attribute at json_data.headers')
+                    raise AttributeError('missing or null "interactionType" attribute at json_data.headers')
                 else:
                     # Logging respective json_data
                     self.logger.info('[%s] - %s' % (interaction_type_arg, json_data))
@@ -61,13 +67,14 @@ class SchemaConnector(SchemaResponse):
         data_headers = data['headers']
         interaction_type = data_headers['interactionType']
         request_id = data_headers['requestId']
+        access_token = data['authorization']['token']
         # Handle interaction type
         if interaction_type == 'discoveryRequest':
-            return self.discovery_handler(request_id)
+            return self.discovery_handler(request_id, access_token)
         elif interaction_type == 'stateRefreshRequest':
-            return self.state_refresh_handler(data['devices'], request_id)
+            return self.state_refresh_handler(data['devices'], request_id, access_token)
         elif interaction_type == 'commandRequest':
-            return self.command_handler(data['devices'], request_id)
+            return self.command_handler(data['devices'], request_id, access_token)
         elif interaction_type == 'grantCallbackAccess':
             return self.grant_callback_access(data['callbackAuthentication'], data['callbackUrls'])
         elif interaction_type == 'integrationDeleted':
@@ -85,33 +92,37 @@ class SchemaConnector(SchemaResponse):
             origin = data.get('originatingInteractionType')
             return self.interaction_result_handler(data, origin)
 
-    def discovery_handler(self, request_id: str):
+    def discovery_handler(self, request_id: str, access_token: str):
         """
         Implementation example handling
         specific attributes from json_data:
 
-            discovery_handler(self, devices, request_id):
+            discovery_handler(self, request_id, access_token):
+                # Custom implementation here...
+                return super().discovery_response(devices, request_id)
             ...
         """
         return self.error_handler.not_implemented_error('discovery_handler')
 
-    def state_refresh_handler(self, devices: list, request_id: str):
+    def state_refresh_handler(self, devices: list, request_id: str, access_token: str):
         """
         Implementation example handling
         specific attributes from json_data:
 
-            state_refresh_handler(self, devices, request_id):
-            ...
+            state_refresh_handler(self, devices, request_id, access_token):
+                # Custom implementation here...
+                return super().state_refresh_response(devices, request_id)
         """
         return self.error_handler.not_implemented_error('state_refresh_handler')
 
-    def command_handler(self, devices: list, request_id: str):
+    def command_handler(self, devices: list, request_id: str, access_token: str):
         """
         Implementation example handling
         specific attributes from json_data:
 
-            command_handler(self, devices, request_id):
-            ...
+            command_handler(self, devices, request_id, access_token):
+                # Custom implementation here...
+                return super().command_request(devices, request_id)
         """
         return self.error_handler.not_implemented_error('command_handler')
 
