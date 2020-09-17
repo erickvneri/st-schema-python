@@ -37,11 +37,9 @@ class DiscoveryResponseSchema(Schema):
         # Declare required attributes
         self.dump_fields.update(
             headers = fields.Nested(HeadersSchema, attribute='headers', required=True),
-            devices = fields.List(fields.Nested(DeviceDiscoverySchema, attribute='devices', required=True))
-        )
+            devices = fields.List(fields.Nested(DeviceDiscoverySchema, attribute='devices', required=True)))
         # Verify Authentication non-required attribute.
         if data.authentication:
             self.dump_fields.update(
-                authentication = fields.Nested(AuthenticationSchema, attribute='authentication')
-            )
+                authentication = fields.Nested(AuthenticationSchema, attribute='authentication'))
         return data

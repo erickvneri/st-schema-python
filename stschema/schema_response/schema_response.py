@@ -1,13 +1,11 @@
 from stschema.schema_device import SchemaDevice
 from stschema.util.base_modules import GlobalErrorEnum, BaseError
-from stschema.schema_response.responses import (
-    DiscoveryResponse,
-    DiscoveryResponseSchema,
-    StateResponse,
-    StateRefreshResponseSchema,
-    GlobalErrorResponse,
-    GlobalErrorSchema
-)
+from stschema.schema_response.responses import (DiscoveryResponse,
+                                                DiscoveryResponseSchema,
+                                                StateResponse,
+                                                StateRefreshResponseSchema,
+                                                GlobalErrorResponse,
+                                                GlobalErrorSchema)
 
 
 class SchemaResponse:
@@ -97,11 +95,9 @@ class SchemaResponse:
         # instantiate a command response(StateResponse)
         # and serialize it into a readable JSON object.
 
-        response = StateResponse(
-            devices=devices,
-            request_id=request_id,
-            interaction_type='commandResponse'
-        )
+        response = StateResponse(devices=devices,
+                                 request_id=request_id,
+                                 interaction_type='commandResponse')
         state_schema = StateRefreshResponseSchema()
         return state_schema.dump(response)
 
@@ -139,22 +135,16 @@ class SchemaResponse:
             if not request_id:
                 raise TypeError('"request_id" argument is missing')
             else:
-                global_error = BaseError(
-                    error_enum.value,
-                    detail
-                )
-                return cls._global_error_response(
-                    interaction_type,
-                    request_id,
-                    global_error
-                )
+                global_error = BaseError(error_enum.value, detail)
+                return cls._global_error_response(interaction_type,
+                                                  request_id,
+                                                  global_error)
 
     @staticmethod
     def _global_error_response(*error_info):
-        response = GlobalErrorResponse(
-            error_info[0],
-            error_info[1],
-            error_info[2])
+        response = GlobalErrorResponse(error_info[0],
+                                       error_info[1],
+                                       error_info[2])
         error_schema = GlobalErrorSchema()
         return error_schema.dump(response)
 

@@ -36,8 +36,7 @@ class StateRefreshResponseSchema(Schema):
     def _verify_dump(self, data, **kwargs):
         # Declare headers as required attribute.
         self.dump_fields.update(
-            headers = fields.Nested(HeadersSchema, attribute='headers', required=True)
-        )
+            headers = fields.Nested(HeadersSchema, attribute='headers', required=True))
         # Verify State instance attribute
         # If device_error at device instance,
         # DeviceErrorSchema will be used, else
@@ -45,17 +44,14 @@ class StateRefreshResponseSchema(Schema):
         if data.device_state:
             if data.device_state[0].device_error:
                 self.dump_fields.update(
-                    deviceState=fields.List(fields.Nested(DeviceErrorSchema), attribute='device_state')
-                )
+                    deviceState=fields.List(fields.Nested(DeviceErrorSchema), attribute='device_state'))
             else:
                 self.dump_fields.update(
-                    deviceState = fields.List(fields.Nested(DeviceStateSchema), attribute='device_state')
-                )
+                    deviceState = fields.List(fields.Nested(DeviceStateSchema), attribute='device_state'))
         # Verify Authentication non-required attribute.
         if data.authentication:
             self.dump_fields.update(
-                authentication = fields.Nested(AuthenticationSchema, attribute='authentication')
-            )
+                authentication = fields.Nested(AuthenticationSchema, attribute='authentication'))
         return data
 
     @post_dump
@@ -64,6 +60,5 @@ class StateRefreshResponseSchema(Schema):
         # DeviceStateSchema as default
         # schema.
         self.dump_fields.update(
-            deviceState = fields.List(fields.Nested(DeviceStateSchema), attribute='device_state')
-        )
+            deviceState = fields.List(fields.Nested(DeviceStateSchema), attribute='device_state'))
         return data

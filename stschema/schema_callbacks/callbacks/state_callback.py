@@ -8,10 +8,8 @@ class StateCallback(StateResponse):
     Device State Callbacks.
     """
     def __init__(self, access_token: str, request_id: str, devices: list) -> 'StateCallback':
-        StateResponse.__init__(
-            self,
-            devices=devices,
-            request_id=request_id,
-            interaction_type='stateCallback'
-        )
+        StateResponse.__init__(self,
+                               devices=devices,
+                               request_id=request_id,
+                               interaction_type='stateCallback')
         self.authentication = BaseAuthentication(access_token)

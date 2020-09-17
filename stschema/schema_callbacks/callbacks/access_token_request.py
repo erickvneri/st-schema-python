@@ -14,18 +14,17 @@ class AccessTokenRequest(BaseResponse):
     tokens at the SmartThings Cloud.
     """
     def __init__(self,
-        client_id: str,
-        client_secret: str,
-        code: str,
-        request_id: str,
-        grant_type: str='authorization_code') -> 'AccessTokenRequest':
-        BaseResponse.__init__(self, interaction_type='accessTokenRequest', request_id=request_id)  # BaseResponse instance
-        self.callback_authentication = CallbackAuthentication(  # CallbackAuthentication instance
+                 client_id: str,
+                 client_secret: str,
+                 code: str,
+                 request_id: str,
+                 grant_type: str='authorization_code') -> 'AccessTokenRequest':
+        BaseResponse.__init__(self, interaction_type='accessTokenRequest', request_id=request_id)
+        self.callback_authentication = CallbackAuthentication(
             client_id = client_id,
             client_secret = client_secret,
             code = code,
-            grant_type = grant_type
-        )
+            grant_type = grant_type)
 
 
 class AccessTokenRequestSchema(Schema):

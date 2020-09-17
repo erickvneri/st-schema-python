@@ -28,14 +28,12 @@ class SchemaDevice(BaseDevice):
     def __init__(self, *args_info, **kwargs_info) -> 'SchemaDevice':
         # By default instance is being created
         # from kwargs_info to discard None values.
-        BaseDevice.__init__(
-            self,
+        BaseDevice.__init__(self,
             external_device_id=kwargs_info.get('external_device_id'),
             friendly_name=kwargs_info.get('friendly_name'),
             device_unique_id=kwargs_info.get('device_unique_id'),
             device_cookie=BaseCookie(kwargs_info.get('device_cookie')),
-            device_handler_type=kwargs_info.get('device_handler_type')
-        )
+            device_handler_type=kwargs_info.get('device_handler_type'))
         # Args instance handler
         if args_info:
             self._device_arg_instance(args_info)
@@ -152,11 +150,9 @@ class SchemaDevice(BaseDevice):
         # Private method called to instanciate
         # the DeviceContext class after data has
         # been prepared by public method.
-        self.device_context = DeviceContext(
-            room_name,
-            groups,
-            categories
-        )
+        self.device_context = DeviceContext(room_name,
+                                            groups,
+                                            categories)
 
     def set_state(self, *args_info, **kwargs_info):
         """Defines the device's state by
@@ -188,27 +184,21 @@ class SchemaDevice(BaseDevice):
             elif i == 4 and not component:
                 component = args_info[4]
 
-        self._set_state(
-            capability,
-            attribute,
-            value,
-            unit,
-            component
-        )
+        self._set_state(capability,
+                        attribute,
+                        value,
+                        unit,
+                        component)
 
-    def _set_state(self, capability, attribute, value, unit, component):
+    def _set_state(self, capability, attribute, value, unit, component='main'):
         # Private method called to instanciate
         # the BaseState class after data has
         # been prepared by public method.
-        if not component:
-            component = 'main'
-        new_state = BaseState(
-            capability=capability,
-            attribute=attribute,
-            value=value,
-            unit=unit,
-            component=component
-        )
+        new_state = BaseState(capability=capability,
+                              attribute=attribute,
+                              value=value,
+                              unit=unit,
+                              component=component)
         self.states.append(new_state)
 
     def set_error_state(self, error_enum: str='DEVICE-UNAVAILABLE', detail: str='unexpected error occurred.'):
@@ -229,17 +219,11 @@ class SchemaDevice(BaseDevice):
         except ValueError as e:
             raise ValueError('Device error enumerator not supported: %s' % error_enum)
         else:
-            self._set_error_state(
-                error_enum.value,
-                detail
-            )
+            self._set_error_state(error_enum.value, detail)
 
     def _set_error_state(self, error_enum, detail):
         # Private method that will define
         # the BaseError state device's
         # attribute.
-        err = BaseError(
-            error_enum=error_enum,
-            detail=detail
-        )
+        err = BaseError(error_enum=error_enum, detail=detail)
         self.device_error = [err]

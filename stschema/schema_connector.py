@@ -8,7 +8,6 @@
 # handler interfaces that will parse the JSON body
 # and pass the necessary information to simplify
 # the development of Schema Connector instances.
-import logging
 from stschema.schema_response import SchemaResponse
 from stschema.util import EventLogger, ErrorHandler
 
