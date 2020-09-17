@@ -31,7 +31,7 @@ class MyConnector(SchemaConnector):
     def __init__(self, *opts):
         SchemaConnector.__init__(self, enable_logger=True)
 
-    def discovery_handler(self, request_id):
+    def discovery_handler(self, request_id, access_token):
         # The discovery_handler built-in method
         # gives access to discoveryRequest data.
         #
@@ -41,7 +41,7 @@ class MyConnector(SchemaConnector):
         declared_devices = [...]
         return self.discovery_response(declared_devices, request_id)
 
-    def state_refresh_handler(self, devices, request_id):
+    def state_refresh_handler(self, devices, request_id, access_token):
         # The state_refresh_handler gives access to
         # stateRefreshRequest data.
         # A filtered list of SchemaDevice instances
@@ -50,7 +50,7 @@ class MyConnector(SchemaConnector):
         filtered_devices = [...]
         return self.state_refresh_response(filtered_devices, request_id)
 
-    def command_handler(self, devices, request_id):
+    def command_handler(self, devices, request_id, access_token):
         # The command_handler gives access to the
         # commandRequest data.
         # A list of an updated SchemaDevice instance
@@ -124,7 +124,7 @@ class MyConnector(SchemaConnector):
     def __init__(self, *opts):
         SchemaConnector.__init__(self, enable_logger=True)
 
-    def discovery_handler(self, request_id):
+    def discovery_handler(self, request_id, access_token):
         # Device definition using the SchemaDevice class
         my_switch = SchemaDevice(
             'xyz_example_id_xyz',
@@ -138,7 +138,7 @@ class MyConnector(SchemaConnector):
         declared_devices = [my_switch]
         return self.discovery_response(declared_devices, request_id)
 
-    def state_refresh_handler(self, devices, request_id):
+    def state_refresh_handler(self, devices, request_id, access_token):
         # State Refresh Request information
         device_id = devices[0]['externalDeviceId']
 
@@ -155,7 +155,7 @@ class MyConnector(SchemaConnector):
         filtered_devices = [my_device]
         return self.state_refresh_response(filtered_devices, request_id)
 
-    def command_handler(self, devices, request_id):
+    def command_handler(self, devices, request_id, access_token):
         # Command Request information
         device_id = devices[0]['externalDeviceId']
         command = devices[0]['commands'][0]
