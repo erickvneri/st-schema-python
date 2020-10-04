@@ -119,7 +119,7 @@ class TestSuiteSchemaConnector:
             )
             json_data_dict = dict(
                 headers=headers_arg,
-                authorization=auth_args,
+                authentication=auth_args,
                 devices=devices_arg
             )
             with pytest.raises(NotImplementedError):
