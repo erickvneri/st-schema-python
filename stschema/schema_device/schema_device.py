@@ -1,8 +1,10 @@
-# The Device interface provides a series of
-# methods to collect the information about
-# the devices that will be served to the
-# SmartThings Schema Connector integration
-# type.
+"""
+The Device interface provides a series of
+methods to collect the information about
+the devices that will be served to the
+SmartThings Schema Connector integration
+type.
+"""
 from stschema.util.base_modules import (
     BaseDevice,
     DeviceContext,

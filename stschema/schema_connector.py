@@ -1,13 +1,15 @@
-# The SchemaConnector class provides a json_data
-# handler that will take the entity-body of a
-# Webhook Http Request and process it according to
-# the Interaction Type passed. It is intended to be
-# used with JSON data only.
-#
-# Also, it provides a series of Interaction Type
-# handler interfaces that will parse the JSON body
-# and pass the necessary information to simplify
-# the development of Schema Connector instances.
+"""
+The SchemaConnector class provides a json_data
+handler that will take the entity-body of a
+Webhook Http Request and process it according to
+the Interaction Type passed. It is intended to be
+used with JSON data only.
+
+Also, it provides a series of Interaction Type
+handler interfaces that will parse the JSON body
+and pass the necessary information to simplify
+the development of Schema Connector instances.
+"""
 from stschema.schema_response import SchemaResponse
 from stschema.util import EventLogger, ErrorHandler
 

@@ -1,16 +1,18 @@
-# Test Suite over functionalities that
-# the SchemaDevice class interface provides.
-#
-# Initial feature tested is the
-# flexibility of a Device
-# instantiation, supporting for
-# straight (*args) and key word
-# (**kwargs) arguments.
-#
-# Some Test-to-Fail test cases habe
-# been included. These Exceptions help
-# develoeprs to improve creation of
-# Device instances.
+"""
+Test Suite over functionalities that
+the SchemaDevice class interface provides.
+
+Initial feature tested is the
+flexibility of a Device
+instantiation, supporting for
+straight (*args) and key word
+(**kwargs) arguments.
+
+Some Test-to-Fail test cases have
+been included. These Exceptions help
+develoeprs to improve creation of
+Device instances.
+"""
 import pytest
 from stschema import SchemaDevice
 from stschema.util.base_modules import ManufacturerInfo

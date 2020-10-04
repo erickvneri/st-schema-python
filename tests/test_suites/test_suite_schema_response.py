@@ -1,14 +1,16 @@
-# Test Suite over the SchemaResponse
-# class and the serialization of the
-# Discovery, State Response and Command
-# Responses respectively.
-#
-# For this test suite, the fixtures used
-# will be the following:
-#   - device_fixture
-#   - error_state_device_fixture
-#   - discovery_response_fixture
-#   - state_refresh_fixture
+"""
+Test Suite over the SchemaResponse
+class and the serialization of the
+Discovery, State Response and Command
+Responses respectively.
+
+For this test suite, the fixtures used
+will be the following:
+    - device_fixture
+    - error_state_device_fixture
+    - discovery_response_fixture
+    - state_refresh_fixture
+"""
 import pytest
 from stschema import SchemaDevice
 from stschema.schema_response import SchemaResponse

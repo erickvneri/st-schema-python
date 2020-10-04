@@ -1,22 +1,24 @@
-# Test Suite on SchemaConnector Interface Class
-# which will test its construction and the
-# instantiation flexibility triggering a few
-# Exceptions to debug the SchemaConnector
-# development
-#
-# The first test case handles the documentation
-# and construction of the class, Private and
-# Public methods along with the inherited
-# methods.
-#
-# The second test case handles the flow-control
-# of the main resource method that will give
-# access to the interaction resource handlers:
-#   -discovery_handler
-#   -state_refresh_handler
-#   -command_handler
-#   -grant_callback_access
-#   -integration_deleted
+"""
+Test Suite on SchemaConnector Interface Class
+which will test its construction and the
+instantiation flexibility triggering a few
+Exceptions to debug the SchemaConnector
+development
+
+The first test case handles the documentation
+and construction of the class, Private and
+Public methods along with the inherited
+methods.
+
+The second test case handles the flow-control
+of the main resource method that will give
+access to the interaction resource handlers:
+    -discovery_handler
+    -state_refresh_handler
+    -command_handler
+    -grant_callback_access
+    -integration_deleted
+"""
 import pytest
 from stschema import SchemaConnector
 
