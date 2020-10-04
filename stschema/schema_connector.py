@@ -1,13 +1,15 @@
-# The SchemaConnector class provides a json_data
-# handler that will take the entity-body of a
-# Webhook Http Request and process it according to
-# the Interaction Type passed. It is intended to be
-# used with JSON data only.
-#
-# Also, it provides a series of Interaction Type
-# handler interfaces that will parse the JSON body
-# and pass the necessary information to simplify
-# the development of Schema Connector instances.
+"""
+The SchemaConnector class provides a json_data
+handler that will take the entity-body of a
+Webhook Http Request and process it according to
+the Interaction Type passed. It is intended to be
+used with JSON data only.
+
+Also, it provides a series of Interaction Type
+handler interfaces that will parse the JSON body
+and pass the necessary information to simplify
+the development of Schema Connector instances.
+"""
 from stschema.schema_response import SchemaResponse
 from stschema.util import EventLogger, ErrorHandler
 
@@ -45,11 +47,11 @@ class SchemaConnector(SchemaResponse):
             # Validating authorization attribute
             # that contains the access token issued
             # by the OAuth2.0 server.
-            auth_args = json_data.get('authorization')
+            auth_args = json_data.get('authentication')
             if not headers_args:
                 raise AttributeError('missing or null "headers" attribute at json_data')
             elif not auth_args:
-                raise AttributeError('missing or null "authorization" attribute at json_data')
+                raise AttributeError('missing or null "authentication" attribute at json_data')
             else:
                 request_id_arg = headers_args.get('requestId')
                 interaction_type_arg = headers_args.get('interactionType')
@@ -66,7 +68,7 @@ class SchemaConnector(SchemaResponse):
         data_headers = data['headers']
         interaction_type = data_headers['interactionType']
         request_id = data_headers['requestId']
-        access_token = data['authorization']['token']
+        access_token = data['authentication']['token']
         # Handle interaction type
         if interaction_type == 'discoveryRequest':
             return self.discovery_handler(request_id, access_token)

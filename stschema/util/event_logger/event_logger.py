@@ -18,4 +18,5 @@ class EventLogger:
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(message)s')
         stream.setFormatter(formatter)
         logger.addHandler(stream)
+        logger.removeHandler(stream)
         return logger

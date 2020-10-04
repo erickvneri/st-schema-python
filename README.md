@@ -225,5 +225,13 @@ _Notice that the `SchemaConnector.grant_callback_access` built-in resource hasn'
 
 
 ---
+### _Important Note_.
+
+Before pushing any updates into the _SmartThings Schema Connector Python SDK_, please run the follwing `pytest` command to run the full _test suite_.
+
+    python3 -m pytest -p no:cacheprovider
+
+
+---
 To learn more about _SmartThings Schema Connector_ integrations, please visit our _[main documentation](https://smartthings.developer.samsung.com/docs/devices/smartthings-schema/schema-basics.html)_
 or share your questions at our _[Community Forums](https://community.smartthings.com/c/developer-programs)_.
