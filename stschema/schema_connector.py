@@ -45,11 +45,11 @@ class SchemaConnector(SchemaResponse):
             # Validating authorization attribute
             # that contains the access token issued
             # by the OAuth2.0 server.
-            auth_args = json_data.get('authorization')
+            auth_args = json_data.get('authentication')
             if not headers_args:
                 raise AttributeError('missing or null "headers" attribute at json_data')
             elif not auth_args:
-                raise AttributeError('missing or null "authorization" attribute at json_data')
+                raise AttributeError('missing or null "authentication" attribute at json_data')
             else:
                 request_id_arg = headers_args.get('requestId')
                 interaction_type_arg = headers_args.get('interactionType')
@@ -66,7 +66,7 @@ class SchemaConnector(SchemaResponse):
         data_headers = data['headers']
         interaction_type = data_headers['interactionType']
         request_id = data_headers['requestId']
-        access_token = data['authorization']['token']
+        access_token = data['authentication']['token']
         # Handle interaction type
         if interaction_type == 'discoveryRequest':
             return self.discovery_handler(request_id, access_token)
