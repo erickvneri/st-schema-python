@@ -43,14 +43,6 @@ class TestDeviceInterface:
             assert SchemaDevice.set_state
             assert SchemaDevice.set_error_state
 
-        def test_private_methods(self):
-            # Private methods
-            assert SchemaDevice._set_context
-            assert SchemaDevice._set_mn
-            assert SchemaDevice._set_state
-            assert SchemaDevice._set_error_state
-            assert SchemaDevice._device_arg_instance
-
 
     class TestDeviceDefinition:
         # Test case on the initial Device
