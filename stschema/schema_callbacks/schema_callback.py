@@ -22,7 +22,7 @@ class SchemaCallback:
 
     This class covers:
         - Access Token Request.
-        - Refresh Token Request (TBD).
+        - Refresh Access Tokens.
         - Device State Callback.
         - Device Discovery Callback.
     """
@@ -31,8 +31,8 @@ class SchemaCallback:
         """
         The access_token_request performs a
         POST Http Requests to the SmartThings
-        platform to request or refresh an
-        Authorization Token.
+        platform to request or refresh
+        Authorization Tokens.
             :::param client_id (required)
             :::param client_secret (required)
             :::param code (required)

@@ -10,7 +10,7 @@ from stschema.util.base_modules import (
 class AccessTokenRequest(BaseResponse):
     """
     The AccessTokenRequest class handles the
-    information necessary to request and refresh
+    information necessary to request or refresh
     Access Tokens at the SmartThings Cloud.
     """
     def __init__(self,

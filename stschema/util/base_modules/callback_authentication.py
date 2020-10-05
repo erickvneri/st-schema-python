@@ -9,6 +9,7 @@ class CallbackAuthentication:
     and perform the following interaction
     types:
         - Access Token Request.
+        - Refresh Access Tokens.
         - State Callback.
         - Discovery Callback.
     """
