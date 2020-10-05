@@ -10,20 +10,28 @@ from stschema.util.base_modules import (
 class AccessTokenRequest(BaseResponse):
     """
     The AccessTokenRequest class handles the
-    information necessary to request Authorization
-    tokens at the SmartThings Cloud.
+    information necessary to request and refresh
+    Access Tokens at the SmartThings Cloud.
     """
     def __init__(self,
                  client_id: str,
                  client_secret: str,
                  code: str,
+                 refresh_token: str,
                  request_id: str,
                  grant_type: str='authorization_code') -> 'AccessTokenRequest':
         BaseResponse.__init__(self, interaction_type='accessTokenRequest', request_id=request_id)
+
+        # Refresh Token reference
+        if not code and refresh_token:
+            grant_type = 'refresh_token'
+            self.headers.interaction_type = 'refreshAccessTokens'
+
         self.callback_authentication = CallbackAuthentication(
             client_id = client_id,
             client_secret = client_secret,
             code = code,
+            refresh_token = refresh_token,
             grant_type = grant_type)
 
 
