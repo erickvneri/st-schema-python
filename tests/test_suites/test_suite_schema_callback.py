@@ -5,6 +5,7 @@ from tests.device_fixture import SchemaDeviceFixture
 # Url for testing Callbacks
 # Comment/Unskip test cases:
 #   - line 46
+#   - line 59
 #   - line 109
 #   - line 195
 custom_test_url = ''
@@ -51,6 +52,20 @@ class TestSuiteSchemaCallbacks:
                 'client_id',
                 'client_secret',
                 'code',
+                None, # None Refresh Token
+                'request_id',
+                custom_test_url
+            )
+
+        @pytest.mark.skip('COMMENT THIS LINE TO ENABLE TEST CASE')
+        def test_refresh_token_request(self):
+            # Test case to check real-time HttpRequests,
+            # unskip to enable.
+            assert SchemaCallback.access_token_request(
+                'client_id',
+                'client_secret',
+                None, # None Code
+                'refresh_token',
                 'request_id',
                 custom_test_url
             )
@@ -78,6 +93,14 @@ class TestSuiteSchemaCallbacks:
                     'code',
                     'request_id'
                 )
+            with pytest.raises(TypeError):
+                assert SchemaCallback.access_token_request(
+                    'client_id',
+                    'client_secret',
+                    'code',
+                    'refresh_token',
+                    'request_id'
+                )
 
         def test_type_error_url(self):
             with pytest.raises(TypeError):
@@ -85,6 +108,7 @@ class TestSuiteSchemaCallbacks:
                         'client_id',
                         'client_secret',
                         'code',
+                        'refresh_token',
                         'request_id',
                         'url'
                     )
