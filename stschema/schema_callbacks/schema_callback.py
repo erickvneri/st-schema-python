@@ -22,20 +22,21 @@ class SchemaCallback:
 
     This class covers:
         - Access Token Request.
-        - Refresh Token Request (TBD).
+        - Refresh Access Tokens.
         - Device State Callback.
         - Device Discovery Callback.
     """
     @classmethod
-    def access_token_request(cls, client_id:str, client_secret: str, code: str, request_id: str, url: str):
+    def access_token_request(cls, client_id:str, client_secret: str, code: str, refresh_token:str, request_id: str, url: str):
         """
         The access_token_request performs a
         POST Http Requests to the SmartThings
-        platform to request an Authorization
-        Token.
+        platform to request or refresh
+        Authorization Tokens.
             :::param client_id (required)
             :::param client_secret (required)
             :::param code (required)
+            :::param refresh_token (required)
             :::param request_id (required)
             :::param url (required)
         """
@@ -46,6 +47,7 @@ class SchemaCallback:
                 client_id,
                 client_secret,
                 code,
+                refresh_token,
                 request_id,
                 url
             )
@@ -61,7 +63,8 @@ class SchemaCallback:
             client_id=auth_args[0],
             client_secret=auth_args[1],
             code=auth_args[2],
-            request_id=auth_args[3]
+            refresh_token=auth_args[3],
+            request_id=auth_args[4]
         )
         # Schema Instance and serialization steps.
         schema = AccessTokenRequestSchema()
@@ -69,7 +72,7 @@ class SchemaCallback:
         # POST Http Request to ST Schema
         # OAuth server.
         token_http_request = requests.post(
-            url=auth_args[4],  # Url argument
+            url=auth_args[5],  # Url argument
             json=authentication_body
         )
         return token_http_request
