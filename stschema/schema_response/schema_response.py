@@ -147,15 +147,3 @@ class SchemaResponse:
                                        error_info[2])
         error_schema = GlobalErrorSchema()
         return error_schema.dump(response)
-
-    @staticmethod
-    def access_token_request(client_id: str, client_secret: str, code: str):
-        raise NotImplementedError('Interaction resource not implemented.')
-
-    @staticmethod
-    def discovery_callback(devices: list, access_token: str):
-        raise NotImplementedError('Interaction resource not implemented.')
-
-    @staticmethod
-    def state_callback(devices: list, access_token: str):
-        raise NotImplementedError('Interaction resource not implemented.')
