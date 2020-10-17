@@ -5,17 +5,9 @@ The _SmartThings Schema Connector Python SDK_ is a package that simplify resourc
 
 ## Installation
 
-Clone this repository.
+Install it using `pip`:
 
-    git clone https://github.com/erickvneri/st-schema-python
-
-Copy the `stschema` package into your working directory.
-
-    cp -r ./st-schema-python/stschema /your/working/directory/
-
-Install SDK's dependencies.
-
-    python3 -m pip install -r ./st-schema-python/requirements.txt
+    python3 -m pip install st-schema-python
 
 ---
 
@@ -225,7 +217,7 @@ _Notice that the `SchemaConnector.grant_callback_access` built-in resource hasn'
 
 
 ---
-### _Important Note_.
+### _Developer Note_.
 
 Before pushing any updates into the _SmartThings Schema Connector Python SDK_, please run the follwing `pytest` command to run the full _test suite_.
 
