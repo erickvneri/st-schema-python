@@ -1,5 +1,3 @@
-from colorama import Fore
-
 class ErrorHandler:
     """
     ErrorHandler class to pretty print
@@ -12,5 +10,4 @@ class ErrorHandler:
 
     def not_implemented_error(self, origin: str):
         error_msg = '[%s] - Interaction resource handler not implemented' % origin
-        formatted_msg = Fore.RED + error_msg + Fore.RESET
-        raise NotImplementedError(formatted_msg)
+        raise NotImplementedError(error_msg)
