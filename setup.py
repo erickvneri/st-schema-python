@@ -10,7 +10,7 @@ with open(basedir + '/README.md', 'r') as ld:
 
 setuptools.setup(
     name='st-schema-python',
-    version='1.0.1',
+    version='1.0.2',
     author='erickvneri',
     author_email='erickv@bluetrailsoft.com',
     description='SmartThings Schema Connector Python SDK',
@@ -21,8 +21,7 @@ setuptools.setup(
     install_requires=[
         'pytest',
         'marshmallow',
-        'requests',
-        'colorama'
+        'requests'
     ],
     python_requires='>=3.6',
     classifiers=[
