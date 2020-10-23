@@ -17,7 +17,6 @@ class DeviceContext:
         self.groups = groups or list()
         self.categories = categories or list()
 
-
 class DeviceContextSchema(Schema):
     """
     The DeviceContextSchema handles the

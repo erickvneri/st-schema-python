@@ -22,7 +22,6 @@ class BaseHeaders:
         self.interaction_type = interaction_type
         self.request_id = request_id
 
-
 class HeadersSchema(Schema):
     """
     The HeaderSchema handles the

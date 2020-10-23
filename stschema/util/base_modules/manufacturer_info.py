@@ -18,7 +18,6 @@ class ManufacturerInfo:
         self.hw_version = hw_version
         self.sw_version = sw_version
 
-
 class ManufacturerSchema(Schema):
     """
     The ManufacturerSchema handles the

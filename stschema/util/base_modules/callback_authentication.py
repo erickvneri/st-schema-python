@@ -20,7 +20,6 @@ class CallbackAuthentication:
         self.refresh_token = refresh_token
         self.grant_type = grant_type
 
-
 class CallbackAuthSchema(Schema):
     """
     The CallbackAuthSchema handles the

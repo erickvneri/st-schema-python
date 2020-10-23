@@ -20,7 +20,6 @@ class BaseState:
         if unit:
             self.unit = unit
 
-
 class StateSchema(Schema):
     """
     The StateSchema handles the

@@ -13,7 +13,6 @@ class StateErrorEnum(enum.Enum):
     DEVICE_UNAVAILABLE = 'DEVICE-UNAVAILABLE'
     RESOURCE_CONSTRAINT_VIOLATION = 'RESOURCE-CONSTRAINT-VIOLATION'
 
-
 class GlobalErrorEnum(enum.Enum):
     """
     The GlobalErrorEnum represents

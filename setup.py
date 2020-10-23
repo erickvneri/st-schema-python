@@ -3,10 +3,8 @@ import os
 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-
 with open(basedir + '/README.md', 'r') as ld:
     long_description = ld.read()
-
 
 setuptools.setup(
     name='st-schema-python',

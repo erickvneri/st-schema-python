@@ -12,7 +12,6 @@ class BaseCookie:
     def __init__(self, cookie) -> 'BaseCookie':
         self.cookie = cookie
 
-
 class CookieSchema(Schema):
     """
     The CookieSchema handles the
