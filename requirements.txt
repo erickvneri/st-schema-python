@@ -1,4 +1,0 @@
-marshmallow==3.7.1
-requests==2.24.0
-pytest==5.4.3
-colorama==0.4.3
