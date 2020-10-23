@@ -12,7 +12,6 @@ class BaseAuthentication:
         self.token = token
         self.token_type = token_type
 
-
 class AuthenticationSchema(Schema):
     """
     The AuthenticationSchema handles the

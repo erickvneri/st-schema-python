@@ -15,7 +15,6 @@ class BaseError:
         self.error_enum = error_enum
         self.detail = detail
 
-
 class BaseErrorSchema(Schema):
     """
     The BaseError handles the

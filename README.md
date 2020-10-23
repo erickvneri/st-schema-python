@@ -219,7 +219,7 @@ _Notice that the `SchemaConnector.grant_callback_access` built-in resource hasn'
 ---
 ### _Developer Note_.
 
-Before pushing any updates into the _SmartThings Schema Connector Python SDK_, please run the follwing `pytest` command to run the full _test suite_.
+Before pushing any updates into the _SmartThings Schema Connector Python SDK_, please install `pytest` and execute the follwing command to run the full _test suite_.
 
     python3 -m pytest -p no:cacheprovider
 
