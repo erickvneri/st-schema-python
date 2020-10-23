@@ -1,17 +1,17 @@
-import requests
+import json
+from urllib import request
+# SchemaDevice import for error handling
 from stschema import SchemaDevice
 # Schemas
 from stschema.schema_response.responses import (
     StateRefreshResponseSchema,
-    DiscoveryResponseSchema
-)
+    DiscoveryResponseSchema)
 # Callback interaction type objects and schemas
 from stschema.schema_callbacks.callbacks import (
     AccessTokenRequest,
     AccessTokenRequestSchema,
     StateCallback,
-    DiscoveryCallback
-)
+    DiscoveryCallback)
 
 class SchemaCallback:
     """
@@ -49,32 +49,31 @@ class SchemaCallback:
                 code,
                 refresh_token,
                 request_id,
-                url
-            )
+                url)
 
-    @staticmethod
-    def _access_token_request(*auth_args):
+    @classmethod
+    def _access_token_request(cls, *auth_args):
         # Private method that will instance and
         # serialize an AccessTokenRequest object
         # as Request Body to ST Schema OAuth.
-        #
+
         # AccessTokenRequest Instance.
         authentication_data = AccessTokenRequest(
             client_id=auth_args[0],
             client_secret=auth_args[1],
             code=auth_args[2],
             refresh_token=auth_args[3],
-            request_id=auth_args[4]
-        )
+            request_id=auth_args[4])
+
         # Schema Instance and serialization steps.
         schema = AccessTokenRequestSchema()
         authentication_body = schema.dump(authentication_data)
+
         # POST Http Request to ST Schema
         # OAuth server.
-        token_http_request = requests.post(
-            url=auth_args[5],  # Url argument
-            json=authentication_body
-        )
+        token_http_request = cls._http_request(
+            url=auth_args[5],
+            json_data=authentication_body)
         return token_http_request
 
     @classmethod
@@ -94,30 +93,29 @@ class SchemaCallback:
                 access_token,
                 request_id,
                 url,
-                devices
-            )
+                devices)
 
-    @staticmethod
-    def _state_callback(*callback_args):
+    @classmethod
+    def _state_callback(cls, *callback_args):
         # Private method that will instance and
         # serialize a StateCallback object as
         # Request Body to ST Schema cloud.
-        #
+
         # StateCallback Instance
         state_callback = StateCallback(
             callback_args[0],
             callback_args[1],
-            callback_args[3]
-        )
+            callback_args[3])
+
         # Schema Instance and serialization steps.
         schema = StateRefreshResponseSchema()
         callback_request_body = schema.dump(state_callback)
+
         # Post Http Request to ST Schema
         # server.
-        return requests.post(
+        return cls._http_request(
             url=callback_args[2],
-            json=callback_request_body
-        )
+            json_data=callback_request_body)
 
     @classmethod
     def discovery_callback(cls, access_token: str, request_id: str, url: str, devices: list) -> object:
@@ -136,30 +134,40 @@ class SchemaCallback:
                 access_token,
                 request_id,
                 url,
-                devices
-            )
+                devices)
 
-    @staticmethod
-    def _discovery_callback(*callback_args):
+    @classmethod
+    def _discovery_callback(cls, *callback_args):
         # Private method that will instance and
         # serialize a DiscoveryCallback object as
         # Request body to ST Schema Cloud.
-        #
+
         # DiscoveryCallback Instance.
         discovery_callback = DiscoveryCallback(
             access_token=callback_args[0],
             request_id=callback_args[1],
-            devices=callback_args[3]
-        )
+            devices=callback_args[3])
+
         # Schema Instance and serialization steps
         schema = DiscoveryResponseSchema()
         discovery_callback_body = schema.dump(discovery_callback)
+
         # POST Http Request to ST Schema
         # server.
-        return requests.post(
+        return cls._http_request(
             url=callback_args[2],
-            json=discovery_callback_body
-        )
+            json_data=discovery_callback_body)
+
+    @staticmethod
+    def _http_request(url: str, json_data: dict):
+        # Private method that will
+        # perform the Post Http Request.
+        http_req = request.Request(url)
+        http_req.add_header('Content-Type', 'application/json')
+
+        return request.urlopen(
+            http_req,
+            json.dumps(json_data).encode('utf-8'))
 
     @staticmethod
     def _validate_callback_args(*callback_args) -> None:
