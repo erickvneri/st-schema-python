@@ -8,7 +8,7 @@ with open(basedir + '/README.md', 'r') as ld:
 
 setuptools.setup(
     name='st-schema-python',
-    version='1.0.2',
+    version='1.2.2',
     author='erickvneri',
     author_email='erickv@bluetrailsoft.com',
     description='SmartThings Schema Connector Python SDK',
@@ -17,13 +17,11 @@ setuptools.setup(
     url='https://github.com/erickvneri/st-schema-python/',
     packages=setuptools.find_packages(),
     install_requires=[
-        'pytest',
-        'marshmallow',
-        'requests'
+        'marshmallow'
     ],
     python_requires='>=3.6',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
         'Topic :: Home Automation',

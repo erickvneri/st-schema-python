@@ -7,7 +7,7 @@ The _SmartThings Schema Connector Python SDK_ is a package that simplify resourc
 
 Install it using `pip`:
 
-    python3 -m pip install st-schema-python
+    pip install st-schema-python
 
 ---
 
