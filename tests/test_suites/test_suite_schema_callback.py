@@ -44,7 +44,7 @@ class TestSuiteSchemaCallbacks:
             assert SchemaCallback.access_token_request
             assert SchemaCallback.access_token_request.__doc__
 
-        @pytest.mark.skip('COMMENT THIS LINE TO ENABLE TEST CASE')
+        @pytest.mark.skipif(not custom_test_url, reason="no test url provided")
         def test_access_token_request(self):
             # Test case to check real-time HttpRequests,
             # unskip to enable.
@@ -57,7 +57,7 @@ class TestSuiteSchemaCallbacks:
                 custom_test_url
             )
 
-        @pytest.mark.skip('COMMENT THIS LINE TO ENABLE TEST CASE')
+        @pytest.mark.skipif(not custom_test_url, reason="no test url provided")
         def test_refresh_token_request(self):
             # Test case to check real-time HttpRequests,
             # unskip to enable.
@@ -130,7 +130,7 @@ class TestSuiteSchemaCallbacks:
             assert SchemaCallback.state_callback
             assert SchemaCallback.state_callback.__doc__
 
-        @pytest.mark.skip('COMMENT THIS LINE TO ENABLE TEST CASE')
+        @pytest.mark.skipif(not custom_test_url, reason="no test url provided")
         def test_state_callback(self):
             # Test case to check real-time HttpRequests,
             # unskip to enable.
@@ -216,7 +216,7 @@ class TestSuiteSchemaCallbacks:
             assert SchemaCallback.discovery_callback
             assert SchemaCallback.discovery_callback.__doc__
 
-        @pytest.mark.skip('COMMENT THIS LINE TO ENABLE TEST CASE')
+        @pytest.mark.skipif(not custom_test_url, reason="no test url provided")
         def test_discovery_callback(self):
             # Test case to check real-time HttpRequests,
             # unskip to enable.
