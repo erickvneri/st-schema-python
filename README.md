@@ -118,15 +118,18 @@ class MyConnector(SchemaConnector):
 
     def discovery_handler(self, request_id, access_token):
         # Device definition using the SchemaDevice class
-        my_switch = SchemaDevice(
+        my_switch = SchemaDevice(  # Device info
             'xyz_example_id_xyz',
             'Office light',
-            'c2c-switch'
-        )
-        my_switch.set_mn(
+            'c2c-switch')
+        my_switch.set_mn(  # Manufacturer info
             'Switch Mn Example',
-            'Model X1'
-        )
+            'Model X1')
+        my_switch.set_context(
+            'Office',
+            [],
+            ['light'])
+
         declared_devices = [my_switch]
         return self.discovery_response(declared_devices, request_id)
 
@@ -162,6 +165,10 @@ class MyConnector(SchemaConnector):
         # Updated device passed as a list argument.
         updated_device = [my_device]
         return  self.command_response(updated_device, request_id)
+
+    def interaction_result_handler(self, interaction_result: dict, origin: str):
+        print(interaction_result, origin)
+        pass
 
 
 # MyConnector instance
