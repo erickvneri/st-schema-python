@@ -46,7 +46,7 @@ class SchemaDevice(BaseDevice):
         self.manufacturer_info = None
 
     # def set_mn(self, *args_info, **kwargs_info):
-    def set_mn(self, manufacturer_name, model_name, hw_version, sw_version):
+    def set_mn(self, manufacturer_name, model_name, hw_version="", sw_version=""):
         """Defines the device's manufacturer information.
         Returns an instance of the ManufacturerInfo class.
             :::param manufacturer_name (required)
