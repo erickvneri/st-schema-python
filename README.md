@@ -238,4 +238,4 @@ Before pushing any updates into the _SmartThings Schema Connector Python SDK_, p
 
 ---
 
-To learn more about _SmartThings Schema Connector_ integrations, visit the _[smartThings Community Forums](https://community.smartthings.com/c/developer-programs)_.
+To learn more about _SmartThings Schema Connector_ integrations, visit the _[SmartThings Community Forums](https://community.smartthings.com/c/developer-programs)_.
