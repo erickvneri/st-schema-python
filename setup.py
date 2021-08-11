@@ -29,9 +29,8 @@ with open(basedir + "/README.md", "r") as ld:
 
 setuptools.setup(
     name="st-schema-python",
-    version="1.2.2",
+    version="2.0.0",
     author="erickvneri",
-    author_email="erickv@bluetrailsoft.com",
     description="SmartThings Schema Connector Python SDK",
     long_description=long_description,
     long_description_content_type="text/markdown",
