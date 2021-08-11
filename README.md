@@ -3,7 +3,7 @@
 The _SmartThings Schema Connector Python SDK_ is a package that simplify resources of
 **Schema Connector** instances through built-in interfaces.
 
-## Installation
+### Installation
 
 Install it using `pip`:
 
@@ -11,7 +11,7 @@ Install it using `pip`:
 
 ---
 
-## SchemaConnector structure
+### SchemaConnector structure
 
 Using **class inheritance**, we'll gain access to a series of resources to control the request and response data of _Interaction types_.
 
@@ -68,13 +68,16 @@ class MyConnector(SchemaConnector):
         pass
 ```
 
-_**Note**: If any resource handler is not implemented but gets used by the `SchemaConnector.    interaction_handler` built-in method, a `NotImplementedError` exception will be raised._
+_**Note**: If any resource handler is not implemented but gets used by the `SchemaConnector. interaction_handler` built-in method, a `NotImplementedError` exception will be raised._
 
-## SchemaDevice definition.
+---
+
+### SchemaDevice definition.
 
 SchemaDevice instance supporting the minimal requirements to create a virtual device at the _SmartThings ecosystem_.
 
 1. Device definition using the SchemaDevice class and the `set_mn` instance method to specify the manufacturer's information:
+
 ```python
 from stschema import SchemaDevice
 
@@ -90,6 +93,7 @@ my_device.set_mn(
     '{{model_name}}'
 )
 ```
+
 2. States definition applying the `set_state` instance method:
 
 ```python
@@ -99,6 +103,8 @@ my_device.set_state(
     '{{value}}'
 )
 ```
+
+---
 
 ### SchemaConnector as a web-service with the _Http.server_ built-in module.
 
@@ -222,15 +228,14 @@ _Notice that the `SchemaConnector.grant_callback_access` built-in resource hasn'
     ...
     NotImplementedError: [grant_callback_access] - Interaction resource handler not implemented
 
-
 ---
+
 ### _Developer Note_.
 
 Before pushing any updates into the _SmartThings Schema Connector Python SDK_, please install `pytest` and execute the follwing command to run the full _test suite_.
 
     python3 -m pytest -p no:cacheprovider
 
-
 ---
-To learn more about _SmartThings Schema Connector_ integrations, please visit our _[main documentation](https://smartthings.developer.samsung.com/docs/devices/smartthings-schema/schema-basics.html)_
-or share your questions at our _[Community Forums](https://community.smartthings.com/c/developer-programs)_.
+
+To learn more about _SmartThings Schema Connector_ integrations, visit the _[smartThings Community Forums](https://community.smartthings.com/c/developer-programs)_.
