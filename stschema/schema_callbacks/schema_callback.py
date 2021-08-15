@@ -1,17 +1,44 @@
+# MIT License
+#
+# Copyright (c) 2021 Erick Israel Vazquez Neri
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 import json
 from urllib import request
+
 # SchemaDevice import for error handling
 from stschema import SchemaDevice
+
 # Schemas
 from stschema.schema_response.responses import (
     StateRefreshResponseSchema,
-    DiscoveryResponseSchema)
+    DiscoveryResponseSchema,
+)
+
 # Callback interaction type objects and schemas
 from stschema.schema_callbacks.callbacks import (
     AccessTokenRequest,
     AccessTokenRequestSchema,
     StateCallback,
-    DiscoveryCallback)
+    DiscoveryCallback,
+)
+
 
 class SchemaCallback:
     """
@@ -26,8 +53,17 @@ class SchemaCallback:
         - Device State Callback.
         - Device Discovery Callback.
     """
+
     @classmethod
-    def access_token_request(cls, client_id:str, client_secret: str, code: str, refresh_token:str, request_id: str, url: str):
+    def access_token_request(
+        cls,
+        client_id: str,
+        client_secret: str,
+        code: str,
+        refresh_token: str,
+        request_id: str,
+        url: str,
+    ):
         """
         The access_token_request performs a
         POST Http Requests to the SmartThings
@@ -40,16 +76,12 @@ class SchemaCallback:
             :::param request_id (required)
             :::param url (required)
         """
-        if not url.startswith('https://'):
+        if not url.startswith("https://"):
             raise TypeError('"url" argument not valid, must be Http Secure.')
         else:
             return cls._access_token_request(
-                client_id,
-                client_secret,
-                code,
-                refresh_token,
-                request_id,
-                url)
+                client_id, client_secret, code, refresh_token, request_id, url
+            )
 
     @classmethod
     def _access_token_request(cls, *auth_args):
@@ -63,7 +95,8 @@ class SchemaCallback:
             client_secret=auth_args[1],
             code=auth_args[2],
             refresh_token=auth_args[3],
-            request_id=auth_args[4])
+            request_id=auth_args[4],
+        )
 
         # Schema Instance and serialization steps.
         schema = AccessTokenRequestSchema()
@@ -72,12 +105,14 @@ class SchemaCallback:
         # POST Http Request to ST Schema
         # OAuth server.
         token_http_request = cls._http_request(
-            url=auth_args[5],
-            json_data=authentication_body)
+            url=auth_args[5], json_data=authentication_body
+        )
         return token_http_request
 
     @classmethod
-    def state_callback(cls, access_token: str, request_id: str, url: str, devices: list) -> object:
+    def state_callback(
+        cls, access_token: str, request_id: str, url: str, devices: list
+    ) -> object:
         """
         The state_callback performs a
         POST Http Requests to the SmartThings
@@ -89,11 +124,7 @@ class SchemaCallback:
             :::param devices (required)
         """
         if not cls._validate_callback_args(url, devices):
-            return cls._state_callback(
-                access_token,
-                request_id,
-                url,
-                devices)
+            return cls._state_callback(access_token, request_id, url, devices)
 
     @classmethod
     def _state_callback(cls, *callback_args):
@@ -103,9 +134,8 @@ class SchemaCallback:
 
         # StateCallback Instance
         state_callback = StateCallback(
-            callback_args[0],
-            callback_args[1],
-            callback_args[3])
+            callback_args[0], callback_args[1], callback_args[3]
+        )
 
         # Schema Instance and serialization steps.
         schema = StateRefreshResponseSchema()
@@ -113,12 +143,12 @@ class SchemaCallback:
 
         # Post Http Request to ST Schema
         # server.
-        return cls._http_request(
-            url=callback_args[2],
-            json_data=callback_request_body)
+        return cls._http_request(url=callback_args[2], json_data=callback_request_body)
 
     @classmethod
-    def discovery_callback(cls, access_token: str, request_id: str, url: str, devices: list) -> object:
+    def discovery_callback(
+        cls, access_token: str, request_id: str, url: str, devices: list
+    ) -> object:
         """
         The discovery_callback performs a
         POST Http Requests to the SmartThings
@@ -130,11 +160,7 @@ class SchemaCallback:
             :::param devices (required)
         """
         if not cls._validate_callback_args(url, devices):
-            return cls._discovery_callback(
-                access_token,
-                request_id,
-                url,
-                devices)
+            return cls._discovery_callback(access_token, request_id, url, devices)
 
     @classmethod
     def _discovery_callback(cls, *callback_args):
@@ -146,7 +172,8 @@ class SchemaCallback:
         discovery_callback = DiscoveryCallback(
             access_token=callback_args[0],
             request_id=callback_args[1],
-            devices=callback_args[3])
+            devices=callback_args[3],
+        )
 
         # Schema Instance and serialization steps
         schema = DiscoveryResponseSchema()
@@ -155,30 +182,34 @@ class SchemaCallback:
         # POST Http Request to ST Schema
         # server.
         return cls._http_request(
-            url=callback_args[2],
-            json_data=discovery_callback_body)
+            url=callback_args[2], json_data=discovery_callback_body
+        )
 
     @staticmethod
     def _http_request(url: str, json_data: dict):
         # Private method that will
         # perform the Post Http Request.
         http_req = request.Request(url)
-        http_req.add_header('Content-Type', 'application/json')
+        http_req.add_header("Content-Type", "application/json")
 
-        return request.urlopen(
-            http_req,
-            json.dumps(json_data).encode('utf-8'))
+        return request.urlopen(http_req, json.dumps(json_data).encode("utf-8"))
 
     @staticmethod
     def _validate_callback_args(*callback_args) -> None:
         # Validate Url's protocol
-        if not callback_args[0].startswith('https://'):
-            raise TypeError('url argument not valid, must be Http Secure.')
+        if not callback_args[0].startswith("https://"):
+            raise TypeError("url argument not valid, must be Http Secure.")
         # Validate devices argument type
         if not isinstance(callback_args[1], list):
-            raise TypeError('devices argument must be instance of list, not %s' % type(callback_args[1]))
+            raise TypeError(
+                "devices argument must be instance of list, not %s"
+                % type(callback_args[1])
+            )
         else:
             # Validate devices items instances
             for device in callback_args[1]:
                 if not isinstance(device, SchemaDevice):
-                    raise TypeError('devices items must be instance of %s, not %s', (SchemaDevice, type(callback_args[1])))
+                    raise TypeError(
+                        "devices items must be instance of %s, not %s",
+                        (SchemaDevice, type(callback_args[1])),
+                    )

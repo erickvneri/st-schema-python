@@ -1,3 +1,24 @@
+# MIT License
+#
+# Copyright (c) 2021 Erick Israel Vazquez Neri
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 """
 The Device interface provides a series of
 methods to collect the information about
@@ -12,7 +33,7 @@ from stschema.util.base_modules import (
     BaseState,
     BaseError,
     BaseCookie,
-    StateErrorEnum
+    StateErrorEnum,
 )
 
 
@@ -27,18 +48,22 @@ class SchemaDevice(BaseDevice):
         :::param device_cookie
     """
 
-    def __init__(self,
-                 external_device_id=None,
-                 friendly_name=None,
-                 device_handler_type=None,
-                 device_unique_id=None,
-                 device_cookie=None) -> 'SchemaDevice':
-        BaseDevice.__init__(self,
-                            external_device_id,
-                            friendly_name,
-                            device_unique_id,
-                            BaseCookie(device_cookie),
-                            device_handler_type)
+    def __init__(
+        self,
+        external_device_id=None,
+        friendly_name=None,
+        device_handler_type=None,
+        device_unique_id=None,
+        device_cookie=None,
+    ) -> "SchemaDevice":
+        BaseDevice.__init__(
+            self,
+            external_device_id,
+            friendly_name,
+            device_unique_id,
+            BaseCookie(device_cookie),
+            device_handler_type,
+        )
 
         self.states = []
         self.device_error = None
@@ -54,10 +79,7 @@ class SchemaDevice(BaseDevice):
             :::param hw_version
             :::param sw_version"""
         self.manufacturer_info = ManufacturerInfo(
-            manufacturer_name,
-            model_name,
-            hw_version,
-            sw_version
+            manufacturer_name, model_name, hw_version, sw_version
         )
 
     def set_context(self, room_name, groups, categories):
@@ -68,27 +90,36 @@ class SchemaDevice(BaseDevice):
             :::param categories"""
         # Type handling for list arguments
         if not isinstance(groups, list):
-            raise TypeError('"groups" must be list instance, not (%s, %s)' % (type(groups), groups))
+            raise TypeError(
+                '"groups" must be list instance, not (%s, %s)' % (type(groups), groups)
+            )
         elif not isinstance(categories, list):
-            raise TypeError('"categories" must be list instance, not (%s, %s)' % (type(categories), categories))
+            raise TypeError(
+                '"categories" must be list instance, not (%s, %s)'
+                % (type(categories), categories)
+            )
 
-        self.device_context = DeviceContext(room_name,
-                                            groups,
-                                            categories)
+        self.device_context = DeviceContext(room_name, groups, categories)
 
     # def set_state(self, *args_info, **kwargs_info):
-    def set_state(self, capability, attribute, value, unit=None, component='main'):
+    def set_state(self, capability, attribute, value, unit=None, component="main"):
         """Defines the device's state by
         adding one capability-state per call.
         Returns an instance of the BaseState class."""
-        new_state = BaseState(capability=capability,
-                              attribute=attribute,
-                              value=value,
-                              unit=unit,
-                              component=component)
+        new_state = BaseState(
+            capability=capability,
+            attribute=attribute,
+            value=value,
+            unit=unit,
+            component=component,
+        )
         self.states.append(new_state)
 
-    def set_error_state(self, error_enum: str='DEVICE-UNAVAILABLE', detail: str='unexpected error occurred.'):
+    def set_error_state(
+        self,
+        error_enum: str = "DEVICE-UNAVAILABLE",
+        detail: str = "unexpected error occurred.",
+    ):
         """
         Defines the error state of the device.
         Supported device error enumerators:
@@ -104,7 +135,7 @@ class SchemaDevice(BaseDevice):
         try:
             error_enum = StateErrorEnum(error_enum)
         except ValueError as e:
-            raise ValueError('Device error enumerator not supported: %s' % error_enum)
+            raise ValueError("Device error enumerator not supported: %s" % error_enum)
         else:
             # self._set_error_state(error_enum.value, detail)
             err = BaseError(error_enum=error_enum.value, detail=detail)
