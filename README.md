@@ -1,5 +1,10 @@
 # SmartThings Schema Connector Python SDK
 
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![PyPI license](https://img.shields.io/pypi/l/st-schema-python.svg)](https://pypi.python.org/pypi/st-schema-python/)
+[![st-schema-python](https://snyk.io/advisor/python/st-schema-python/badge.svg)](https://snyk.io/advisor/python/st-schema-python)
+[![PyPI download week](https://img.shields.io/pypi/dw/st-schema-python.svg)](https://pypi.org/project/st-schema-python/)
+
 The _SmartThings Schema Connector Python SDK_ is a package that simplify resources of
 **Schema Connector** instances through built-in interfaces.
 
